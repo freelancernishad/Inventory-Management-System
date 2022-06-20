@@ -3,9 +3,10 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ProductController;
-
+use Meneses\LaravelMpdf\Facades\LaravelMpdf;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,6 +21,20 @@ use App\Http\Controllers\Api\ProductController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/memo', function () {
+
+
+
+    $fileName = 'Invoice-'.date('Y-m-d H:m:s');
+
+    $data['fileName'] = $fileName;
+
+    $pdf = LaravelMpdf::loadView('invoice1',$data);
+    return $pdf->stream("$fileName.pdf");
+
+    // return view('invoice1');
+
+});
 
 // Auth::routes();
 
@@ -32,7 +47,9 @@ Route::get('/', function () {
 // });
 
 
+
 Route::get('invoice/{id}',[OrderController::class,'invoice']);
+Route::get('/custom/invoice/{id}',[InvoiceController::class,'invoice']);
 
 Route::get('/{vue_capture?}', function () {
     return view('welcome');

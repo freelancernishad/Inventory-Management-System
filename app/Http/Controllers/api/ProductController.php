@@ -24,7 +24,7 @@ class ProductController extends Controller
         ->join('suppliers', 'products.supplier_id', 'suppliers.id')
         ->select('products.*', 'categories.category_name', 'suppliers.name')
         ->orderBy('products.id', 'desc')
-        ->paginate(10);
+        ->paginate(12);
 
         return response()->json($products);
     }

@@ -12,10 +12,21 @@ class PosController extends Controller
     }
     public function order(Request $request)
     {
+
+
+
         $request->validate([
             'customer_id' => 'required',
             'payBy' => 'required'
         ]);
+
+
+         $customInvoice = $request->customInvoice;
+
+
+
+
+
         $data = [];
         $data['customer_id'] = $request->customer_id;
         $data['qty'] = $request->qty;
@@ -42,6 +53,22 @@ class PosController extends Controller
                 ->where('id', $content->product_id)
                 ->update(['product_quantity' => DB::raw('product_quantity - ' . $content->product_quantity)]);
         }
+        foreach ($customInvoice as $value) {
+
+            // print_r($value['name']);
+            $customdata['order_id'] = $order_id;
+
+            $customdata['product_name'] = $value['name'];
+            $customdata['product_quantity'] = $value['weight_quantity'];
+            $customdata['product_quantity_type'] = $value['weight_type'];
+            $customdata['product_price'] = $value['price'];
+            $customdata['sub_total'] = $value['weight_quantity']*$value['price'];
+            DB::table('custom_order_details')->insert($customdata);
+            // print_r($customdata);
+        }
+
+
+
         DB::table('pos')->delete();
         return response()->json($order_id);
     }

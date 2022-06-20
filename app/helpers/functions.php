@@ -1,4 +1,7 @@
 <?php
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
+
 function month_en_to_bn($month)
 {
 
@@ -19,6 +22,21 @@ function int_en_to_bn($number)
 }
 
 
+function base64($Image)
+{
+//  return $Image;
+
+    if(File::exists(env('FILE_PATH').$Image)){
+
+        $Image= env('FILE_PATH').$Image;
+    }else{
+        $Image= env('FILE_PATH').'backend/image.png';
+
+    }
+
+$ext =  pathinfo($Image, PATHINFO_EXTENSION);;
+    return $b64image = "data:image/$ext;base64,".base64_encode(file_get_contents($Image));
+}
 
 function sent_response($message,$data=[]){
     $response = [

@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Api\PosController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\Api\CartController;
 use  App\Http\Controllers\api\authController;
 use App\Http\Controllers\Api\OrderController;
@@ -135,6 +136,7 @@ Route::post('/due-order/{id}',  [OrderController::class,'DueOrderupdate']);
         Route::get('/year-order', [OrderController::class,'yearOrder']);
         Route::get('/orders/{id}', [OrderController::class,'orders']);
         Route::get('/order/details/{id}', [OrderController::class,'orderDetails']);
+        Route::get('/order/duepay/{id}', [OrderController::class,'orderduepay']);
 
         // Dashboard Routes
         Route::get('/today/sell', [PosController::class,'todaySell']);
@@ -146,6 +148,9 @@ Route::post('/due-order/{id}',  [OrderController::class,'DueOrderupdate']);
         Route::get('/monthly/bar', [PosController::class,'monthlybar']);
         Route::get('/daily/bar', [PosController::class,'dailybar']);
         Route::get('/years/list', [PosController::class,'yearslist']);
+
+        Route::post('/invoice/create', [InvoiceController::class,'store']);
+        Route::get('/invoice', [InvoiceController::class,'index']);
 
 
 

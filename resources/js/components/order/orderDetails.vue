@@ -41,13 +41,26 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <ul class="list-group">
+
+
+
+                        <ul class="list-group" v-if="duepaymets==0">
                             <li class="list-group-item"><b>Sub Total : </b>{{ orders.sub_total }}$</li>
-                            <li class="list-group-item"><b>Vat : </b>{{ orders.vat }}%</li>
-                            <li class="list-group-item"><b>Total : </b>{{ orders.total }}$</li>
                             <li class="list-group-item"><b>Pay Amount : </b>{{ orders.pay }}$</li>
-                            <li class="list-group-item"><b>Due Amount : </b>{{ orders.due }}$</li>
+                            <li class="list-group-item"><b>Due Amount : </b>{{ orders.due }}৳</li>
                       </ul>
+
+
+                        <ul class="list-group" v-else>
+                            <li class="list-group-item"><b>Sub Total : </b>{{ orders.sub_total }}৳</li>
+                            <li class="list-group-item"><b>{{ orders.order_date }} : </b>{{ orders.pay-previousDue }}৳</li>
+                            <li class="list-group-item" v-for="duepaymet in duepaymets"><b>{{ duepaymet.pay_date }} : </b>{{ duepaymet.payment_amount }}৳</li>
+                            <li class="list-group-item"><b>Total Pay Amount : </b>{{ orders.pay }}৳</li>
+                            <li class="list-group-item"><b>Due Amount : </b>{{ orders.due }}৳</li>
+                      </ul>
+
+
+
                     </div>
                 </div>
               </div>
@@ -109,7 +122,9 @@ export default {
 		return {
             orders: {},
             details: {},
+			duepaymets: {},
 			errors: {},
+            previousDue:0,
             pramid:'',
 		}
 	},
@@ -124,6 +139,19 @@ export default {
         axios.get('/api/order/details/' + id)
             .then(({data}) => (this.details = data))
             .catch(console.log('error'))
+
+        axios.get('/api/order/duepay/' + id)
+            .then(({data}) => {
+
+                this.duepaymets = data;
+                 this.duepaymets.forEach(element => {
+                    console.log(element)
+                    this.previousDue += Number(element.payment_amount)
+                 });
+
+            })
+            .catch(console.log('error'))
+
     },
 
 	computed: {

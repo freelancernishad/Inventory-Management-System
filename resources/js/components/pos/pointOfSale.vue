@@ -12,15 +12,16 @@
             </div>
             <div class="row mb-3">
                 <!-- Area Chart -->
-                <div class="col-xl-7 col-lg-6">
+                <div class="col-xl-12 col-lg-12">
                     <div class="card mb-4">
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <input type="text" class="form-control" v-model="pos" v-on:change="posidchange"
+                            <input type="text" class="form-control" placeholder="Pos" v-model="pos" v-on:change="posidchange"
                                 ref="focusMe" @focus="magic_flag = false" id="pos" autofocus />
-                            <label for="pos" class="btn btn-info" id="posbtn" v-on:click="scanpos">{{ postext }}</label>
+                            <!-- <label for="pos" class="btn btn-info" id="posbtn" v-on:click="scanpos">{{ postext }}</label> -->
                         </div>
                         <div class="card-body">
                             <div class="table-responsive" style="font-size: 12px">
+                            <button type="button" class="flex justify-start ml-2 rounded-md border px-3 py-2 bg-pink-600 text-white" @click="addMore()">Add Custom product</button>
                                 <table class="table align-items-center table-flush">
                                     <thead class="thead-light">
                                         <tr>
@@ -94,6 +95,40 @@
                                                 " class="btn btn-sm btn-danger" style="color: white">X</a>
                                             </td>
                                         </tr>
+
+                    <tr  v-for="(Invoice, index) in Invoices" :key="index">
+                        <td><input v-model="Invoice.name" placeholder="প্রোডাক্ট এর নাম" class="form-control w-full py-2 border border-indigo-500 rounded"/></td>
+                        <td style="display:flex;">
+                            <input type="number" @change="totalcount" v-model="Invoice.weight_quantity" placeholder="প্রোডাক্ট এর ওজন/পরিমাণ" class="form-control w-full py-2 border border-indigo-500 rounded" min="0" step="5"/>
+
+                                <select style="width: 75px;"  v-model="Invoice.weight_type" class="form-control">
+                                    <option value="">Select</option>
+                                    <option>বস্তা</option>
+                                    <option>কেজি</option>
+                                    <option>মন</option>
+                                    <option>গ্রাম</option>
+                                </select>
+
+                            </td>
+                        <td><input type="number" v-model="Invoice.price"  @change="totalcount" placeholder="ইউনিট দাম" class="form-control w-full py-2 border border-indigo-500 rounded" min="0" step="5"/></td>
+                        <td>
+
+
+                             <input type="number" v-model="customtotalObj[index]=Invoice.price*Invoice.weight_quantity" placeholder="মোট দাম" class="form-control w-full py-2 border border-indigo-500 rounded" readonly/>
+
+
+
+                        </td>
+
+                        <td><button type="button" class="btn btn-sm btn-danger" @click="remove(index)" >X</button></td>
+                    </tr>
+
+
+
+
+
+
+
                                     </tbody>
                                 </table>
                             </div>
@@ -111,25 +146,19 @@
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between lh-condensed">
                                         <div>
+                                            <h6 class="my-0">Custom Total</h6>
+                                        </div>
+                                        <span class="text-muted">${{ customtotal }}</span>
+                                    </li>
+
+                                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                        <div>
                                             <h6 class="my-0">Sub Total</h6>
                                         </div>
                                         <span class="text-muted">${{ sub_total }}</span>
                                     </li>
-                                    <li class="list-group-item d-flex justify-content-between lh-condensed">
-                                        <div>
-                                            <h6 class="my-0">Vat</h6>
-                                        </div>
-                                        <span class="text-muted">{{ vats.vat }}%</span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between bg-light">
-                                        <div class="text-success">
-                                            <h6 class="my-0">Total (USD)</h6>
-                                        </div>
-                                        <span class="text-success">${{
-                                                (sub_total * vats.vat) / 100 +
-                                                sub_total
-                                        }}</span>
-                                    </li>
+
+
                                 </ul>
                                 <form @submit.prevent="orderDone">
                                     <div class="form-group">
@@ -174,7 +203,7 @@
                     </div>
                 </div>
                 <!-- Pie Chart -->
-                <div class="col-xl-5 col-lg-6">
+                <div class="col-xl-12 col-lg-12">
                     <div class="card mb-4">
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                             <h5 class="m-0 font-weight-bold text-primary">
@@ -202,15 +231,13 @@
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-6" v-for="product in products.data"
-                                            :key="product.id">
+                                        <div class="col-lg-3 col-md-6 col-sm-6 col-6 btn btn-sm" v-for="product in products.data"
+                                            :key="product.id"  @click.prevent="addToCart(product.id)">
                                             <div class="card" style="
                                                     align-items: center;
                                                     margin-bottom: 10px;
                                                 ">
-                                                <button class="btn btn-sm" @click.prevent="
-                                                    addToCart(product.id)
-                                                ">
+
                                                     <img :src="product.image" class="card-img-top" id="image_size"
                                                         alt="..." />
                                                     <div class="card-body">
@@ -236,7 +263,7 @@
                                                             <span class="badge badge-danger">Stock Out</span>
                                                         </td>
                                                     </div>
-                                                </button>
+
                                             </div>
                                         </div>
                                     </div>
@@ -280,7 +307,9 @@ export default {
             customers: [],
             cartProduct: [],
             searchTerm: "",
-            vats: "",
+            vats: {
+                vat:0
+            },
             // Form
             customer_id: "",
             pay: "",
@@ -291,6 +320,9 @@ export default {
             postext: "Scan",
             isActive: false,
             cat_id :'',
+            Invoices: [],
+            customtotalObj:{},
+            customtotal:0,
         };
     },
     computed: {
@@ -316,7 +348,7 @@ export default {
             for (let i = 0; i < this.cartProduct.length; i++) {
                 sum += parseFloat(this.cartProduct[i].sub_total);
             }
-            return sum;
+            return sum+this.customtotal;
         },
     },
     methods: {
@@ -526,6 +558,47 @@ export default {
                 .then(({ data }) => (this.vats = data))
                 .catch();
         },
+
+
+    addMore() {
+      this.Invoices.push({
+        name: "",
+        weight_quantity: "",
+        price: "",
+      });
+    },
+    remove(index) {
+      this.Invoices.splice(index, 1);
+
+ Notification.cart_delete();
+
+    },
+
+ sum( obj ) {
+  var sum = 0;
+  for( var el in obj ) {
+    if( obj.hasOwnProperty( el ) ) {
+      sum += parseFloat( obj[el] );
+    }
+  }
+  return sum;
+},
+
+
+
+        totalcount(){
+
+var summed = this.sum(this.customtotalObj);
+// console.log( "sum: "+summed );
+this.customtotal = summed;
+        },
+
+
+
+
+
+
+
         orderDone() {
             let total = (this.sub_total * this.vats.vat) / 100 + this.sub_total;
             var data = {
@@ -536,13 +609,14 @@ export default {
                 due: this.due,
                 payBy: this.payBy,
                 vat: this.vats.vat,
+                customInvoice: this.Invoices,
                 total: total,
             };
             axios.post("/api/order", data).then(({ data }) => {
-                this.$router.push({
-                    name: "orderDetails",
-                    params: { id: data },
-                });
+                // this.$router.push({
+                //     name: "orderDetails",
+                //     params: { id: data },
+                // });
                 Notification.success();
             });
         },
@@ -554,4 +628,14 @@ export default {
     height: 100px;
     width: 135px;
 }
+
+
+
+.bg-pink-600 {
+    --tw-bg-opacity: 1;
+    background-color: rgba(219,39,119,var(--tw-bg-opacity));
+}
+
+
+
 </style>

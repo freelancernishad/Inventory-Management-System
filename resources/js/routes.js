@@ -60,6 +60,12 @@ let thisYearOrders = require('./components/order/thisYearOrders.vue').default;
 let orderDetails = require('./components/order/orderDetails.vue').default;
 let orderPay = require('./components/order/orderPay.vue').default;
 
+
+let Invoice_buy = require('./components/pos/Invoice_buy.vue').default;
+let Invoice_sell = require('./components/pos/Invoice_sell.vue').default;
+let Invoice = require('./components/pos/invoice.vue').default;
+let InvoiceDetails = require('./components/pos/InvoiceDetails.vue').default;
+
 export const routes = [
 
   //Auth Routes
@@ -69,6 +75,14 @@ export const routes = [
   { path: '/logout', component: logout, name:'logout' },
 
   { path: '/home', component: home, name:'home' },
+
+
+  { path: '/invoices/list/buy', component: Invoice_buy, name:'Invoice_buy' },
+  { path: '/invoices/list/sell', component: Invoice_sell, name:'Invoice_sell' },
+  { path: '/invoice', component: Invoice, name:'Invoice' },
+  { path: '/invoices/:id', component: InvoiceDetails, name:'InvoiceDetails' },
+
+
 
   // Employee Routes
   { path: '/store-employee', component: storeEmployee, name:'storeEmployee' },
@@ -124,4 +138,6 @@ export const routes = [
   { path: '/this-year-orders', component: thisYearOrders, name:'thisYearOrders' },
   { path: '/order-details/:id', component: orderDetails, name:'orderDetails' },
   { path: '/order-pay/:id', component: orderPay, name:'orderPay' },
+
+
 ]

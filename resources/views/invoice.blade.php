@@ -107,13 +107,42 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
+                    @if($duepaymets==0)
+
+
+
                     <ul class="list-group" >
                         <li class="list-group-item"><b>Sub Total : </b>{{ $orders->sub_total }}$</li>
-                        <li class="list-group-item"><b>Vat : </b>{{ $orders->vat }}%</li>
-                        <li class="list-group-item"><b>Total : </b>{{ $orders->total }}$</li>
                         <li class="list-group-item"><b>Pay Amount : </b>{{ $orders->pay }}$</li>
                         <li class="list-group-item"><b>Due Amount : </b>{{ $orders->due }}$</li>
                   </ul>
+                  @else
+
+
+                  @php
+                      $previousDue = 0;
+
+                  foreach($duepaymets as $duepaymet){
+                    $previousDue += $duepaymet->payment_amount;
+                  }
+
+
+
+                  @endphp
+                  <ul class="list-group" v-else>
+                    <li class="list-group-item"><b>Sub Total : </b>{{ $orders->sub_total }}৳</li>
+                    <li class="list-group-item"><b>{{ $orders->order_date }} : </b>{{ $orders->pay-$previousDue }}৳</li>
+@foreach ($duepaymets as $duepaymet)
+
+
+                    <li class="list-group-item"><b>{{ $duepaymet->pay_date }} : </b>{{ $duepaymet->payment_amount }}৳</li>
+                    @endforeach
+                    <li class="list-group-item"><b>Total Pay Amount : </b>{{ $orders->pay }}৳</li>
+                    <li class="list-group-item"><b>Due Amount : </b>{{ $orders->due }}৳</li>
+                 </ul>
+
+                 @endif
+
                 </div>
             </div>
           </div>
@@ -162,6 +191,14 @@
 @endphp
 
                             @endforeach
+
+
+                            @php
+                                print_r($custom_order_details);
+                            @endphp
+
+
+
 
                             <tr>
                                 <td colspan='4' class="td" style='text-align: right;'>Sub Total</td>
