@@ -157,7 +157,7 @@ a.item.active {background: #75757500 !important;color: #0540a5 !important;border
       <div id="collapseBootstrap4" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <router-link class="collapse-item" to="/store-expense">Add Expense</router-link>
-          <router-link class="collapse-item" to="expense">All Expense</router-link>
+          <router-link class="collapse-item" to="/expense">All Expense</router-link>
         </div>
       </div>
     </li>
@@ -170,7 +170,7 @@ a.item.active {background: #75757500 !important;color: #0540a5 !important;border
     <div id="collapseBootstrapcustomer" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <router-link class="collapse-item" to="/store-customer">Add Customer</router-link>
-        <router-link class="collapse-item" to="customer">All Customer</router-link>
+        <router-link class="collapse-item" to="/customer">All Customer</router-link>
       </div>
     </div>
   </li>
@@ -183,7 +183,7 @@ a.item.active {background: #75757500 !important;color: #0540a5 !important;border
   <div id="collapseBootstrap5" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
     <div class="bg-white py-2 collapse-inner rounded">
       <router-link class="collapse-item" to="/given-salary">Add Salary</router-link>
-      <router-link class="collapse-item" to="salary">All Salary</router-link>
+      <router-link class="collapse-item" to="/salary">All Salary</router-link>
     </div>
   </div>
 </li>
