@@ -5459,7 +5459,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.post('/api/category', this.form).then(function () {
         _this.$router.push({
-          name: 'storeCategory'
+          name: 'category'
         });
 
         Notification.success();

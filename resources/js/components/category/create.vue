@@ -15,7 +15,7 @@
 										<input type="text" class="form-control" id="exampleInputFirstName" placeholder="Enter Category Name" v-model="form.category_name">
 										<small class="text-danger" v-if="errors.category_name"> {{ errors.category_name[0] }} </small>
 									</div>
-									
+
 									<div class="form-group">
 										<button type="submit" class="btn btn-primary btn-block">Submit</button>
 									</div>
@@ -47,12 +47,12 @@ export default {
 			},
 			errors: {}
 		}
-	},	
+	},
 	methods:{
 		storeCategory(){
 			axios.post('/api/category', this.form)
 			.then(() => {
-				this.$router.push({name: 'storeCategory'})
+				this.$router.push({name: 'category'})
 				Notification.success()
 			})
 			.catch(error => this.errors = error.response.data.errors)
