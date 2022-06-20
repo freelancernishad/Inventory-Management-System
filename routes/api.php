@@ -3,27 +3,27 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Api\PosController;
+use App\Http\Controllers\api\PosController;
 use App\Http\Controllers\InvoiceController;
-use App\Http\Controllers\Api\CartController;
-use  App\Http\Controllers\Api\authController;
-use App\Http\Controllers\Api\OrderController;
-use App\Http\Controllers\Api\SalaryController;
-use App\Http\Controllers\Api\ExpenseController;
-use App\Http\Controllers\Api\ProductController;
-use App\Http\Controllers\Api\CategoryController;
-use App\Http\Controllers\Api\CustomerController;
-use App\Http\Controllers\Api\EmployeeController;
-use App\Http\Controllers\Api\SupplierController;
+use App\Http\Controllers\api\CartController;
+use  App\Http\Controllers\api\authController;
+use App\Http\Controllers\api\OrderController;
+use App\Http\Controllers\api\SalaryController;
+use App\Http\Controllers\api\ExpenseController;
+use App\Http\Controllers\api\ProductController;
+use App\Http\Controllers\api\CategoryController;
+use App\Http\Controllers\api\CustomerController;
+use App\Http\Controllers\api\EmployeeController;
+use App\Http\Controllers\api\SupplierController;
 
 /*
 |--------------------------------------------------------------------------
-| API Routes
+| aPI Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register API routes for your application. These
+| Here is where you can register aPI routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
+| is assigned the "api" middleware group. Enjoy building your aPI!
 |
 */
 
@@ -99,12 +99,12 @@ Route::get('/customer/due/{id}',  [CustomerController::class,'CustomerDue']);
 Route::get('/due-order/{id}',  [OrderController::class,'DueOrder']);
 Route::post('/due-order/{id}',  [OrderController::class,'DueOrderupdate']);
 
-        // Route::apiResource('employee', 'Api\EmployeeController');
-        // Route::apiResource('supplier', 'Api\SupplierController');
-        // Route::apiResource('category', 'Api\CategoryController');
-        // Route::apiResource('product', 'Api\ProductController');
-        // Route::apiResource('expense', 'Api\ExpenseController');
-        // Route::apiResource('customer', 'Api\CustomerController');
+        // Route::apiResource('employee', 'api\EmployeeController');
+        // Route::apiResource('supplier', 'api\SupplierController');
+        // Route::apiResource('category', 'api\CategoryController');
+        // Route::apiResource('product', 'api\ProductController');
+        // Route::apiResource('expense', 'api\ExpenseController');
+        // Route::apiResource('customer', 'api\CustomerController');
 
         // Salary Routes
         Route::post('/salary/paid/{id}', [SalaryController::class,'paid']);

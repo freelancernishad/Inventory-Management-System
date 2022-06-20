@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\api;
 
 use App\Models\Customer;
 use Illuminate\Http\Request;
@@ -10,7 +10,7 @@ use Intervention\Image\Facades\Image;
 
 class CustomerController extends Controller
 {
-    
+
     /**
      * Display a listing of the resource.
      *
