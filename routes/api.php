@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\PosController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\Api\CartController;
-use  App\Http\Controllers\api\authController;
+use  App\Http\Controllers\Api\authController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\SalaryController;
 use App\Http\Controllers\Api\ExpenseController;
