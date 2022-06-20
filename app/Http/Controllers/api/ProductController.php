@@ -21,7 +21,6 @@ class ProductController extends Controller
     public function productCodeGen(Request $request)
     {
 
-
          $last = DB::table('products')->latest()->count();
          if($last==0){
 
