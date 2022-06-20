@@ -11287,7 +11287,9 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('qr-code', vue_qrcode_comp
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('barcode', (vue_barcode__WEBPACK_IMPORTED_MODULE_3___default()));
 
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('b-modal', bootstrap_vue__WEBPACK_IMPORTED_MODULE_4__.BModal);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('b-button', bootstrap_vue__WEBPACK_IMPORTED_MODULE_5__.BButton); // Router Imported
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('b-button', bootstrap_vue__WEBPACK_IMPORTED_MODULE_5__.BButton);
+window.ASSETURL = '/public/'; // window.ASSETURL = '/';
+// Router Imported
 
  // Import helper class
 
@@ -11478,7 +11480,7 @@ var Notification = /*#__PURE__*/function () {
     key: "successSound",
     value: function successSound() {
       var data = {
-        soundurl: '/Single Audio.mp3'
+        soundurl: ASSETURL + 'Single Audio.mp3'
       };
       var audio = new Audio(data.soundurl);
       audio.play();
@@ -11487,7 +11489,7 @@ var Notification = /*#__PURE__*/function () {
     key: "deleteSound",
     value: function deleteSound() {
       var data = {
-        soundurl: '/Broke Glass.mp3'
+        soundurl: ASSETURL + 'Broke Glass.mp3'
       };
       var audio = new Audio(data.soundurl);
       audio.play();
@@ -11496,7 +11498,7 @@ var Notification = /*#__PURE__*/function () {
     key: "errorSound",
     value: function errorSound() {
       var data = {
-        soundurl: '/Windows error.mp3'
+        soundurl: ASSETURL + 'Windows error.mp3'
       };
       var audio = new Audio(data.soundurl);
       audio.play();
