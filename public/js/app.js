@@ -9754,6 +9754,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_created$data$created = {
   created: function created() {
     if (!User.loggedIn()) {
@@ -97744,63 +97748,10 @@ var render = function () {
                           _c("div", { staticClass: "col-md-6" }, [
                             _c(
                               "label",
-                              { attrs: { for: "exampleFormControlSelect2" } },
-                              [_vm._v("Seletct Supplier")]
+                              { attrs: { for: "exampleFormControlSelect1" } },
+                              [_vm._v("Group")]
                             ),
                             _vm._v(" "),
-                            _c(
-                              "select",
-                              {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.form.supplier_id,
-                                    expression: "form.supplier_id",
-                                  },
-                                ],
-                                staticClass: "form-control",
-                                attrs: { id: "exampleFormControlSelect2" },
-                                on: {
-                                  change: function ($event) {
-                                    var $$selectedVal = Array.prototype.filter
-                                      .call(
-                                        $event.target.options,
-                                        function (o) {
-                                          return o.selected
-                                        }
-                                      )
-                                      .map(function (o) {
-                                        var val =
-                                          "_value" in o ? o._value : o.value
-                                        return val
-                                      })
-                                    _vm.$set(
-                                      _vm.form,
-                                      "supplier_id",
-                                      $event.target.multiple
-                                        ? $$selectedVal
-                                        : $$selectedVal[0]
-                                    )
-                                  },
-                                },
-                              },
-                              _vm._l(_vm.suppliers, function (supplier) {
-                                return _c(
-                                  "option",
-                                  { domProps: { value: supplier.id } },
-                                  [_vm._v(_vm._s(supplier.name))]
-                                )
-                              }),
-                              0
-                            ),
-                          ]),
-                        ]),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("div", { staticClass: "form-row" }, [
-                          _c("div", { staticClass: "col-md-4" }, [
                             _c("input", {
                               directives: [
                                 {
@@ -97814,7 +97765,7 @@ var render = function () {
                               attrs: {
                                 type: "text",
                                 id: "exampleInputPhone",
-                                placeholder: "Enter root",
+                                placeholder: "Enter Group",
                               },
                               domProps: { value: _vm.form.root },
                               on: {
@@ -97837,8 +97788,12 @@ var render = function () {
                                 ])
                               : _vm._e(),
                           ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "col-md-4" }, [
+                        ]),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("div", { staticClass: "form-row" }, [
+                          _c("div", { staticClass: "col-md-6" }, [
                             _c("input", {
                               directives: [
                                 {
@@ -97876,7 +97831,7 @@ var render = function () {
                               : _vm._e(),
                           ]),
                           _vm._v(" "),
-                          _c("div", { staticClass: "col-md-4" }, [
+                          _c("div", { staticClass: "col-md-6" }, [
                             _c("input", {
                               directives: [
                                 {

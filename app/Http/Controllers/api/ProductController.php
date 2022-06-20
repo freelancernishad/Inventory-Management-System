@@ -65,7 +65,7 @@ class ProductController extends Controller
             'supplier_id'      => 'required',
             'product_name'     => 'required',
             'product_code'     => 'required|max:80',
-            'root'             => 'required|max:80',
+            // 'root'             => 'required|max:80',
             'buying_price'     => 'required|max:80',
             'selling_price'    => 'required|max:80',
             'buying_date'      => 'required|max:80',
