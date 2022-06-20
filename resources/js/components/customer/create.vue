@@ -35,7 +35,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="form-group">
+									<!-- <div class="form-group">
 										<div class="form-row">
 											<div class="col-md-6">
 												<div class="custom-file" style="margin-top: 16px;">
@@ -47,8 +47,8 @@
 												<img :src="form.photo" style="width: 146px">
 											</div>
 										</div>
-									</div>
-									
+									</div> -->
+
 									<div class="form-group">
 										<button type="submit" class="btn btn-primary btn-block">Submit</button>
 									</div>
@@ -85,7 +85,7 @@ export default {
 			errors: {}
 		}
 	},
-	
+
 	methods:{
 		onFileSelected(event){
 			let file = event.target.files[0];

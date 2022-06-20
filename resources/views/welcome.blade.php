@@ -29,7 +29,10 @@ ul#accordionSidebar {
 .ui.pagination.menu.small a {padding: 4px 10px;margin: 0 3px;background: #0540a5;cursor: pointer;color: white;}
 
 a.item.active {background: #75757500 !important;color: #0540a5 !important;border: 2px solid #0540a5;padding: 2px 8px !important;}
-
+.btn-xs {
+    padding: 2px 7px;
+    font-size: 12px;
+}
   </style>
 </head>
 
@@ -129,6 +132,7 @@ a.item.active {background: #75757500 !important;color: #0540a5 !important;border
           <div class="bg-white py-2 collapse-inner rounded">
             <router-link class="collapse-item" to="/store-product">Add Product</router-link>
             <router-link class="collapse-item" to="/product">All Product</router-link>
+            <router-link class="collapse-item" to="/product/expired">Expired Product</router-link>
           </div>
         </div>
       </li>

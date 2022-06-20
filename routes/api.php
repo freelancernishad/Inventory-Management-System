@@ -92,6 +92,7 @@ Route::apiResources([
     'customer' => CustomerController::class,
 ]);
 Route::get('/products/search',[ProductController::class,'search']);
+Route::get('/products/expired',[ProductController::class,'expired']);
 Route::get('/products/code',[ProductController::class,'productCodeGen']);
 
 Route::get('/product_code/{product_code}',  [ProductController::class,'product_code']);

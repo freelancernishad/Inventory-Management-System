@@ -58,18 +58,29 @@
 										</div>
 									</div>
 									<div class="form-group">
+
 										<div class="form-row">
-											<div class="col-md-6">
+
+											<div class="col-md-4">
+                                                <label for="">Buying Date</label>
 												<input type="date" class="form-control" id="exampleInputAddress" placeholder="Enter Buying Date" v-model='form.buying_date'>
 												<small class="text-danger" v-if="errors.buying_date">{{ errors.buying_date[0] }}</small>
 											</div>
-											<div class="col-md-6">
+
+											<div class="col-md-4">
+                                                <label for="">Expired Date</label>
+												<input type="date" class="form-control" id="exampleInputAddress" placeholder="Enter Buying Date" v-model='form.expired_date'>
+												<small class="text-danger" v-if="errors.expired_date">{{ errors.expired_date[0] }}</small>
+											</div>
+
+											<div class="col-md-4">
+                                                 <label for="">Product Quantity</label>
 												<input type="number" class="form-control" id="exampleInputNid" placeholder="Enter Product Quantity" v-model='form.product_quantity'>
 												<small class="text-danger" v-if="errors.product_quantity">{{ errors.product_quantity[0] }}</small>
 											</div>
 										</div>
 									</div>
-									<div class="form-group">
+									<!-- <div class="form-group">
 										<div class="form-row">
 											<div class="col-md-6">
 												<div class="custom-file">
@@ -81,7 +92,7 @@
 												<img :src="form.image" style="width: 146px">
 											</div>
 										</div>
-									</div>
+									</div> -->
 
 									<div class="form-group">
 										<button type="submit" class="btn btn-primary btn-block">Submit</button>
@@ -118,6 +129,7 @@ export default {
 				buying_price: null,
 				selling_price: null,
 				buying_date: null,
+				expired_date: null,
 				product_quantity: null,
 				image: null,
 			},

@@ -156,7 +156,7 @@
                                 <tr>
                                     <th>Product Name</th>
                                     <th>Product Code</th>
-                                    <th>Image</th>
+
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -165,9 +165,7 @@
                                 <tr v-for="product in stockOutProducts" :key="product.id">
                                     <td>{{ product.product_name }}</td>
                                     <td>{{ product.product_code }}</td>
-                                    <td>
-                                        <img :src="product.image" id="img_size" />
-                                    </td>
+                 
                                     <td v-if="product.product_quantity >= 1">
                                         <span class="badge badge-success">Available</span>
                                     </td>
@@ -203,23 +201,18 @@
                                 <tr>
                                     <th>Product Name</th>
                                     <th>Product Code</th>
-                                    <th>Image</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="product in stockOutProducts" :key="product.id">
+                                <tr v-for="product in expiredProducts" :key="product.id">
                                     <td>{{ product.product_name }}</td>
                                     <td>{{ product.product_code }}</td>
+
+
                                     <td>
-                                        <img :src="product.image" id="img_size" />
-                                    </td>
-                                    <td v-if="product.product_quantity >= 1">
-                                        <span class="badge badge-success">Available</span>
-                                    </td>
-                                    <td v-else="">
-                                        <span class="badge badge-danger">Stock Out</span>
+                                        <span class="badge badge-danger">Expired</span>
                                     </td>
                                     <td>
                                         <router-link :to="{
@@ -309,7 +302,8 @@ export default {
             income: "",
             due: "",
             expense: "",
-            stockOutProducts: "",
+            stockOutProducts: {},
+            expiredProducts: {},
             newdata: new Date(),
             year: "",
             month: "",
@@ -376,6 +370,7 @@ this.countmonth();
         this.todayDue();
         this.expenses();
         this.stockOutProduct();
+        this.expiredProduct();
         this.monthlybar();
         this.dailybar();
         this.yearslist();
@@ -423,6 +418,12 @@ this.countmonth();
             axios
                 .get("/api/stockout/product")
                 .then(({ data }) => (this.stockOutProducts = data))
+                .catch();
+        },
+        expiredProduct() {
+            axios
+                .get("/api/products/expired")
+                .then(({ data }) => (this.expiredProducts = data.data))
                 .catch();
         },
         monthlybar() {

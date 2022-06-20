@@ -554,7 +554,7 @@ $payable = $orders->pay-$previousDue;
 
         <style>
         @page {
-         margin: 0px;
+         margin: 10px;
         }
         .memoborder{
             width: 49%;
@@ -711,12 +711,14 @@ $payable = $orders->pay-$previousDue;
                             <tbody class='tbody'>";
 
 
-                                    $subtotal = 0;
+                            $subtotal = $orders->sub_total;
+                            $totalpay = $orders->pay;
+                            $totaldue = $orders->due;
                                     $index = 1;
 
                                 foreach($orderDetails as $product){
                                   $html .="  <tr class='tr'>
-                                        <td class='td defaltfont'>$index</td>
+                                        <td class='td defaltfont'>".int_en_to_bn($index)."</td>
                                         <td class='td defaltfont'>$product->product_name</td>
                                         <td class='td defaltfont'>$product->product_quantity</td>
                                         <td class='td defaltfont'>$product->product_price</td>
@@ -724,12 +726,12 @@ $payable = $orders->pay-$previousDue;
                                     </tr>";
 
                                         $index++;
-                                        $subtotal += $product->sub_total;
+                                        // $subtotal += $product->sub_total;
 
                                 }
                                 foreach ($custom_order_details as $productCustom){
                                 $html .=" <tr class='tr'>
-                                        <td class='td defaltfont'>$index</td>
+                                        <td class='td defaltfont'>".int_en_to_bn($index)."</td>
                                         <td class='td defaltfont'>$productCustom->product_name</td>
                                         <td class='td defaltfont'>$productCustom->product_quantity
                                             $productCustom->product_quantity_type</td>
@@ -738,19 +740,89 @@ $payable = $orders->pay-$previousDue;
                                     </tr>";
 
                                         $index++;
-                                        $subtotal += $productCustom->sub_total;
+                                        // $subtotal += $productCustom->sub_total;
 
                                 };
+
+                                $totalrow = 11-$index;
+                                for ($i=0; $i <$totalrow ; $i++) {
+                                    $html .=" <tr class='tr'>
+                                    <td class='td defaltfont'>".int_en_to_bn($i+$index)."</td>
+                                    <td class='td defaltfont'></td>
+                                    <td class='td defaltfont'></td>
+                                    <td class='td defaltfont'></td>
+                                    <td class='td defaltfont'></td>
+                                </tr>";
+                                }
+
+
+
+
+
                                 $html .=" </tbody>
-                            <tfoot class='tfoot'>
-                                <tr class='tr'>
-                                    <td colspan='4' class='defalttext td defaltfont'
-                                        style='text-align:right;    padding: 0 13px;'>
-                                        <p> মোট </p>
-                                    </td>
+                            <tfoot class='tfoot'>";
+
+if($duepaymets==0){
+
+
+
+                            $html .="
+                            <tr class='tr'>
+                                    <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> পরিশোধ </p></td>
+                                    <td class='td defaltfont'>$totalpay</td>
+                            </tr>
+                            <tr class='tr'>
+                                    <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> বাকি </p></td>
+                                    <td class='td defaltfont'>$totaldue</td>
+                            </tr>
+                            <tr class='tr'>
+                                    <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> মোট </p></td>
                                     <td class='td defaltfont'>$subtotal</td>
-                                </tr>
-                            </tfoot>
+                            </tr>
+                            ";
+                            }else{
+
+
+                                $previousDue = 0;
+
+                            foreach($duepaymets as $duepaymet){
+                              $previousDue += $duepaymet->payment_amount;
+                            }
+$payable = $orders->pay-$previousDue;
+
+                            $html .="
+                            <tr class='tr'>
+                                    <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> $orders->order_date </p></td>
+                                    <td class='td defaltfont'>$payable</td>
+                            </tr>";
+                            foreach($duepaymets as $duepaymet){
+                                $html .=" <tr class='tr'>
+                                <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> $duepaymet->pay_date </p></td>
+                                <td class='td defaltfont'>$duepaymet->payment_amount</td>
+                                 </tr>";
+                              }
+
+
+
+                            $html .=" <tr class='tr'>
+                                    <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> বাকি </p></td>
+                                    <td class='td defaltfont'>$totaldue</td>
+                            </tr>
+
+                            <tr class='tr'>
+                                    <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> মোট </p></td>
+                                    <td class='td defaltfont'>$subtotal</td>
+                            </tr>
+                            ";
+                            };
+
+
+
+
+
+
+
+                                $html .=" </tfoot>
                         </table>
                         <p style='margin-top:20px;padding:0 15px' class='defaltfont'>কথাই : $amount</p>
                     </div>

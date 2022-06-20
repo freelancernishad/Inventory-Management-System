@@ -69,6 +69,7 @@ class ProductController extends Controller
             'buying_price'     => 'required|max:80',
             'selling_price'    => 'required|max:80',
             'buying_date'      => 'required|max:80',
+            'expired_date'      => 'required|max:80',
             'product_quantity' => 'required',
         ]);
 
@@ -93,6 +94,7 @@ class ProductController extends Controller
             $product->buying_price = $request->buying_price;
             $product->selling_price = $request->selling_price;
             $product->buying_date = $request->buying_date;
+            $product->expired_date = $request->expired_date;
             $product->product_quantity = $request->product_quantity;
             $product->image = $image_url;
             $product->save();
@@ -106,6 +108,7 @@ class ProductController extends Controller
             $product->buying_price = $request->buying_price;
             $product->selling_price = $request->selling_price;
             $product->buying_date = $request->buying_date;
+            $product->expired_date = $request->expired_date;
             $product->product_quantity = $request->product_quantity;
             $product->save();
         }
@@ -156,10 +159,11 @@ class ProductController extends Controller
             'supplier_id'      => 'required',
             'product_name'     => 'required',
             'product_code'     => 'required|max:80',
-            'root'             => 'required|max:80',
+            // 'root'             => 'required|max:80',
             'buying_price'     => 'required|max:80',
             'selling_price'    => 'required|max:80',
             'buying_date'      => 'required|max:80',
+            'expired_date'      => 'required|max:80',
             'product_quantity' => 'required',
         ]);
 
@@ -172,6 +176,7 @@ class ProductController extends Controller
         $product->buying_price = $request->buying_price;
         $product->selling_price = $request->selling_price;
         $product->buying_date = $request->buying_date;
+        $product->expired_date = $request->expired_date;
         $product->product_quantity = $request->product_quantity;
 
         if ($image = $request->newImage) {
@@ -235,8 +240,8 @@ class ProductController extends Controller
 // return $request->availble;
         $result = QueryBuilder::for(Product::class)
         ->join('categories', 'products.category_id', 'categories.id')
-        ->join('suppliers', 'products.supplier_id', 'suppliers.id')
-        ->select('products.*', 'categories.category_name', 'suppliers.name')
+        // ->join('suppliers', 'products.supplier_id', 'suppliers.id')
+        ->select('products.*', 'categories.category_name')
         ->orderBy('products.id', 'desc');
 
 
@@ -256,5 +261,49 @@ class ProductController extends Controller
         // ->paginate(10);
         return response()->json($data);
     }
+
+
+
+    public function expired(Request $request)
+    {
+
+
+        $today = date('Y-m-d');
+    //   return  Product::where('expired_date','<',$today)->get();
+
+
+// return $request->availble;
+        $result = QueryBuilder::for(Product::class)
+        ->join('categories', 'products.category_id', 'categories.id')
+        // ->join('suppliers', 'products.supplier_id', 'suppliers.id')
+        ->select('products.*', 'categories.category_name')
+        ->where('expired_date','<',$today)
+        ->orderBy('products.id', 'desc');
+
+
+            if($request->availble==true){
+                $result->where('product_quantity','>',0);
+            }else{
+
+                $result->allowedFilters([AllowedFilter::exact('category_id'),AllowedFilter::exact('product_quantity'), 'supplier_id','product_name','product_code','root','buying_price','selling_price','buying_date','image',AllowedFilter::exact('id')]);
+            }
+
+
+       $data = $result->paginate(10);
+
+
+        // $result = QueryBuilder::for(Product::class)
+        // ->allowedFilters(['category_id', 'supplier_id','product_name','product_code','root','buying_price','selling_price','buying_date','image','product_quantity',AllowedFilter::exact('id')])
+        // ->paginate(10);
+        return response()->json($data);
+    }
+
+
+
+
+
+
+
+
 
 }

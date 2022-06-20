@@ -35,7 +35,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="form-group">
+									<!-- <div class="form-group">
 										<div class="form-row">
 											<div class="col-md-6">
 												<div class="custom-file" style="margin-top: 16px;">
@@ -47,8 +47,8 @@
 												<img :src="form.photo" style="width: 146px">
 											</div>
 										</div>
-									</div>
-									
+									</div> -->
+
 									<div class="form-group">
 										<button type="submit" class="btn btn-primary btn-block">Update</button>
 									</div>
@@ -91,7 +91,7 @@ export default {
 		axios.get('/api/customer/' + id)
 			 .then(({data}) => (this.form = data))
 			 .catch(console.log('error'))
-	},	
+	},
 	methods:{
 		onFileSelected(event){
 			let file = event.target.files[0];

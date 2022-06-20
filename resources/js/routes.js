@@ -24,6 +24,7 @@ let editCategory = require('./components/category/edit.vue').default;
 // Product Components
 let storeProduct = require('./components/product/create.vue').default;
 let product = require('./components/product/index.vue').default;
+let product_expired = require('./components/product/product_expired.vue').default;
 let editProduct = require('./components/product/edit.vue').default;
 
 // Expense Components
@@ -102,6 +103,7 @@ export const routes = [
   // Product Routes
   { path: '/store-product', component: storeProduct, name:'storeProduct' },
   { path: '/product', component: product, name:'product' },
+  { path: '/product/expired', component: product_expired, name:'product_expired' },
   { path: '/edit-product/:id', component: editProduct, name:'editProduct' },
 
   // Expense Routes
