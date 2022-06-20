@@ -12,6 +12,9 @@ use Spatie\QueryBuilder\AllowedFilter;
 use Illuminate\Support\Facades\File;
 class ProductController extends Controller
 {
+
+
+
     /**
      * Display a listing of the resource.
      *
