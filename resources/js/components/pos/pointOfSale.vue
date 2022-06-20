@@ -613,10 +613,10 @@ this.customtotal = summed;
                 total: total,
             };
             axios.post("/api/order", data).then(({ data }) => {
-                // this.$router.push({
-                //     name: "orderDetails",
-                //     params: { id: data },
-                // });
+                this.$router.push({
+                    name: "orderDetails",
+                    params: { id: data },
+                });
                 Notification.success();
             });
         },

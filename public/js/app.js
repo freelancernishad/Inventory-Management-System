@@ -9275,6 +9275,8 @@ __webpack_require__.r(__webpack_exports__);
       this.customtotal = summed;
     },
     orderDone: function orderDone() {
+      var _this15 = this;
+
       var total = this.sub_total * this.vats.vat / 100 + this.sub_total;
       var data = {
         qty: this.qty,
@@ -9289,10 +9291,14 @@ __webpack_require__.r(__webpack_exports__);
       };
       axios.post("/api/order", data).then(function (_ref13) {
         var data = _ref13.data;
-        // this.$router.push({
-        //     name: "orderDetails",
-        //     params: { id: data },
-        // });
+
+        _this15.$router.push({
+          name: "orderDetails",
+          params: {
+            id: data
+          }
+        });
+
         Notification.success();
       });
     }
