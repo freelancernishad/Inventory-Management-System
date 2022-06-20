@@ -58,7 +58,7 @@ a.item.active {background: #75757500 !important;color: #0540a5 !important;border
                 <i class="fas fa-fw fa-table"></i>
                 <span>POS</span></router-link>
               </li>
-
+{{--
               <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap1"
                 aria-expanded="true" aria-controls="collapseBootstrap1">
@@ -73,7 +73,7 @@ a.item.active {background: #75757500 !important;color: #0540a5 !important;border
 
                 </div>
               </div>
-            </li>
+            </li> --}}
 
 
               <hr class="sidebar-divider">
