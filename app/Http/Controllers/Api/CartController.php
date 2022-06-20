@@ -175,6 +175,7 @@ public function addToCartprice($id,$price)
 
 
 
+
 		$quantity = DB::table('pos')->where('id', $id)->decrement('product_quantity');
 
 		$product = DB::table('pos')->where('id', $id)->first();

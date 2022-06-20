@@ -376,6 +376,7 @@ $amount = $numto->bnMoney($orders->sub_total);
             </div>
 
         </div>
+
                 <div class='memobody' style='position: relative;'>
                     <table width='100%' style='border: 1px solid #2F77A5;margin-bottom:20px' cellspacing='0'>
                         <tr>

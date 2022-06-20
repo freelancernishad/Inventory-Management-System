@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 
 class SalaryController extends Controller
 {
+
     function paid(Request $request, $id)
     {
     	$request->validate([

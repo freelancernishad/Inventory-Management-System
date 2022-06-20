@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 class authController extends Controller
 {
+
     public function login(Request $r)
     {
         $validator = Validator::make($r->all(), [
