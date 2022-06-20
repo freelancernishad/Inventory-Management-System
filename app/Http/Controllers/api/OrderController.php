@@ -489,12 +489,12 @@ if($duepaymets==0){
                             foreach($duepaymets as $duepaymet){
                               $previousDue += $duepaymet->payment_amount;
                             }
-
+$payable = $orders->pay-$previousDue;
 
                             $html .="
                             <tr class='tr'>
                                     <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> $orders->order_date </p></td>
-                                    <td class='td defaltfont'>".$orders->pay-$previousDue."</td>
+                                    <td class='td defaltfont'>$payable</td>
                             </tr>";
                             foreach($duepaymets as $duepaymet){
                                 $html .=" <tr class='tr'>
