@@ -85,6 +85,15 @@ class Notification{
 		}).show();
         this.successSound()
 	}
+    customdelete(mess){
+		new Noty({
+			type: 'error',
+			layout: 'topRight',
+			text: mess,
+			timeout: 2000,
+		}).show();
+        this.deleteSound();
+	}
 
 	cart_delete(){
 		new Noty({

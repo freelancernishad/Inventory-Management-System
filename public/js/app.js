@@ -5657,6 +5657,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         if (result.isConfirmed) {
           axios["delete"]('/api/category/' + id).then(function () {
+            Notification.customdelete('Category Deleted');
             _this3.categories = _this3.categories.filter(function (category) {
               return category.id != id;
             });
@@ -5664,8 +5665,11 @@ __webpack_require__.r(__webpack_exports__);
             _this3.$router.push({
               name: 'category'
             });
-          });
-          Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+          }); // Swal.fire(
+          // 	'Deleted!',
+          // 	'Your file has been deleted.',
+          // 	'success'
+          // 	)
         }
       });
     }
@@ -9555,6 +9559,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   created: function created() {
     if (!User.loggedIn()) {
@@ -9567,7 +9573,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       form: {
         category_id: null,
-        supplier_id: null,
+        supplier_id: 1,
         product_name: null,
         product_code: null,
         root: null,
@@ -9618,13 +9624,17 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this3 = this;
 
-    axios.get('api/category').then(function (_ref) {
+    axios.get('/api/category').then(function (_ref) {
       var data = _ref.data;
       return _this3.categories = data;
     });
-    axios.get('api/supplier').then(function (_ref2) {
+    axios.get('/api/supplier').then(function (_ref2) {
       var data = _ref2.data;
       return _this3.suppliers = data;
+    });
+    axios.get('/api/products/code').then(function (_ref3) {
+      var data = _ref3.data;
+      return _this3.form.product_code = data;
     });
   }
 });
@@ -10136,6 +10146,10 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         if (result.isConfirmed) {
           axios["delete"]('/api/product/' + id).then(function () {
+            Notification.customdelete('Product Deleted');
+
+            _this4.allProduct();
+
             _this4.products = _this4.products.filter(function (product) {
               return product.id != id;
             });
@@ -10144,7 +10158,6 @@ __webpack_require__.r(__webpack_exports__);
               name: 'product'
             });
           });
-          Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
         }
       });
     }
@@ -11287,9 +11300,9 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('qr-code', vue_qrcode_comp
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('barcode', (vue_barcode__WEBPACK_IMPORTED_MODULE_3___default()));
 
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('b-modal', bootstrap_vue__WEBPACK_IMPORTED_MODULE_4__.BModal);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('b-button', bootstrap_vue__WEBPACK_IMPORTED_MODULE_5__.BButton);
-window.ASSETURL = '/public/'; // window.ASSETURL = '/';
-// Router Imported
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('b-button', bootstrap_vue__WEBPACK_IMPORTED_MODULE_5__.BButton); // window.ASSETURL = '/public/';
+
+window.ASSETURL = '/'; // Router Imported
 
  // Import helper class
 
@@ -11578,6 +11591,17 @@ var Notification = /*#__PURE__*/function () {
         timeout: 2000
       }).show();
       this.successSound();
+    }
+  }, {
+    key: "customdelete",
+    value: function customdelete(mess) {
+      new Noty({
+        type: 'error',
+        layout: 'topRight',
+        text: mess,
+        timeout: 2000
+      }).show();
+      this.deleteSound();
     }
   }, {
     key: "cart_delete",
@@ -50731,7 +50755,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#img_size[data-v-8e3009e8]{\r\n\twidth: 40px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#img_size[data-v-8e3009e8]{\n\twidth: 40px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -97160,6 +97184,7 @@ var render = function () {
                                 type: "number",
                                 id: "exampleInputEmail",
                                 placeholder: "Enter Product Code",
+                                readonly: "",
                               },
                               domProps: { value: _vm.form.product_code },
                               on: {
@@ -97245,63 +97270,10 @@ var render = function () {
                           _c("div", { staticClass: "col-md-6" }, [
                             _c(
                               "label",
-                              { attrs: { for: "exampleFormControlSelect2" } },
-                              [_vm._v("Seletct Supplier")]
+                              { attrs: { for: "exampleFormControlSelect1" } },
+                              [_vm._v("Group")]
                             ),
                             _vm._v(" "),
-                            _c(
-                              "select",
-                              {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.form.supplier_id,
-                                    expression: "form.supplier_id",
-                                  },
-                                ],
-                                staticClass: "form-control",
-                                attrs: { id: "exampleFormControlSelect2" },
-                                on: {
-                                  change: function ($event) {
-                                    var $$selectedVal = Array.prototype.filter
-                                      .call(
-                                        $event.target.options,
-                                        function (o) {
-                                          return o.selected
-                                        }
-                                      )
-                                      .map(function (o) {
-                                        var val =
-                                          "_value" in o ? o._value : o.value
-                                        return val
-                                      })
-                                    _vm.$set(
-                                      _vm.form,
-                                      "supplier_id",
-                                      $event.target.multiple
-                                        ? $$selectedVal
-                                        : $$selectedVal[0]
-                                    )
-                                  },
-                                },
-                              },
-                              _vm._l(_vm.suppliers, function (supplier) {
-                                return _c(
-                                  "option",
-                                  { domProps: { value: supplier.id } },
-                                  [_vm._v(_vm._s(supplier.name))]
-                                )
-                              }),
-                              0
-                            ),
-                          ]),
-                        ]),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("div", { staticClass: "form-row" }, [
-                          _c("div", { staticClass: "col-md-4" }, [
                             _c("input", {
                               directives: [
                                 {
@@ -97315,7 +97287,7 @@ var render = function () {
                               attrs: {
                                 type: "text",
                                 id: "exampleInputPhone",
-                                placeholder: "Enter root",
+                                placeholder: "Enter Group",
                               },
                               domProps: { value: _vm.form.root },
                               on: {
@@ -97338,8 +97310,12 @@ var render = function () {
                                 ])
                               : _vm._e(),
                           ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "col-md-4" }, [
+                        ]),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("div", { staticClass: "form-row" }, [
+                          _c("div", { staticClass: "col-md-6" }, [
                             _c("input", {
                               directives: [
                                 {
@@ -97377,7 +97353,7 @@ var render = function () {
                               : _vm._e(),
                           ]),
                           _vm._v(" "),
-                          _c("div", { staticClass: "col-md-4" }, [
+                          _c("div", { staticClass: "col-md-6" }, [
                             _c("input", {
                               directives: [
                                 {

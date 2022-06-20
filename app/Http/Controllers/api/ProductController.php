@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
-
+use Illuminate\Support\Facades\File;
 class ProductController extends Controller
 {
     /**
@@ -17,6 +17,26 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function productCodeGen(Request $request)
+    {
+
+
+         $last = DB::table('products')->latest()->count();
+         if($last==0){
+
+            return $product_code = str_pad(10000000, 8, '0', STR_PAD_LEFT);
+
+         }else{
+             $last = DB::table('products')->latest()->first();
+             $product_code = $last->product_code;
+
+             return $product_code+1;
+         }
+    }
+
+
+
     public function index(Request $request)
     {
         $products = DB::table('products')
@@ -186,12 +206,14 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $image = $product->image;
 
-        if ($image) {
-            unlink($image);
-            $product->delete();
-        }else{
-            $product->delete();
-        }
+      if(File::exists($image)){
+        unlink($image);
+        $product->delete();
+    }else{
+        $product->delete();
+    }
+
+
     }
 
     public function updateStock($id)

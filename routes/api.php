@@ -92,6 +92,7 @@ Route::apiResources([
     'customer' => CustomerController::class,
 ]);
 Route::get('/products/search',[ProductController::class,'search']);
+Route::get('/products/code',[ProductController::class,'productCodeGen']);
 
 Route::get('/product_code/{product_code}',  [ProductController::class,'product_code']);
 Route::get('/customer/due/{id}',  [CustomerController::class,'CustomerDue']);

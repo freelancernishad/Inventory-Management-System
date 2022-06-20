@@ -18,7 +18,7 @@
 												<small class="text-danger" v-if="errors.product_name"> {{ errors.product_name[0] }} </small>
 											</div>
 											<div class="col-md-6">
-												<input type="number" class="form-control" id="exampleInputEmail" placeholder="Enter Product Code" v-model='form.product_code'>
+												<input type="number" class="form-control" id="exampleInputEmail" placeholder="Enter Product Code" v-model='form.product_code' readonly>
 												<small class="text-danger" v-if="errors.product_code">{{ errors.product_code[0] }}</small>
 											</div>
 										</div>
@@ -31,25 +31,27 @@
 													<option v-for="category in categories" :value="category.id">{{ category.category_name }}</option>
 												</select>
 											</div>
-											<div class="col-md-6">
+											<!-- <div class="col-md-6">
 												<label for="exampleFormControlSelect2">Seletct Supplier</label>
 												<select class="form-control" id="exampleFormControlSelect2" v-model="form.supplier_id">
 													<option v-for="supplier in suppliers" :value="supplier.id">{{ supplier.name }}</option>
 												</select>
+											</div> -->
+                                            <div class="col-md-6">
+                                                <label for="exampleFormControlSelect1">Group</label>
+												<input type="text" class="form-control" id="exampleInputPhone" placeholder="Enter Group" v-model='form.root'>
+												<small class="text-danger" v-if="errors.root">{{ errors.root[0] }}</small>
 											</div>
 										</div>
 									</div>
 									<div class="form-group">
 										<div class="form-row">
-											<div class="col-md-4">
-												<input type="text" class="form-control" id="exampleInputPhone" placeholder="Enter root" v-model='form.root'>
-												<small class="text-danger" v-if="errors.root">{{ errors.root[0] }}</small>
-											</div>
-											<div class="col-md-4">
+
+											<div class="col-md-6">
 												<input type="number" class="form-control" id="exampleInputSalary" placeholder="Enter Buying Price" v-model='form.buying_price'>
 												<small class="text-danger" v-if="errors.buying_price">{{ errors.buying_price[0] }}</small>
 											</div>
-											<div class="col-md-4">
+											<div class="col-md-6">
 												<input type="number" class="form-control" id="exampleInputSalary" placeholder="Enter Selling Price" v-model='form.selling_price'>
 												<small class="text-danger" v-if="errors.selling_price">{{ errors.selling_price[0] }}</small>
 											</div>
@@ -80,7 +82,7 @@
 											</div>
 										</div>
 									</div>
-									
+
 									<div class="form-group">
 										<button type="submit" class="btn btn-primary btn-block">Submit</button>
 									</div>
@@ -109,7 +111,7 @@ export default {
 		return {
 			form:{
 				category_id: null,
-				supplier_id: null,
+				supplier_id: 1,
 				product_name: null,
 				product_code: null,
 				root: null,
@@ -124,7 +126,7 @@ export default {
 			suppliers: {}
 		}
 	},
-	
+
 	methods:{
 		onFileSelected(event){
 			let file = event.target.files[0];
@@ -149,11 +151,14 @@ export default {
 		}
 	},
 	mounted(){
-		axios.get('api/category')
+		axios.get('/api/category')
 			 .then(({data}) => (this.categories = data))
 
-		axios.get('api/supplier')
+		axios.get('/api/supplier')
 			 .then(({data}) => (this.suppliers = data))
+
+		axios.get('/api/products/code')
+			 .then(({data}) => (this.form.product_code = data))
 	}
 }
 </script>

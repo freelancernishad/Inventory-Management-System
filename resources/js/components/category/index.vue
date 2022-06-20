@@ -78,19 +78,24 @@ export default {
 				if (result.isConfirmed) {
 					axios.delete('/api/category/' + id)
 						 .then(() => {
+                              Notification.customdelete('Category Deleted');
 						 	this.categories = this.categories.filter(category => {
+
 						 		return category.id != id
+
+
+
 						 	})
 						 })
 						 .catch(() => {
 						 	this.$router.push({name: 'category'})
 						 })
 
-					Swal.fire(
-						'Deleted!',
-						'Your file has been deleted.',
-						'success'
-						)
+					// Swal.fire(
+					// 	'Deleted!',
+					// 	'Your file has been deleted.',
+					// 	'success'
+					// 	)
 				}
 			})
 		}

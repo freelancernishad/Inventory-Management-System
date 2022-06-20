@@ -216,6 +216,8 @@ export default {
 				if (result.isConfirmed) {
 					axios.delete('/api/product/' + id)
 						 .then(() => {
+                               Notification.customdelete('Product Deleted');
+                               this.allProduct();
 						 	this.products = this.products.filter(product => {
 						 		return product.id != id
 						 	})
@@ -224,11 +226,6 @@ export default {
 						 	this.$router.push({name: 'product'})
 						 })
 
-					Swal.fire(
-						'Deleted!',
-						'Your file has been deleted.',
-						'success'
-						)
 				}
 			})
 		}
