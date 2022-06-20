@@ -23,8 +23,8 @@ import { BModal , BButton  } from 'bootstrap-vue'
 Vue.component('b-modal', BModal)
 Vue.component('b-button', BButton)
 
-// window.ASSETURL = '/public/';
-window.ASSETURL = '/';
+window.ASSETURL = '/public/';
+// window.ASSETURL = '/';
 
 // Router Imported
 import {routes} from './routes';

@@ -11304,9 +11304,9 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('qr-code', vue_qrcode_comp
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('barcode', (vue_barcode__WEBPACK_IMPORTED_MODULE_3___default()));
 
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('b-modal', bootstrap_vue__WEBPACK_IMPORTED_MODULE_4__.BModal);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('b-button', bootstrap_vue__WEBPACK_IMPORTED_MODULE_5__.BButton); // window.ASSETURL = '/public/';
-
-window.ASSETURL = '/'; // Router Imported
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('b-button', bootstrap_vue__WEBPACK_IMPORTED_MODULE_5__.BButton);
+window.ASSETURL = '/public/'; // window.ASSETURL = '/';
+// Router Imported
 
  // Import helper class
 
