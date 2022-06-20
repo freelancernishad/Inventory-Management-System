@@ -80,7 +80,7 @@ class ProductController extends Controller
             $name = time().'.'.$ext;
             $img = Image::make($request->image)->resize(240, 200);
 
-            $upload_path = 'backend/product/';
+            $upload_path = env('FILE_PATH').'backend/product/';
             $image_url = $upload_path.$name;
             $img->save($image_url);
 
@@ -182,7 +182,7 @@ class ProductController extends Controller
             $name = time().'.'.$ext;
             $img = Image::make($image)->resize(240, 200);
 
-            $upload_path = 'backend/product/';
+            $upload_path =  env('FILE_PATH').'backend/product/';
             $image_url = $upload_path.$name;
             $newImage = $img->save($image_url);
 
