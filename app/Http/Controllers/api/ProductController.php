@@ -44,8 +44,8 @@ class ProductController extends Controller
     {
         $products = DB::table('products')
         ->join('categories', 'products.category_id', 'categories.id')
-        ->join('suppliers', 'products.supplier_id', 'suppliers.id')
-        ->select('products.*', 'categories.category_name', 'suppliers.name')
+        // ->join('suppliers', 'products.supplier_id', 'suppliers.id')
+        ->select('products.*', 'categories.category_name')
         ->orderBy('products.id', 'desc')
         ->paginate(12);
 

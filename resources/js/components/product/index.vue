@@ -28,7 +28,7 @@
 										<th>Barcode</th>
 										<th>Product Code</th>
 										<th>Category</th>
-										<th>Supplier</th>
+
 										<th>Root</th>
 										<th>Buying Price</th>
 										<th>Selling Price</th>
@@ -62,7 +62,7 @@
                                             </td>
 										<td>{{ product.product_code }}</td>
 										<td>{{ product.category_name }}</td>
-										<td>{{ product.name }}</td>
+
 										<td>{{ product.root }}</td>
 										<td>{{ product.buying_price }}</td>
 										<td>{{ product.selling_price }}</td>
