@@ -23,7 +23,7 @@
 										<input type="date" class="form-control" id="exampleInputFirstName" placeholder="Enter Expense Date" v-model="form.expense_date">
 										<small class="text-danger" v-if="errors.expense_date"> {{ errors.expense_date[0] }} </small>
 									</div>
-									
+
 									<div class="form-group">
 										<button type="submit" class="btn btn-primary btn-block">Submit</button>
 									</div>
@@ -57,12 +57,12 @@ export default {
 			},
 			errors: {}
 		}
-	},	
+	},
 	methods:{
 		storeExpense(){
 			axios.post('/api/expense', this.form)
 			.then(() => {
-				this.$router.push({name: 'storeExpense'})
+				this.$router.push({name: 'expense'})
 				Notification.success()
 			})
 			.catch(error => this.errors = error.response.data.errors)

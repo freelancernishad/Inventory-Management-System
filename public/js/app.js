@@ -6757,7 +6757,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.post('/api/expense', this.form).then(function () {
         _this.$router.push({
-          name: 'storeExpense'
+          name: 'expense'
         });
 
         Notification.success();

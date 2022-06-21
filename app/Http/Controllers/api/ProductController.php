@@ -28,7 +28,7 @@ class ProductController extends Controller
          $last = DB::table('products')->latest()->count();
          if($last==0){
 
-            return $product_code = str_pad(10000000, 8, '0', STR_PAD_LEFT);
+            return $product_code = str_pad(10000, 5, '0', STR_PAD_LEFT);
 
          }else{
              $last = DB::table('products')->latest()->first();
