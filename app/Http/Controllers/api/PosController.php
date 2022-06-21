@@ -19,6 +19,7 @@ class PosController extends Controller
         $request->validate([
             'customer_id' => 'required',
             'payBy' => 'required'
+            'memo' => 'required'
         ]);
 
 
@@ -45,6 +46,7 @@ class PosController extends Controller
         $data['pay'] = $request->pay;
         $data['due'] = $request->due;
         $data['payBy'] = $request->payBy;
+        $data['memo'] = $request->memo;
         $data['order_date'] = date('d/m/Y');
         $data['order_month'] = date('F');
         $data['order_year'] = date('Y');
