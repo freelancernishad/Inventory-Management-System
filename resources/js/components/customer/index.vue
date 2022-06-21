@@ -33,7 +33,7 @@
 										<td> <span  :id="'due'+customer.id"></span> {{ totaldue(customer.id) }} <router-link :id="'button'+customer.id" :to="{name: 'customerdue', params: {id: customer.id}}" class="btn btn-sm btn-info">Pay Now</router-link></td>
 										<td>
 											<router-link :to="{name: 'editCustomer', params: {id: customer.id}}" class="btn btn-sm btn-primary">Edit</router-link>
-											<a @click="deleteCustomer(customer.id)" class="btn btn-sm btn-danger" style="color: white">Delete</a>
+											<!-- <a @click="deleteCustomer(customer.id)" class="btn btn-sm btn-danger" style="color: white">Delete</a> -->
 										</td>
 									</tr>
 								</tbody>

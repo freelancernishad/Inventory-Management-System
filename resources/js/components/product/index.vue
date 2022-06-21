@@ -73,7 +73,7 @@
 										<td style="background: red;color: white;text-align: center;" v-else>{{ product.expired_date }}</td>
 										<td>
 											<router-link :to="{name: 'editProduct', params: {id: product.id}}" class="btn btn-sm btn-primary">Edit</router-link>
-											<a @click="deleteProduct(product.id)" class="btn btn-sm btn-danger" style="color: white">Delete</a>
+											<!-- <a @click="deleteProduct(product.id)" class="btn btn-sm btn-danger" style="color: white">Delete</a> -->
 										</td>
 									</tr>
 

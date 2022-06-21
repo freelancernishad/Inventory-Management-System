@@ -91081,20 +91081,6 @@ var render = function () {
                               },
                               [_vm._v("Edit")]
                             ),
-                            _vm._v(" "),
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-sm btn-danger",
-                                staticStyle: { color: "white" },
-                                on: {
-                                  click: function ($event) {
-                                    return _vm.deleteCategory(category.id)
-                                  },
-                                },
-                              },
-                              [_vm._v("Delete")]
-                            ),
                           ],
                           1
                         ),
@@ -91926,20 +91912,6 @@ var render = function () {
                                 },
                               },
                               [_vm._v("Edit")]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-sm btn-danger",
-                                staticStyle: { color: "white" },
-                                on: {
-                                  click: function ($event) {
-                                    return _vm.deleteCustomer(customer.id)
-                                  },
-                                },
-                              },
-                              [_vm._v("Delete")]
                             ),
                           ],
                           1
@@ -98854,20 +98826,6 @@ var render = function () {
                                 },
                               },
                               [_vm._v("Edit")]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-sm btn-danger",
-                                staticStyle: { color: "white" },
-                                on: {
-                                  click: function ($event) {
-                                    return _vm.deleteProduct(product.id)
-                                  },
-                                },
-                              },
-                              [_vm._v("Delete")]
                             ),
                           ],
                           1
