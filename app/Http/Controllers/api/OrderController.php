@@ -455,7 +455,7 @@ $memo = $orders->memo;
 
                                 };
 
-                                    $totalrow = 20-$index;
+                                    $totalrow = 16-$index;
                                     for ($i=0; $i <$totalrow ; $i++) {
                                         $html .=" <tr class='tr'>
                                         <td class='td defaltfont'>".int_en_to_bn($i+$index)."</td>
@@ -477,6 +477,10 @@ if($duepaymets==0){
 
                             $html .="
                             <tr class='tr'>
+                            <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> মোট </p></td>
+                            <td class='td defaltfont'>$subtotal</td>
+                    </tr>
+                            <tr class='tr'>
                                     <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> পরিশোধ </p></td>
                                     <td class='td defaltfont'>$totalpay</td>
                             </tr>
@@ -484,10 +488,7 @@ if($duepaymets==0){
                                     <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> বাকি </p></td>
                                     <td class='td defaltfont'>$totaldue</td>
                             </tr>
-                            <tr class='tr'>
-                                    <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> মোট </p></td>
-                                    <td class='td defaltfont'>$subtotal</td>
-                            </tr>
+
                             ";
                             }else{
 
@@ -500,6 +501,10 @@ if($duepaymets==0){
 $payable = $orders->pay-$previousDue;
 
                             $html .="
+                            <tr class='tr'>
+                            <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> মোট </p></td>
+                            <td class='td defaltfont'>$subtotal</td>
+                    </tr>
                             <tr class='tr'>
                                     <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> $orders->order_date </p></td>
                                     <td class='td defaltfont'>$payable</td>
@@ -518,10 +523,7 @@ $payable = $orders->pay-$previousDue;
                                     <td class='td defaltfont'>$totaldue</td>
                             </tr>
 
-                            <tr class='tr'>
-                                    <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> মোট </p></td>
-                                    <td class='td defaltfont'>$subtotal</td>
-                            </tr>
+
                             ";
                             };
 
@@ -533,10 +535,10 @@ $payable = $orders->pay-$previousDue;
 
                                 $html .=" </tfoot>
                         </table>
-                        <p style='margin-top:20px;padding:0 15px' class='defaltfont'>কথাই : $amount</p>
+                        <p style='margin-top:15px;padding:0 15px' class='defaltfont'>কথাই : $amount</p>
                     </div>
                 </div>
-                <div class='memofooter' style='margin-top:50px'>
+                <div class='memofooter' style='margin-top:25px'>
                     <p style='float:left;width:30%;padding:10px 15px' class='defaltfont'>ক্রেতার সাক্ষর</p>
                     <p style='float:right;width:30%;text-align:right;padding:10px 15px' class='defaltfont'>বিক্রেতার
                         সাক্ষর</p>
@@ -801,6 +803,11 @@ $payable = $orders->pay-$previousDue;
 
                             $html .="
                             <tr class='tr'>
+                            <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> মোট </p></td>
+                            <td class='td defaltfont'>$subtotal</td>
+                    </tr>
+
+                            <tr class='tr'>
                                     <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> $orders->order_date </p></td>
                                     <td class='td defaltfont'>$payable</td>
                             </tr>";
@@ -818,10 +825,7 @@ $payable = $orders->pay-$previousDue;
                                     <td class='td defaltfont'>$totaldue</td>
                             </tr>
 
-                            <tr class='tr'>
-                                    <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> মোট </p></td>
-                                    <td class='td defaltfont'>$subtotal</td>
-                            </tr>
+
                             ";
                             };
 
