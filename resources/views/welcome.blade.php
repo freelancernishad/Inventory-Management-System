@@ -40,6 +40,9 @@ th {
 td {
     text-align: center;
 }
+span.money {
+    font-size: 25px;
+}
   </style>
 </head>
 

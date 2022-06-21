@@ -93578,8 +93578,9 @@ var render = function () {
                   "div",
                   { staticClass: "h5 mb-0 font-weight-bold text-gray-800" },
                   [
+                    _c("span", { staticClass: "money" }, [_vm._v("৳")]),
                     _vm._v(
-                      "\n                                ৳" +
+                      " " +
                         _vm._s(_vm.todaySells) +
                         "\n                            "
                     ),
@@ -93616,8 +93617,9 @@ var render = function () {
                   "div",
                   { staticClass: "h5 mb-0 font-weight-bold text-gray-800" },
                   [
+                    _c("span", { staticClass: "money" }, [_vm._v("৳")]),
                     _vm._v(
-                      "\n                                ৳" +
+                      " " +
                         _vm._s(_vm.income) +
                         "\n                            "
                     ),
@@ -93656,10 +93658,9 @@ var render = function () {
                     staticClass: "h5 mb-0 mr-3 font-weight-bold text-gray-800",
                   },
                   [
+                    _c("span", { staticClass: "money" }, [_vm._v("৳")]),
                     _vm._v(
-                      "\n                                ৳" +
-                        _vm._s(_vm.due) +
-                        "\n                            "
+                      " " + _vm._s(_vm.due) + "\n                            "
                     ),
                   ]
                 ),
@@ -93694,8 +93695,9 @@ var render = function () {
                   "div",
                   { staticClass: "h5 mb-0 font-weight-bold text-gray-800" },
                   [
+                    _c("span", { staticClass: "money" }, [_vm._v("৳")]),
                     _vm._v(
-                      "\n                                ৳" +
+                      " " +
                         _vm._s(_vm.expense) +
                         "\n                            "
                     ),

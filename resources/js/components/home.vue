@@ -20,7 +20,7 @@
                                     Today Sell Amount
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    ৳{{ todaySells }}
+                                    <span class="money">৳</span> {{ todaySells }}
                                 </div>
                                 <div class="mt-2 mb-0 text-muted text-xs">
                                     <!-- <span class="text-success mr-2"><i class="fa fa-arrow-up"></i>
@@ -46,7 +46,7 @@
                                     Today Income
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    ৳{{ income }}
+                                    <span class="money">৳</span> {{ income }}
                                 </div>
                                 <div class="mt-2 mb-0 text-muted text-xs">
                                     <!-- <span class="text-success mr-2"><i class="fas fa-arrow-up"></i>
@@ -71,7 +71,7 @@
                                     Today Due
                                 </div>
                                 <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                    ৳{{ due }}
+                                    <span class="money">৳</span> {{ due }}
                                 </div>
                                 <div class="mt-2 mb-0 text-muted text-xs">
                                     <!-- <span class="text-success mr-2"><i class="fas fa-arrow-up"></i>
@@ -96,7 +96,7 @@
                                     Expense Amount
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    ৳{{ expense }}
+                                    <span class="money">৳</span> {{ expense }}
                                 </div>
                                 <div class="mt-2 mb-0 text-muted text-xs">
                                     <!-- <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i>
