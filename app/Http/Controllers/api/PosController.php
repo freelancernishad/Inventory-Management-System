@@ -18,7 +18,7 @@ class PosController extends Controller
 
         $request->validate([
             'customer_id' => 'required',
-            'payBy' => 'required'
+            'payBy' => 'required',
             'memo' => 'required'
         ]);
 
