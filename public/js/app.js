@@ -93579,17 +93579,17 @@ var render = function () {
                   { staticClass: "h5 mb-0 font-weight-bold text-gray-800" },
                   [
                     _vm._v(
-                      "\n                                $" +
+                      "\n                                ৳" +
                         _vm._s(_vm.todaySells) +
                         "\n                            "
                     ),
                   ]
                 ),
                 _vm._v(" "),
-                _vm._m(1),
+                _c("div", { staticClass: "mt-2 mb-0 text-muted text-xs" }),
               ]),
               _vm._v(" "),
-              _vm._m(2),
+              _vm._m(1),
             ]),
           ]),
         ]),
@@ -93617,17 +93617,17 @@ var render = function () {
                   { staticClass: "h5 mb-0 font-weight-bold text-gray-800" },
                   [
                     _vm._v(
-                      "\n                                $" +
+                      "\n                                ৳" +
                         _vm._s(_vm.income) +
                         "\n                            "
                     ),
                   ]
                 ),
                 _vm._v(" "),
-                _vm._m(3),
+                _c("div", { staticClass: "mt-2 mb-0 text-muted text-xs" }),
               ]),
               _vm._v(" "),
-              _vm._m(4),
+              _vm._m(2),
             ]),
           ]),
         ]),
@@ -93657,17 +93657,17 @@ var render = function () {
                   },
                   [
                     _vm._v(
-                      "\n                                $" +
+                      "\n                                ৳" +
                         _vm._s(_vm.due) +
                         "\n                            "
                     ),
                   ]
                 ),
                 _vm._v(" "),
-                _vm._m(5),
+                _c("div", { staticClass: "mt-2 mb-0 text-muted text-xs" }),
               ]),
               _vm._v(" "),
-              _vm._m(6),
+              _vm._m(3),
             ]),
           ]),
         ]),
@@ -93695,17 +93695,17 @@ var render = function () {
                   { staticClass: "h5 mb-0 font-weight-bold text-gray-800" },
                   [
                     _vm._v(
-                      "\n                                $" +
+                      "\n                                ৳" +
                         _vm._s(_vm.expense) +
                         "\n                            "
                     ),
                   ]
                 ),
                 _vm._v(" "),
-                _vm._m(7),
+                _c("div", { staticClass: "mt-2 mb-0 text-muted text-xs" }),
               ]),
               _vm._v(" "),
-              _vm._m(8),
+              _vm._m(4),
             ]),
           ]),
         ]),
@@ -93878,7 +93878,7 @@ var render = function () {
               "table",
               { staticClass: "table align-items-center table-flush" },
               [
-                _vm._m(9),
+                _vm._m(5),
                 _vm._v(" "),
                 _c(
                   "tbody",
@@ -93964,7 +93964,7 @@ var render = function () {
               "table",
               { staticClass: "table align-items-center table-flush" },
               [
-                _vm._m(10),
+                _vm._m(6),
                 _vm._v(" "),
                 _c(
                   "tbody",
@@ -93974,7 +93974,7 @@ var render = function () {
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(product.product_code))]),
                       _vm._v(" "),
-                      _vm._m(11, true),
+                      _vm._m(7, true),
                       _vm._v(" "),
                       _c(
                         "td",
@@ -94046,34 +94046,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mt-2 mb-0 text-muted text-xs" }, [
-      _c("span", { staticClass: "text-success mr-2" }, [
-        _c("i", { staticClass: "fa fa-arrow-up" }),
-        _vm._v("\n                                    3.48%"),
-      ]),
-      _vm._v(" "),
-      _c("span", [_vm._v("Since last month")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-auto" }, [
       _c("i", { staticClass: "fas fa-calendar fa-2x text-primary" }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mt-2 mb-0 text-muted text-xs" }, [
-      _c("span", { staticClass: "text-success mr-2" }, [
-        _c("i", { staticClass: "fas fa-arrow-up" }),
-        _vm._v("\n                                    12%"),
-      ]),
-      _vm._v(" "),
-      _c("span", [_vm._v("Since last years")]),
     ])
   },
   function () {
@@ -94088,34 +94062,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mt-2 mb-0 text-muted text-xs" }, [
-      _c("span", { staticClass: "text-success mr-2" }, [
-        _c("i", { staticClass: "fas fa-arrow-up" }),
-        _vm._v("\n                                    20.4%"),
-      ]),
-      _vm._v(" "),
-      _c("span", [_vm._v("Since last month")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-auto" }, [
       _c("i", { staticClass: "fas fa-users fa-2x text-info" }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mt-2 mb-0 text-muted text-xs" }, [
-      _c("span", { staticClass: "text-danger mr-2" }, [
-        _c("i", { staticClass: "fas fa-arrow-down" }),
-        _vm._v("\n                                    1.10%"),
-      ]),
-      _vm._v(" "),
-      _c("span", [_vm._v("Since yesterday")]),
     ])
   },
   function () {

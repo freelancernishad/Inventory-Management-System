@@ -20,12 +20,12 @@
                                     Today Sell Amount
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    ${{ todaySells }}
+                                    ৳{{ todaySells }}
                                 </div>
                                 <div class="mt-2 mb-0 text-muted text-xs">
-                                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i>
+                                    <!-- <span class="text-success mr-2"><i class="fa fa-arrow-up"></i>
                                         3.48%</span>
-                                    <span>Since last month</span>
+                                    <span>Since last month</span> -->
                                 </div>
                             </div>
                             <div class="col-auto">
@@ -46,12 +46,12 @@
                                     Today Income
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    ${{ income }}
+                                    ৳{{ income }}
                                 </div>
                                 <div class="mt-2 mb-0 text-muted text-xs">
-                                    <span class="text-success mr-2"><i class="fas fa-arrow-up"></i>
+                                    <!-- <span class="text-success mr-2"><i class="fas fa-arrow-up"></i>
                                         12%</span>
-                                    <span>Since last years</span>
+                                    <span>Since last years</span> -->
                                 </div>
                             </div>
                             <div class="col-auto">
@@ -71,12 +71,12 @@
                                     Today Due
                                 </div>
                                 <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                    ${{ due }}
+                                    ৳{{ due }}
                                 </div>
                                 <div class="mt-2 mb-0 text-muted text-xs">
-                                    <span class="text-success mr-2"><i class="fas fa-arrow-up"></i>
+                                    <!-- <span class="text-success mr-2"><i class="fas fa-arrow-up"></i>
                                         20.4%</span>
-                                    <span>Since last month</span>
+                                    <span>Since last month</span> -->
                                 </div>
                             </div>
                             <div class="col-auto">
@@ -96,12 +96,12 @@
                                     Expense Amount
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    ${{ expense }}
+                                    ৳{{ expense }}
                                 </div>
                                 <div class="mt-2 mb-0 text-muted text-xs">
-                                    <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i>
+                                    <!-- <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i>
                                         1.10%</span>
-                                    <span>Since yesterday</span>
+                                    <span>Since yesterday</span> -->
                                 </div>
                             </div>
                             <div class="col-auto">
@@ -165,7 +165,7 @@
                                 <tr v-for="product in stockOutProducts" :key="product.id">
                                     <td>{{ product.product_name }}</td>
                                     <td>{{ product.product_code }}</td>
-                 
+
                                     <td v-if="product.product_quantity >= 1">
                                         <span class="badge badge-success">Available</span>
                                     </td>
