@@ -58,6 +58,7 @@ class PosController extends Controller
             $cartData['product_id'] = $content->product_id;
             $cartData['product_quantity'] = $content->product_quantity;
             $cartData['product_price'] = $content->product_price;
+            $cartData['buying_price'] = $content->buying_price;
             $cartData['sub_total'] = $content->sub_total;
             DB::table('order_details')->insert($cartData);
             DB::table('products')
@@ -118,7 +119,19 @@ class PosController extends Controller
     }
     public function todayIncome()
     {
-        $todayIncome = DB::table('orders')->where('order_date', date('d/m/Y'))->sum('pay');
+
+
+         $orders = DB::table('orders')->where('order_date', date('d/m/Y'))->get();
+$buying_price = 0;
+$product_price = 0;
+     foreach ($orders as $key => $value) {
+        // print_r($value->id);
+        $buying_price += DB::table('order_details')->where('order_id', $value->id)->sum('buying_price');
+        $product_price += DB::table('order_details')->where('order_id', $value->id)->sum('product_price');
+
+     }
+$todayIncome =  $product_price-$buying_price;
+
         return response()->json($todayIncome);
     }
     public function todayDue()
