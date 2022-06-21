@@ -91,7 +91,8 @@ public function addToCartprice($id,$price)
 			$data['product_id'] = $id;
 			$data['product_name'] = $product->product_name;
 			$data['product_quantity'] = 1;
-			$data['product_price'] = $product->selling_price;;
+			$data['buying_price'] = $product->buying_price;
+			$data['product_price'] = $product->selling_price;
 			$data['sub_total'] = $product->selling_price;
 			DB::table('pos')->insert($data);
              return response()->json($product_quantity-1);

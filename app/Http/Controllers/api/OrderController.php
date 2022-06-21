@@ -221,7 +221,15 @@ $amount = $numto->bnMoney($orders->sub_total);
 //  echo $this->invoice1($orders,$orderDetails,$duepaymets,$amount,$custom_order_details,'left');
         $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-L','default_font' => 'bangla',]);
 
-  $mpdf->WriteHTML( $this->invoice1($orders,$orderDetails,$duepaymets,$amount,$custom_order_details,'right'));
+$memo = $orders->memo;
+        if($memo=='memo1'){
+
+            $mpdf->WriteHTML( $this->invoice1($orders,$orderDetails,$duepaymets,$amount,$custom_order_details,'right'));
+        }else if($memo=='memo2'){
+            $mpdf->WriteHTML( $this->invoice2($orders,$orderDetails,$duepaymets,$amount,$custom_order_details,'right'));
+
+        }
+
 
 
 

@@ -30,7 +30,10 @@
                                                 Qty
                                             </th>
                                             <th style="padding: 12px 50px">
-                                                Unit
+                                                Buy
+                                            </th>
+                                            <th style="padding: 12px 50px">
+                                                Sell
                                             </th>
                                             <th>Total</th>
                                             <th>Action</th>
@@ -78,6 +81,7 @@
                                                     </span>
                                                 </div>
                                             </td>
+                                             <td>{{  product.buying_price }} </td>
                                             <td>
                                                 <input type="number" v-model="
                                                     product.product_price
@@ -88,7 +92,9 @@
     )
 " class="form-control" />
                                             </td>
-                                            <td>{{ product.sub_total }}$</td>
+
+
+                                            <td>{{ product.sub_total }}৳</td>
                                             <td>
                                                 <a @click="
                                                     deleteItem(product.id)
@@ -148,14 +154,14 @@
                                         <div>
                                             <h6 class="my-0">Custom Total</h6>
                                         </div>
-                                        <span class="text-muted">${{ customtotal }}</span>
+                                        <span class="text-muted">৳{{ customtotal }}</span>
                                     </li>
 
                                     <li class="list-group-item d-flex justify-content-between lh-condensed">
                                         <div>
                                             <h6 class="my-0">Sub Total</h6>
                                         </div>
-                                        <span class="text-muted">${{ sub_total }}</span>
+                                        <span class="text-muted">৳{{ sub_total }}</span>
                                     </li>
 
 
@@ -172,14 +178,16 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Pay</label>
-                                        <input type="text" class="form-control" v-model="pay"
+                                        <input type="number" class="form-control" v-model="pay" @change="duecount" maxlength="9"
                                             id="exampleFormControlInput1" />
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleFormControlInput2">Due</label>
-                                        <input type="text" class="form-control" v-model="due"
-                                            id="exampleFormControlInput2" />
+                                        <input type="number" class="form-control" v-model="due"
+                                            id="exampleFormControlInput2" readonly />
                                     </div>
+
+
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect2">Pay By</label>
                                         <select class="form-control" id="exampleFormControlSelect2" v-model="payBy">
@@ -194,6 +202,28 @@
                                             </option>
                                         </select>
                                     </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect2">Memo</label>
+                                        <select class="form-control" id="exampleFormControlSelect2" v-model="memo">
+                                            <option value="memo1">
+                                                মেসার্স এলাহী ট্রেডার্স
+                                            </option>
+                                            <option value="memo2">
+                                               মেসার্স রনি ট্রেডার্স
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-check">
+                                    <input class="form-check-input" type="checkbox"  v-model="sms" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                       Mobile Sms Sent
+                                    </label>
+                                    </div>
+
+
+
                                     <button class="btn btn-success" type="submit">
                                         Submit
                                     </button>
@@ -315,6 +345,8 @@ export default {
             pay: "",
             due: "",
             payBy: "",
+            memo: "",
+            sms: "",
             pos: "",
             magic_flag: false,
             postext: "Scan",
@@ -352,6 +384,15 @@ export default {
         },
     },
     methods: {
+
+        duecount(){
+// console.log(this.pay);
+if (this.pay > this.sub_total) this.pay=this.sub_total;
+
+            this.due = this.sub_total-this.pay
+        },
+
+
         allProduct(page) {
             if (typeof page === "undefined") {
                 page = 1;
@@ -608,6 +649,8 @@ this.customtotal = summed;
                 pay: this.pay,
                 due: this.due,
                 payBy: this.payBy,
+                memo: this.memo,
+                sms: this.sms,
                 vat: this.vats.vat,
                 customInvoice: this.Invoices,
                 total: total,

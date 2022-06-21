@@ -33,6 +33,13 @@ a.item.active {background: #75757500 !important;color: #0540a5 !important;border
     padding: 2px 7px;
     font-size: 12px;
 }
+th {
+    text-align: center;
+}
+
+td {
+    text-align: center;
+}
   </style>
 </head>
 

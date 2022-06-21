@@ -8975,6 +8975,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   created: function created() {
     if (!User.loggedIn()) {
@@ -9014,6 +9044,8 @@ __webpack_require__.r(__webpack_exports__);
       pay: "",
       due: "",
       payBy: "",
+      memo: "",
+      sms: "",
       pos: "",
       magic_flag: false,
       postext: "Scan",
@@ -9059,6 +9091,11 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    duecount: function duecount() {
+      // console.log(this.pay);
+      if (this.pay > this.sub_total) this.pay = this.sub_total;
+      this.due = this.sub_total - this.pay;
+    },
     allProduct: function allProduct(page) {
       var _this4 = this;
 
@@ -9288,6 +9325,8 @@ __webpack_require__.r(__webpack_exports__);
         pay: this.pay,
         due: this.due,
         payBy: this.payBy,
+        memo: this.memo,
+        sms: this.sms,
         vat: this.vats.vat,
         customInvoice: this.Invoices,
         total: total
@@ -91843,15 +91882,7 @@ var render = function () {
                       return _c("tr", { key: customer.id }, [
                         _c("td", [_vm._v(_vm._s(customer.name))]),
                         _vm._v(" "),
-                        _c("td", [
-                          _c("img", {
-                            attrs: { src: customer.photo, id: "img_size" },
-                          }),
-                        ]),
-                        _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(customer.phone))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(customer.email))]),
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(customer.address))]),
                         _vm._v(" "),
@@ -91937,11 +91968,7 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("Name")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Photo")]),
-        _vm._v(" "),
         _c("th", [_vm._v("Phone")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Email")]),
         _vm._v(" "),
         _c("th", [_vm._v("Address")]),
         _vm._v(" "),
@@ -94597,12 +94624,12 @@ var render = function () {
                     ? _c("ul", { staticClass: "list-group" }, [
                         _c("li", { staticClass: "list-group-item" }, [
                           _c("b", [_vm._v("Sub Total : ")]),
-                          _vm._v(_vm._s(_vm.orders.sub_total) + "$"),
+                          _vm._v(_vm._s(_vm.orders.sub_total) + "৳"),
                         ]),
                         _vm._v(" "),
                         _c("li", { staticClass: "list-group-item" }, [
                           _c("b", [_vm._v("Pay Amount : ")]),
-                          _vm._v(_vm._s(_vm.orders.pay) + "$"),
+                          _vm._v(_vm._s(_vm.orders.pay) + "৳"),
                         ]),
                         _vm._v(" "),
                         _c("li", { staticClass: "list-group-item" }, [
@@ -94679,15 +94706,6 @@ var render = function () {
                             _c("td", [_vm._v(_vm._s(product.product_name))]),
                             _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(product.product_code))]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _c("img", {
-                                attrs: {
-                                  src: "/" + product.image,
-                                  id: "image_size",
-                                },
-                              }),
-                            ]),
                             _vm._v(" "),
                             _c("td", [
                               _vm._v(_vm._s(product.product_quantity)),
@@ -94806,8 +94824,6 @@ var staticRenderFns = [
         _c("th", [_vm._v("Product Name")]),
         _vm._v(" "),
         _c("th", [_vm._v("Code")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Image")]),
         _vm._v(" "),
         _c("th", [_vm._v("Qty")]),
         _vm._v(" "),
@@ -96382,6 +96398,10 @@ var render = function () {
                                 ]),
                                 _vm._v(" "),
                                 _c("td", [
+                                  _vm._v(_vm._s(product.buying_price) + " "),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
                                   _c("input", {
                                     directives: [
                                       {
@@ -96417,7 +96437,7 @@ var render = function () {
                                 ]),
                                 _vm._v(" "),
                                 _c("td", [
-                                  _vm._v(_vm._s(product.sub_total) + "$"),
+                                  _vm._v(_vm._s(product.sub_total) + "৳"),
                                 ]),
                                 _vm._v(" "),
                                 _c("td", [
@@ -96691,7 +96711,7 @@ var render = function () {
                         _vm._m(3),
                         _vm._v(" "),
                         _c("span", { staticClass: "text-muted" }, [
-                          _vm._v("$" + _vm._s(_vm.customtotal)),
+                          _vm._v("৳" + _vm._s(_vm.customtotal)),
                         ]),
                       ]
                     ),
@@ -96706,7 +96726,7 @@ var render = function () {
                         _vm._m(4),
                         _vm._v(" "),
                         _c("span", { staticClass: "text-muted" }, [
-                          _vm._v("$" + _vm._s(_vm.sub_total)),
+                          _vm._v("৳" + _vm._s(_vm.sub_total)),
                         ]),
                       ]
                     ),
@@ -96794,11 +96814,13 @@ var render = function () {
                           ],
                           staticClass: "form-control",
                           attrs: {
-                            type: "text",
+                            type: "number",
+                            maxlength: "9",
                             id: "exampleFormControlInput1",
                           },
                           domProps: { value: _vm.pay },
                           on: {
+                            change: _vm.duecount,
                             input: function ($event) {
                               if ($event.target.composing) {
                                 return
@@ -96827,8 +96849,9 @@ var render = function () {
                           ],
                           staticClass: "form-control",
                           attrs: {
-                            type: "text",
+                            type: "number",
                             id: "exampleFormControlInput2",
+                            readonly: "",
                           },
                           domProps: { value: _vm.due },
                           on: {
@@ -96896,6 +96919,112 @@ var render = function () {
                                 "\n                                                Gift Card\n                                            "
                               ),
                             ]),
+                          ]
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group" }, [
+                        _c(
+                          "label",
+                          { attrs: { for: "exampleFormControlSelect2" } },
+                          [_vm._v("Memo")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.memo,
+                                expression: "memo",
+                              },
+                            ],
+                            staticClass: "form-control",
+                            attrs: { id: "exampleFormControlSelect2" },
+                            on: {
+                              change: function ($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function (o) {
+                                    return o.selected
+                                  })
+                                  .map(function (o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.memo = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              },
+                            },
+                          },
+                          [
+                            _c("option", { attrs: { value: "memo1" } }, [
+                              _vm._v(
+                                "\n                                                মেসার্স এলাহী ট্রেডার্স\n                                            "
+                              ),
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "memo2" } }, [
+                              _vm._v(
+                                "\n                                               মেসার্স রনি ট্রেডার্স\n                                            "
+                              ),
+                            ]),
+                          ]
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-check" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.sms,
+                              expression: "sms",
+                            },
+                          ],
+                          staticClass: "form-check-input",
+                          attrs: { type: "checkbox", id: "flexCheckDefault" },
+                          domProps: {
+                            checked: Array.isArray(_vm.sms)
+                              ? _vm._i(_vm.sms, null) > -1
+                              : _vm.sms,
+                          },
+                          on: {
+                            change: function ($event) {
+                              var $$a = _vm.sms,
+                                $$el = $event.target,
+                                $$c = $$el.checked ? true : false
+                              if (Array.isArray($$a)) {
+                                var $$v = null,
+                                  $$i = _vm._i($$a, $$v)
+                                if ($$el.checked) {
+                                  $$i < 0 && (_vm.sms = $$a.concat([$$v]))
+                                } else {
+                                  $$i > -1 &&
+                                    (_vm.sms = $$a
+                                      .slice(0, $$i)
+                                      .concat($$a.slice($$i + 1)))
+                                }
+                              } else {
+                                _vm.sms = $$c
+                              }
+                            },
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          {
+                            staticClass: "form-check-label",
+                            attrs: { for: "flexCheckDefault" },
+                          },
+                          [
+                            _vm._v(
+                              "\n                                       Mobile Sms Sent\n                                    "
+                            ),
                           ]
                         ),
                       ]),
@@ -97236,7 +97365,13 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { staticStyle: { padding: "12px 50px" } }, [
           _vm._v(
-            "\n                                                Unit\n                                            "
+            "\n                                                Buy\n                                            "
+          ),
+        ]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { padding: "12px 50px" } }, [
+          _vm._v(
+            "\n                                                Sell\n                                            "
           ),
         ]),
         _vm._v(" "),

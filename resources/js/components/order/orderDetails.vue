@@ -45,8 +45,8 @@
 
 
                         <ul class="list-group" v-if="duepaymets==0">
-                            <li class="list-group-item"><b>Sub Total : </b>{{ orders.sub_total }}$</li>
-                            <li class="list-group-item"><b>Pay Amount : </b>{{ orders.pay }}$</li>
+                            <li class="list-group-item"><b>Sub Total : </b>{{ orders.sub_total }}৳</li>
+                            <li class="list-group-item"><b>Pay Amount : </b>{{ orders.pay }}৳</li>
                             <li class="list-group-item"><b>Due Amount : </b>{{ orders.due }}৳</li>
                       </ul>
 
@@ -81,7 +81,7 @@
                                 <tr>
                                     <th>Product Name</th>
                                     <th>Code</th>
-                                    <th>Image</th>
+                                    <!-- <th>Image</th> -->
                                     <th>Qty</th>
                                     <th>Unit Price</th>
                                     <th>Total</th>
@@ -91,7 +91,7 @@
                                 <tr v-for="product in details" :key="details.id">
                                     <td>{{ product.product_name }}</td>
                                     <td>{{ product.product_code }}</td>
-                                    <td><img :src="'/'+product.image" id="image_size"></td>
+                                    <!-- <td><img :src="'/'+product.image" id="image_size"></td> -->
                                     <td>{{ product.product_quantity }}</td>
                                     <td>{{ product.product_price }}$</td>
                                     <td>{{ product.sub_total }}$</td>

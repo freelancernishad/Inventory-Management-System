@@ -1,8 +1,10 @@
 <?php
 namespace App\Http\Controllers\api;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Exception;
 class PosController extends Controller
 {
     public function categoryProducts($id)
@@ -14,12 +16,18 @@ class PosController extends Controller
     {
 
 
-
-
         $request->validate([
             'customer_id' => 'required',
             'payBy' => 'required'
         ]);
+
+
+
+
+         $sms =  $request->sms;
+
+
+
 
 
          $customInvoice = $request->customInvoice;
@@ -71,6 +79,34 @@ class PosController extends Controller
 
 
         DB::table('pos')->delete();
+
+
+
+        if($sms){
+            $customer =  Customer::find($request->customer_id);
+             $phone = $customer->phone;
+             $deccription ='description';
+             $messages = array();
+                     array_push(
+                         $messages,
+                         [
+                             "number" => '88' . int_bn_to_en($phone),
+                             "message" => "$deccription"
+                         ]
+                     );
+     $responsemessege = [];
+             try {
+                 $msgs = sendMessages($messages);
+                 array_push($responsemessege,$msgs);
+
+             } catch (Exception $e) {
+                 array_push($responsemessege,$e->getMessage());
+             }
+         }
+
+
+// return $responsemessege;
+
         return response()->json($order_id);
     }
     public function todaySell()

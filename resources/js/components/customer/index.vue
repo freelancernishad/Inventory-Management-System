@@ -15,9 +15,9 @@
 								<thead class="thead-light">
 									<tr>
 										<th>Name</th>
-										<th>Photo</th>
+										<!-- <th>Photo</th> -->
 										<th>Phone</th>
-										<th>Email</th>
+										<!-- <th>Email</th> -->
 										<th>Address</th>
 										<th>Total Due</th>
 										<th>Action</th>
@@ -26,9 +26,9 @@
 								<tbody>
 									<tr v-for="customer in filtersearch" :key="customer.id">
 										<td>{{ customer.name }}</td>
-										<td><img :src="customer.photo" id="img_size"></td>
+										<!-- <td><img :src="customer.photo" id="img_size"></td> -->
 										<td>{{ customer.phone }}</td>
-										<td>{{ customer.email }}</td>
+										<!-- <td>{{ customer.email }}</td> -->
 										<td>{{ customer.address }}</td>
 										<td> <span  :id="'due'+customer.id"></span> {{ totaldue(customer.id) }} <router-link :id="'button'+customer.id" :to="{name: 'customerdue', params: {id: customer.id}}" class="btn btn-sm btn-info">Pay Now</router-link></td>
 										<td>
