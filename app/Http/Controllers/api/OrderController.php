@@ -481,7 +481,7 @@ if($duepaymets==0){
                             <td class='td defaltfont'>$subtotal</td>
                     </tr>
                             <tr class='tr'>
-                                    <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> পরিশোধ </p></td>
+                                    <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> জমা </p></td>
                                     <td class='td defaltfont'>$totalpay</td>
                             </tr>
                             <tr class='tr'>
@@ -678,11 +678,20 @@ $payable = $orders->pay-$previousDue;
         <div class='memobg memobg1'>
             <div class='memo'>
                 <div class='memoHead'>
-                    <h1 class='companiname'>মেসার্স রনি ট্রেডার্স</h1>
+                <p class='defalttext'>বিসমিল্লাহির রাহমানির রাহিম</p>
+                <table>
+                    <tr>
+                        <td width='155px'><img style='position:fixed;width:50px;top:0px;left:0px' src='".base64('m.png')."'></td>
+                        <td><h1 class='companiname'> মেসার্স রনি ট্রেডার্স</h1></td>
+                    </tr>
+                </table>
+
+
+
                     <p class='defalttext name'>প্রোঃ মোঃ হাছেন আলী </p>
                     <p class='defalttext'>এখানে রাসায়নিক সার কীটনাশক ও বীজ বিক্রিয় করা হয়</p>
                     <p class='defalttext address'>কালীগঞ্জ বাজার, দেবিগঞ্জ, পঞ্চগড় </p>
-                    <p class='defalttext' style='color:#6A4B5A'>মোবাইল নং : ০১৭৪০৯২৯৩০২ </p>
+                    <p class='defalttext' style='color:#6A4B5A'>মোবাইল নং : ০১৭৪০৯২৯৩০২, ০১৭৮৫৪৯৪২১৬ </p>
                 </div>
                 <div class='memobody' style='position: relative;'>
                     <table width='100%' style='border: 1px solid #2F77A5;margin-bottom:20px' cellspacing='0'>
@@ -754,7 +763,7 @@ $payable = $orders->pay-$previousDue;
 
                                 };
 
-                                $totalrow = 20-$index;
+                                $totalrow = 19-$index;
                                 for ($i=0; $i <$totalrow ; $i++) {
                                     $html .=" <tr class='tr'>
                                     <td class='td defaltfont'>".int_en_to_bn($i+$index)."</td>
@@ -782,7 +791,7 @@ if($duepaymets==0){
                             <td class='td defaltfont'>$subtotal</td>
                              </tr>
                             <tr class='tr'>
-                                    <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> পরিশোধ </p></td>
+                                    <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> জমা </p></td>
                                     <td class='td defaltfont'>$totalpay</td>
                             </tr>
                             <tr class='tr'>
@@ -828,19 +837,12 @@ $payable = $orders->pay-$previousDue;
 
                             ";
                             };
-
-
-
-
-
-
-
-                                $html .=" </tfoot>
+                $html .=" </tfoot>
                         </table>
                         <p style='margin-top:20px;padding:0 15px' class='defaltfont'>কথাই : $amount</p>
                     </div>
                 </div>
-                <div class='memofooter' style='margin-top:50px'>
+                <div class='memofooter' style='margin-top:25px'>
                     <p style='float:left;width:30%;padding:10px 15px' class='defaltfont'>ক্রেতার সাক্ষর</p>
                     <p style='float:right;width:30%;text-align:right;padding:10px 15px' class='defaltfont'>বিক্রেতার
                         সাক্ষর</p>
