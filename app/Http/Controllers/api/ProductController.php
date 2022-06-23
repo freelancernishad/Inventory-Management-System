@@ -260,7 +260,7 @@ class ProductController extends Controller
             }
 
 
-       $data = $result->paginate(10);
+       $data = $result->paginate(25);
 
 
         // $result = QueryBuilder::for(Product::class)
