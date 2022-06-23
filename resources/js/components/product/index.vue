@@ -11,13 +11,14 @@
 
 							<input type="text" placeholder="Search By Product Name" v-model="searchTerm" v-on:input="searchData" class="form-control" style="width: 300px;">
 		<router-link to="/store-product" class="btn btn-primary float-right" style="margin-top: 6px;margin-right: 6px;">Add Product</router-link>
-						</div>
-                        <!-- <qr-code text="Text to encode"></qr-code>
 
-  <input v-model="barcodeValue" /><br>
-  <barcode v-bind:value="barcodeValue">
-    Show this if the rendering fails.
-  </barcode> -->
+						</div>
+
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <div></div>
+							<a href="/product/export" class="btn btn-danger float-right" style="margin-top: 6px;margin-right: 6px;">Export Products</a>
+						</div>
+
 
 						<div class="table-responsive">
 							<table class="table align-items-center table-flush">

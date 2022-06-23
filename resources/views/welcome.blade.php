@@ -93,32 +93,7 @@ span.money {
               <div class="sidebar-heading">
                 Features
               </div>
-              <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
-                aria-expanded="true" aria-controls="collapseBootstrap">
-                <i class="far fa fa-users"></i>
-                <span>Employee</span>
-              </a>
-              <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                  <router-link class="collapse-item" to="/store-employee">Add Employee</router-link>
-                  <router-link class="collapse-item" to="/employee">All Employee</router-link>
-                </div>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap1"
-              aria-expanded="true" aria-controls="collapseBootstrap1">
-              <i class="far fa-fw fa-window-maximize"></i>
-              <span>Supplier</span>
-            </a>
-            <div id="collapseBootstrap1" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
-              <div class="bg-white py-2 collapse-inner rounded">
-                <router-link class="collapse-item" to="/store-supplier">Add Supplier</router-link>
-                <router-link class="collapse-item" to="supplier">All Supplier</router-link>
-              </div>
-            </div>
-          </li>
+
           <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap2"
             aria-expanded="true" aria-controls="collapseBootstrap2">
@@ -162,19 +137,6 @@ span.money {
         </div>
       </li>
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap4"
-        aria-expanded="true" aria-controls="collapseBootstrap4">
-        <i class="far fa fa-book"></i>
-        <span>Expense</span>
-      </a>
-      <div id="collapseBootstrap4" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <router-link class="collapse-item" to="/store-expense">Add Expense</router-link>
-          <router-link class="collapse-item" to="/expense">All Expense</router-link>
-        </div>
-      </div>
-    </li>
     <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrapcustomer"
       aria-expanded="true" aria-controls="collapseBootstrapcustomer">
@@ -188,19 +150,7 @@ span.money {
       </div>
     </div>
   </li>
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap5"
-    aria-expanded="true" aria-controls="collapseBootstrap5">
-    <i class="far fa fa-credit-card"></i>
-    <span>Salary</span>
-  </a>
-  <div id="collapseBootstrap5" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
-    <div class="bg-white py-2 collapse-inner rounded">
-      <router-link class="collapse-item" to="/given-salary">Add Salary</router-link>
-      <router-link class="collapse-item" to="/salary">All Salary</router-link>
-    </div>
-  </div>
-</li>
+
 <li class="nav-item">
   <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstraporder"
   aria-expanded="true" aria-controls="collapseBootstraporder">
@@ -216,6 +166,60 @@ span.money {
   </div>
 </div>
 </li>
+
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap4"
+    aria-expanded="true" aria-controls="collapseBootstrap4">
+    <i class="far fa fa-book"></i>
+    <span>Expense</span>
+  </a>
+  <div id="collapseBootstrap4" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+    <div class="bg-white py-2 collapse-inner rounded">
+      <router-link class="collapse-item" to="/store-expense">Add Expense</router-link>
+      <router-link class="collapse-item" to="/expense">All Expense</router-link>
+    </div>
+  </div>
+</li>
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
+    aria-expanded="true" aria-controls="collapseBootstrap">
+    <i class="far fa fa-users"></i>
+    <span>Employee</span>
+  </a>
+  <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+    <div class="bg-white py-2 collapse-inner rounded">
+      <router-link class="collapse-item" to="/store-employee">Add Employee</router-link>
+      <router-link class="collapse-item" to="/employee">All Employee</router-link>
+    </div>
+  </div>
+</li>
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap5"
+    aria-expanded="true" aria-controls="collapseBootstrap5">
+    <i class="far fa fa-credit-card"></i>
+    <span>Salary</span>
+  </a>
+  <div id="collapseBootstrap5" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+    <div class="bg-white py-2 collapse-inner rounded">
+      <router-link class="collapse-item" to="/given-salary">Add Salary</router-link>
+      <router-link class="collapse-item" to="/salary">All Salary</router-link>
+    </div>
+  </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap1"
+  aria-expanded="true" aria-controls="collapseBootstrap1">
+  <i class="far fa-fw fa-window-maximize"></i>
+  <span>Supplier</span>
+</a>
+<div id="collapseBootstrap1" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+  <div class="bg-white py-2 collapse-inner rounded">
+    <router-link class="collapse-item" to="/store-supplier">Add Supplier</router-link>
+    <router-link class="collapse-item" to="supplier">All Supplier</router-link>
+  </div>
+</div>
+</li>
+
 <hr class="sidebar-divider">
 <div class="sidebar-heading">
   Developed By Freelancer Nishad {{ date('Y') }}

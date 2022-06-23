@@ -820,12 +820,15 @@ $payable = $orders->pay-$previousDue;
                                     <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> $orders->order_date </p></td>
                                     <td class='td defaltfont'>$payable</td>
                             </tr>";
+
+
                             foreach($duepaymets as $duepaymet){
                                 $html .=" <tr class='tr'>
                                 <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> $duepaymet->pay_date </p></td>
                                 <td class='td defaltfont'>$duepaymet->payment_amount</td>
                                  </tr>";
                               }
+
 
 
 

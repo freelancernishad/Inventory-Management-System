@@ -16,7 +16,7 @@
 									<tr>
 										<th>Product Name</th>
 										<th>Product Code</th>
-										<th>Image</th>
+										<!-- <th>Image</th> -->
 										<th>Category</th>
 										<th>Buying Price</th>
 										<th>Status</th>
@@ -28,7 +28,7 @@
 									<tr v-for="product in products.data" :key="product.id">
 										<td>{{ product.product_name }}</td>
 										<td>{{ product.product_code }}</td>
-										<td><img :src="product.image" id="img_size"></td>
+										<!-- <td><img :src="product.image" id="img_size"></td> -->
 										<td>{{ product.category_name }}</td>
 										<td>{{ product.buying_price }}</td>
 										<td v-if="product.product_quantity >= 1"><span class="badge badge-success">Available</span></td>

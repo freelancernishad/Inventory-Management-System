@@ -4,18 +4,25 @@ namespace App\Http\Controllers\api;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Exports\ProductsExport;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
+use Maatwebsite\Excel\Facades\Excel;
 use Intervention\Image\Facades\Image;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
-use Illuminate\Support\Facades\File;
+
 class ProductController extends Controller
 {
 
 
 
+    public function export()
+    {
 
+        return Excel::download(new ProductsExport, 'Products.xlsx');
+    }
     /**
      * Display a listing of the resource.
      *

@@ -48,8 +48,12 @@ Route::get('/memo', function () {
 
 
 
-Route::get('invoice/{id}',[OrderController::class,'invoice']);
-Route::get('/custom/invoice/{id}',[InvoiceController::class,'invoice']);
+    Route::get('product/export',[ProductController::class,'export']);
+    Route::get('invoice/{id}',[OrderController::class,'invoice']);
+    Route::get('/custom/invoice/{id}',[InvoiceController::class,'invoice']);
+
+
+
 
 Route::get('/{vue_capture?}', function () {
     return view('welcome');

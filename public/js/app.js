@@ -10137,6 +10137,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   created: function created() {
     if (!User.loggedIn()) {
@@ -97421,12 +97422,6 @@ var render = function () {
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(product.product_code))]),
                         _vm._v(" "),
-                        _c("td", [
-                          _c("img", {
-                            attrs: { src: product.image, id: "img_size" },
-                          }),
-                        ]),
-                        _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(product.category_name))]),
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(product.buying_price))]),
@@ -97507,8 +97502,6 @@ var staticRenderFns = [
         _c("th", [_vm._v("Product Name")]),
         _vm._v(" "),
         _c("th", [_vm._v("Product Code")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Image")]),
         _vm._v(" "),
         _c("th", [_vm._v("Category")]),
         _vm._v(" "),
@@ -98724,12 +98717,14 @@ var render = function () {
               1
             ),
             _vm._v(" "),
+            _vm._m(0),
+            _vm._v(" "),
             _c("div", { staticClass: "table-responsive" }, [
               _c(
                 "table",
                 { staticClass: "table align-items-center table-flush" },
                 [
-                  _vm._m(0),
+                  _vm._m(1),
                   _vm._v(" "),
                   _c(
                     "tbody",
@@ -98860,6 +98855,31 @@ var render = function () {
   ])
 }
 var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "card-header py-3 d-flex flex-row align-items-center justify-content-between",
+      },
+      [
+        _c("div"),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-danger float-right",
+            staticStyle: { "margin-top": "6px", "margin-right": "6px" },
+            attrs: { href: "/product/export" },
+          },
+          [_vm._v("Export Products")]
+        ),
+      ]
+    )
+  },
   function () {
     var _vm = this
     var _h = _vm.$createElement
@@ -99247,12 +99267,6 @@ var render = function () {
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(product.product_code))]),
                         _vm._v(" "),
-                        _c("td", [
-                          _c("img", {
-                            attrs: { src: product.image, id: "img_size" },
-                          }),
-                        ]),
-                        _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(product.category_name))]),
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(product.buying_price))]),
@@ -99333,8 +99347,6 @@ var staticRenderFns = [
         _c("th", [_vm._v("Product Name")]),
         _vm._v(" "),
         _c("th", [_vm._v("Product Code")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Image")]),
         _vm._v(" "),
         _c("th", [_vm._v("Category")]),
         _vm._v(" "),
