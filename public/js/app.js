@@ -9172,7 +9172,7 @@ __webpack_require__.r(__webpack_exports__);
       pay: "",
       due: "",
       payBy: "",
-      memo: "",
+      memo: "memo2",
       sms: "",
       pos: "",
       magic_flag: false,
@@ -97115,58 +97115,6 @@ var render = function () {
                             _c("option", { attrs: { value: "Gift Card" } }, [
                               _vm._v(
                                 "\n                                                Gift Card\n                                            "
-                              ),
-                            ]),
-                          ]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c(
-                          "label",
-                          { attrs: { for: "exampleFormControlSelect2" } },
-                          [_vm._v("Memo")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.memo,
-                                expression: "memo",
-                              },
-                            ],
-                            staticClass: "form-control",
-                            attrs: { id: "exampleFormControlSelect2" },
-                            on: {
-                              change: function ($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function (o) {
-                                    return o.selected
-                                  })
-                                  .map(function (o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.memo = $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              },
-                            },
-                          },
-                          [
-                            _c("option", { attrs: { value: "memo1" } }, [
-                              _vm._v(
-                                "\n                                                মেসার্স এলাহী ট্রেডার্স\n                                            "
-                              ),
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "memo2" } }, [
-                              _vm._v(
-                                "\n                                               মেসার্স রনি ট্রেডার্স\n                                            "
                               ),
                             ]),
                           ]

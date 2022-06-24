@@ -202,7 +202,7 @@
                                             </option>
                                         </select>
                                     </div>
-
+<!-- 
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect2">Memo</label>
                                         <select class="form-control" id="exampleFormControlSelect2" v-model="memo">
@@ -213,7 +213,7 @@
                                                মেসার্স রনি ট্রেডার্স
                                             </option>
                                         </select>
-                                    </div>
+                                    </div> -->
 
                                     <div class="form-check">
                                     <input class="form-check-input" type="checkbox"  v-model="sms" id="flexCheckDefault">
@@ -344,7 +344,7 @@ export default {
             pay: "",
             due: "",
             payBy: "",
-            memo: "",
+            memo: "memo2",
             sms: "",
             pos: "",
             magic_flag: false,
