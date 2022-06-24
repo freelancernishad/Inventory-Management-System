@@ -88,14 +88,31 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="product in details" :key="details.id">
+
+
+                                <tr v-for="product in details" :key="product.id">
                                     <td>{{ product.product_name }}</td>
                                     <td>{{ product.product_code }}</td>
                                     <!-- <td><img :src="'/'+product.image" id="image_size"></td> -->
                                     <td>{{ product.product_quantity }}</td>
-                                    <td>{{ product.product_price }}$</td>
-                                    <td>{{ product.sub_total }}$</td>
+                                    <td>{{ product.product_price }}<span class="money">৳</span></td>
+                                    <td>{{ product.sub_total }}<span class="money">৳</span></td>
                                 </tr>
+
+
+
+                                <tr v-for="custom_product in customdetails" :key="custom_product.id">
+                                    <td>{{ custom_product.product_name }}</td>
+                                    <td>{{ custom_product.product_code }}</td>
+                                    <!-- <td><img :src="'/'+product.image" id="image_size"></td> -->
+                                    <td>{{ custom_product.product_quantity }} {{ custom_product.product_quantity_type }}</td>
+                                    <td>{{ custom_product.product_price }}<span class="money">৳</span></td>
+                                    <td>{{ custom_product.sub_total }}<span class="money">৳</span></td>
+                                </tr>
+
+
+
+
                             </tbody>
                         </table>
                     </div>
@@ -122,6 +139,7 @@ export default {
 		return {
             orders: {},
             details: {},
+            customdetails: {},
 			duepaymets: {},
 			errors: {},
             previousDue:0,
@@ -138,6 +156,10 @@ export default {
 
         axios.get('/api/order/details/' + id)
             .then(({data}) => (this.details = data))
+            .catch(console.log('error'))
+
+        axios.get('/api/customorder/details/' + id)
+            .then(({data}) => (this.customdetails = data))
             .catch(console.log('error'))
 
         axios.get('/api/order/duepay/' + id)

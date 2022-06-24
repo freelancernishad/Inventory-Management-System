@@ -139,11 +139,38 @@ $todayIncome =  $product_price-$buying_price;
         $todayDue = DB::table('orders')->where('order_date', date('d/m/Y'))->sum('due');
         return response()->json($todayDue);
     }
+
+
     public function expenses()
     {
         $expenses = DB::table('expenses')->where('expense_date', date('Y-m-d'))->sum('amount');
         return response()->json($expenses);
     }
+
+
+    public function totalStock()
+    {
+        $products = DB::table('products')->sum('product_quantity');
+        return response()->json($products);
+    }
+
+
+    public function totalStockAmount()
+    {
+
+
+
+        $products = DB::table('products')->get();
+$total = 0;
+foreach ($products as $key => $value) {
+    $total += $value->buying_price*$value->product_quantity;
+}
+
+
+        return response()->json($total);
+    }
+
+
     public function stockOut()
     {
         $stockOut = DB::table('products')->where('product_quantity', '<', 1)->get();

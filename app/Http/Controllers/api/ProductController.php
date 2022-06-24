@@ -244,19 +244,48 @@ class ProductController extends Controller
 
     public function search(Request $request)
     {
+        $data = $request->filter['product_name'];
+
+
+        $columns = ['product_name','product_code'];
+
+        // $query = Product::select('*');
+
+
+
+    // return    $models = $query->get();
+
+
+        // $cases = DB::table('products')
+        // ->where(function($query) use ($data)
+        // {
+        //     $query->whereRaw('*', 'like', '%'.$data.'%');
+        // })
+        // ->get();
+
+
+
+        // return $cases;
 // return $request->availble;
-        $result = QueryBuilder::for(Product::class)
+        // $result = QueryBuilder::for(Product::class)
+        $result =  Product::select('*')
         ->join('categories', 'products.category_id', 'categories.id')
         // ->join('suppliers', 'products.supplier_id', 'suppliers.id')
         ->select('products.*', 'categories.category_name')
         ->orderBy('products.id', 'desc');
 
 
+
             if($request->availble==true){
                 $result->where('product_quantity','>',0);
             }else{
+                foreach($columns as $column)
+                {
+                  $result->orWhere($column, 'like','%'.$data.'%');
+                }
 
-                $result->allowedFilters([AllowedFilter::exact('category_id'),AllowedFilter::exact('product_quantity'), 'supplier_id','product_name','product_code','root','buying_price','selling_price','buying_date','image',AllowedFilter::exact('id')]);
+
+                // $result->allowedFilters([AllowedFilter::exact('category_id'),AllowedFilter::exact('product_quantity'), 'supplier_id','product_name','product_code','root','buying_price','selling_price','buying_date','image',AllowedFilter::exact('id')]);
             }
 
 
@@ -269,6 +298,26 @@ class ProductController extends Controller
         return response()->json($data);
     }
 
+
+
+    public function stockCheck(Request $request)
+    {
+        $result = QueryBuilder::for(Product::class)
+        ->join('categories', 'products.category_id', 'categories.id')
+        // ->join('suppliers', 'products.supplier_id', 'suppliers.id')
+        ->select('products.*', 'categories.category_name')
+        ->orderBy('products.id', 'desc');
+        if($request->availble==true){
+            $result->where('product_quantity','>',0);
+        }else{
+            $result->allowedFilters([AllowedFilter::exact('category_id'),AllowedFilter::exact('product_quantity'), 'supplier_id','product_name','product_code','root','buying_price','selling_price','buying_date','image',AllowedFilter::exact('id')]);
+        }
+
+
+   $data = $result->paginate(25);
+
+    return response()->json($data);
+    }
 
 
     public function expired(Request $request)

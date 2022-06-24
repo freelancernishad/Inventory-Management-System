@@ -6166,6 +6166,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   created: function created() {
     if (!User.loggedIn()) {
@@ -6177,7 +6184,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       customers: [],
-      searchTerm: ""
+      searchTerm: "",
+      timeout: null
     };
   },
   computed: {
@@ -6198,9 +6206,22 @@ __webpack_require__.r(__webpack_exports__);
         return _this2.customers = data;
       })["catch"]();
     },
+    searchData: function searchData() {
+      var _this3 = this;
+
+      // clear timeout variable
+      clearTimeout(this.timeout);
+      this.timeout = setTimeout(function () {
+        axios.get('/api/customers/search?data=' + _this3.searchTerm).then(function (_ref2) {
+          var data = _ref2.data;
+          _this3.customers = data; //  this.allitems = data
+          //  console.log(this.products)
+        })["catch"]();
+      }, 300);
+    },
     totaldue: function totaldue(id) {
-      axios.get('/api/customer/due/' + id).then(function (_ref2) {
-        var data = _ref2.data;
+      axios.get('/api/customer/due/' + id).then(function (_ref3) {
+        var data = _ref3.data;
         // console.log(data);
         document.getElementById('due' + id).innerHTML = data;
 
@@ -6210,7 +6231,7 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"]();
     },
     deleteCustomer: function deleteCustomer(id) {
-      var _this3 = this;
+      var _this4 = this;
 
       Swal.fire({
         title: 'Are you sure?',
@@ -6223,11 +6244,11 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         if (result.isConfirmed) {
           axios["delete"]('/api/customer/' + id).then(function () {
-            _this3.customers = _this3.customers.filter(function (customer) {
+            _this4.customers = _this4.customers.filter(function (customer) {
               return customer.id != id;
             });
           })["catch"](function () {
-            _this3.$router.push({
+            _this4.$router.push({
               name: 'customer'
             });
           });
@@ -7232,6 +7253,73 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "home",
   created: function created() {
@@ -7305,6 +7393,8 @@ __webpack_require__.r(__webpack_exports__);
       income: "",
       due: "",
       expense: "",
+      totalStock: "",
+      totalStockAmount: "",
       stockOutProducts: {},
       expiredProducts: {},
       newdata: new Date(),
@@ -7346,7 +7436,8 @@ __webpack_require__.r(__webpack_exports__);
     this.todayIncome();
     this.todayDue();
     this.expenses();
-    this.stockOutProduct();
+    this.totalStocks();
+    this.totalStockAmounts();
     this.expiredProduct();
     this.monthlybar();
     this.dailybar();
@@ -7392,24 +7483,40 @@ __webpack_require__.r(__webpack_exports__);
         return _this4.expense = data;
       })["catch"]();
     },
-    stockOutProduct: function stockOutProduct() {
+    totalStocks: function totalStocks() {
       var _this5 = this;
 
-      axios.get("/api/stockout/product").then(function (_ref5) {
+      axios.get("/api/total/totalStock").then(function (_ref5) {
         var data = _ref5.data;
-        return _this5.stockOutProducts = data;
+        return _this5.totalStock = data;
+      })["catch"]();
+    },
+    totalStockAmounts: function totalStockAmounts() {
+      var _this6 = this;
+
+      axios.get("/api/total/totalStockAmount").then(function (_ref6) {
+        var data = _ref6.data;
+        return _this6.totalStockAmount = data;
+      })["catch"]();
+    },
+    stockOutProduct: function stockOutProduct() {
+      var _this7 = this;
+
+      axios.get("/api/stockout/product").then(function (_ref7) {
+        var data = _ref7.data;
+        return _this7.stockOutProducts = data;
       })["catch"]();
     },
     expiredProduct: function expiredProduct() {
-      var _this6 = this;
+      var _this8 = this;
 
-      axios.get("/api/products/expired").then(function (_ref6) {
-        var data = _ref6.data;
-        return _this6.expiredProducts = data.data;
+      axios.get("/api/products/expired").then(function (_ref8) {
+        var data = _ref8.data;
+        return _this8.expiredProducts = data.data;
       })["catch"]();
     },
     monthlybar: function monthlybar() {
-      var _this7 = this;
+      var _this9 = this;
 
       // console.log(this.year=)
       // this.start = this.newdata.getFullYear()+'-'+this.newdata.getMonth()+'-'+this.newdata.getDate();
@@ -7420,45 +7527,45 @@ __webpack_require__.r(__webpack_exports__);
         this.year = this.newdata.getFullYear();
       }
 
-      axios.get("/api/monthly/bar?start=" + this.start + "&end=" + this.end + "&year=" + this.year).then(function (_ref7) {
-        var data = _ref7.data;
-        _this7.chartData.datasets = [data.reports2, data.reports];
-        console.log(_this7.chartData.datasets);
+      axios.get("/api/monthly/bar?start=" + this.start + "&end=" + this.end + "&year=" + this.year).then(function (_ref9) {
+        var data = _ref9.data;
+        _this9.chartData.datasets = [data.reports2, data.reports];
+        console.log(_this9.chartData.datasets);
       })["catch"]();
     },
     dailybar: function dailybar() {
-      var _this8 = this;
+      var _this10 = this;
 
       var monthd = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
       this.countmonth();
       this.startd = this.newdata.getFullYear() + "-" + monthd[this.monthname] + "-1";
       this.endd = this.newdata.getFullYear() + "-" + monthd[this.monthname] + "-" + this.monthdays;
       this.yeard = this.newdata.getFullYear();
-      axios.get("/api/daily/bar?start=" + this.startd + "&end=" + this.endd + "&year=" + this.yeard).then(function (_ref8) {
-        var data = _ref8.data;
-        _this8.chartData2.datasets = [data.reports];
-        _this8.chartData2.labels = data.allmonth; //  console.log(this.chartData2.labels);
+      axios.get("/api/daily/bar?start=" + this.startd + "&end=" + this.endd + "&year=" + this.yeard).then(function (_ref10) {
+        var data = _ref10.data;
+        _this10.chartData2.datasets = [data.reports];
+        _this10.chartData2.labels = data.allmonth; //  console.log(this.chartData2.labels);
         // if(this.monthname==''){
         //     this.monthname = this.newdata.getMonth();
         // }
       })["catch"]();
     },
     yearslist: function yearslist() {
-      var _this9 = this;
+      var _this11 = this;
 
-      axios.get("api/years/list?type=year").then(function (_ref9) {
-        var data = _ref9.data;
+      axios.get("api/years/list?type=year").then(function (_ref11) {
+        var data = _ref11.data;
         // console.log(data);
-        _this9.yearsList = data;
+        _this11.yearsList = data;
       })["catch"]();
     },
     monthslist: function monthslist() {
-      var _this10 = this;
+      var _this12 = this;
 
-      axios.get("api/years/list?type=month").then(function (_ref10) {
-        var data = _ref10.data;
+      axios.get("api/years/list?type=month").then(function (_ref12) {
+        var data = _ref12.data;
         // console.log(data);
-        _this10.monthlist = data;
+        _this12.monthlist = data;
       })["catch"]();
     }
   }
@@ -7847,6 +7954,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   created: function created() {
     if (!User.loggedIn()) {
@@ -7859,6 +7983,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       orders: {},
       details: {},
+      customdetails: {},
       duepaymets: {},
       errors: {},
       previousDue: 0,
@@ -7878,8 +8003,12 @@ __webpack_require__.r(__webpack_exports__);
       var data = _ref2.data;
       return _this.details = data;
     })["catch"](console.log('error'));
-    axios.get('/api/order/duepay/' + id).then(function (_ref3) {
+    axios.get('/api/customorder/details/' + id).then(function (_ref3) {
       var data = _ref3.data;
+      return _this.customdetails = data;
+    })["catch"](console.log('error'));
+    axios.get('/api/order/duepay/' + id).then(function (_ref4) {
+      var data = _ref4.data;
       _this.duepaymets = data;
 
       _this.duepaymets.forEach(function (element) {
@@ -9004,7 +9133,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   created: function created() {
     if (!User.loggedIn()) {
@@ -9443,7 +9571,7 @@ __webpack_require__.r(__webpack_exports__);
         page = 1;
       }
 
-      axios.get("/api/products/search?page=".concat(page, "&availble=true")).then(function (_ref) {
+      axios.get("/api/products/stockcheck?page=".concat(page, "&availble=true")).then(function (_ref) {
         var data = _ref.data;
         return _this.products = data;
       })["catch"]();
@@ -9458,7 +9586,7 @@ __webpack_require__.r(__webpack_exports__);
           page = 1;
         }
 
-        axios.get('/api/products/search?filter[product_name]=' + _this2.searchTerm).then(function (_ref2) {
+        axios.get('/api/products/stockcheck?filter[product_name]=' + _this2.searchTerm).then(function (_ref2) {
           var data = _ref2.data;
           _this2.products = data;
           _this2.allitems = data; //  console.log(this.products)
@@ -10138,6 +10266,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   created: function created() {
     if (!User.loggedIn()) {
@@ -10206,7 +10338,7 @@ __webpack_require__.r(__webpack_exports__);
           page = 1;
         }
 
-        axios.get('/api/products/search?filter[product_name]=' + _this3.searchTerm).then(function (_ref2) {
+        axios.get("/api/products/search?filter[product_name]=".concat(_this3.searchTerm)).then(function (_ref2) {
           var data = _ref2.data;
           _this3.products = data;
           _this3.allitems = data; //  console.log(this.products)
@@ -10587,7 +10719,7 @@ __webpack_require__.r(__webpack_exports__);
         page = 1;
       }
 
-      axios.get("/api/products/search?page=".concat(page, "&filter[product_quantity]=0")).then(function (_ref) {
+      axios.get("/api/products/stockcheck?page=".concat(page, "&filter[product_quantity]=0")).then(function (_ref) {
         var data = _ref.data;
         return _this.products = data;
       })["catch"]();
@@ -10602,7 +10734,7 @@ __webpack_require__.r(__webpack_exports__);
           page = 1;
         }
 
-        axios.get('/api/products/search?filter[product_name]=' + _this2.searchTerm).then(function (_ref2) {
+        axios.get('/api/products/stockcheck?filter[product_name]=' + _this2.searchTerm).then(function (_ref2) {
           var data = _ref2.data;
           _this2.products = data;
           _this2.allitems = data; //  console.log(this.products)
@@ -51311,7 +51443,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#img_size[data-v-159f145c]{\r\n\twidth: 40px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#img_size[data-v-159f145c]{\n\twidth: 40px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -91830,16 +91962,22 @@ var render = function () {
                     },
                   ],
                   staticClass: "form-control",
-                  staticStyle: { width: "300px", "margin-right": "-900px" },
-                  attrs: { type: "text", placeholder: "Search By Phone" },
+                  staticStyle: { width: "300px" },
+                  attrs: {
+                    type: "text",
+                    placeholder: "Search By Name Or Phone",
+                  },
                   domProps: { value: _vm.searchTerm },
                   on: {
-                    input: function ($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.searchTerm = $event.target.value
-                    },
+                    input: [
+                      function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.searchTerm = $event.target.value
+                      },
+                      _vm.searchData,
+                    ],
                   },
                 }),
                 _vm._v(" "),
@@ -91865,7 +92003,7 @@ var render = function () {
                   _vm._v(" "),
                   _c(
                     "tbody",
-                    _vm._l(_vm.filtersearch, function (customer) {
+                    _vm._l(_vm.customers, function (customer) {
                       return _c("tr", { key: customer.id }, [
                         _c("td", [_vm._v(_vm._s(customer.name))]),
                         _vm._v(" "),
@@ -93685,6 +93823,83 @@ var render = function () {
           ]),
         ]),
       ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-xl-3 col-md-6 mb-4" }, [
+        _c("div", { staticClass: "card h-100" }, [
+          _c("div", { staticClass: "card-body" }, [
+            _c("div", { staticClass: "row no-gutters align-items-center" }, [
+              _c("div", { staticClass: "col mr-2" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "text-xs font-weight-bold text-uppercase mb-1",
+                  },
+                  [
+                    _vm._v(
+                      "\n                                Total Stock\n                            "
+                    ),
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "h5 mb-0 font-weight-bold text-gray-800" },
+                  [
+                    _vm._v(
+                      "\n                                 " +
+                        _vm._s(_vm.totalStock) +
+                        "\n                            "
+                    ),
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "mt-2 mb-0 text-muted text-xs" }),
+              ]),
+              _vm._v(" "),
+              _vm._m(5),
+            ]),
+          ]),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-xl-3 col-md-6 mb-4" }, [
+        _c("div", { staticClass: "card h-100" }, [
+          _c("div", { staticClass: "card-body" }, [
+            _c("div", { staticClass: "row no-gutters align-items-center" }, [
+              _c("div", { staticClass: "col mr-2" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "text-xs font-weight-bold text-uppercase mb-1",
+                  },
+                  [
+                    _vm._v(
+                      "\n                                Total Stock Amount\n                            "
+                    ),
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "h5 mb-0 font-weight-bold text-gray-800" },
+                  [
+                    _c("span", { staticClass: "money" }, [_vm._v("৳")]),
+                    _vm._v(
+                      " " +
+                        _vm._s(_vm.totalStockAmount) +
+                        "\n                            "
+                    ),
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "mt-2 mb-0 text-muted text-xs" }),
+              ]),
+              _vm._v(" "),
+              _vm._m(6),
+            ]),
+          ]),
+        ]),
+      ]),
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
@@ -93853,7 +94068,7 @@ var render = function () {
               "table",
               { staticClass: "table align-items-center table-flush" },
               [
-                _vm._m(5),
+                _vm._m(7),
                 _vm._v(" "),
                 _c(
                   "tbody",
@@ -93939,7 +94154,7 @@ var render = function () {
               "table",
               { staticClass: "table align-items-center table-flush" },
               [
-                _vm._m(6),
+                _vm._m(8),
                 _vm._v(" "),
                 _c(
                   "tbody",
@@ -93949,7 +94164,7 @@ var render = function () {
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(product.product_code))]),
                       _vm._v(" "),
-                      _vm._m(7, true),
+                      _vm._m(9, true),
                       _vm._v(" "),
                       _c(
                         "td",
@@ -94047,6 +94262,22 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-auto" }, [
       _c("i", { staticClass: "fas fa-comments fa-2x text-warning" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-auto" }, [
+      _c("i", { staticClass: "fas fa-comments fa-2x text-warning" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-auto" }, [
+      _c("i", { staticClass: "fas fa-shopping-cart fa-2x text-success" }),
     ])
   },
   function () {
@@ -94249,7 +94480,7 @@ var render = function () {
                       return _c("tr", { key: order.id }, [
                         _c("td", [_vm._v(_vm._s(order.name))]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(order.total))]),
+                        _c("td", [_vm._v(_vm._s(order.sub_total))]),
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(order.pay))]),
                         _vm._v(" "),
@@ -94397,7 +94628,7 @@ var render = function () {
                       return _c("tr", { key: order.id }, [
                         _c("td", [_vm._v(_vm._s(order.name))]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(order.total))]),
+                        _c("td", [_vm._v(_vm._s(order.sub_total))]),
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(order.pay))]),
                         _vm._v(" "),
@@ -94624,24 +94855,68 @@ var render = function () {
                       _vm._v(" "),
                       _c(
                         "tbody",
-                        _vm._l(_vm.details, function (product) {
-                          return _c("tr", { key: _vm.details.id }, [
-                            _c("td", [_vm._v(_vm._s(product.product_name))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(product.product_code))]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(_vm._s(product.product_quantity)),
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(_vm._s(product.product_price) + "$"),
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(product.sub_total) + "$")]),
-                          ])
-                        }),
-                        0
+                        [
+                          _vm._l(_vm.details, function (product) {
+                            return _c("tr", { key: product.id }, [
+                              _c("td", [_vm._v(_vm._s(product.product_name))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(product.product_code))]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(_vm._s(product.product_quantity)),
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(_vm._s(product.product_price)),
+                                _c("span", { staticClass: "money" }, [
+                                  _vm._v("৳"),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(_vm._s(product.sub_total)),
+                                _c("span", { staticClass: "money" }, [
+                                  _vm._v("৳"),
+                                ]),
+                              ]),
+                            ])
+                          }),
+                          _vm._v(" "),
+                          _vm._l(_vm.customdetails, function (custom_product) {
+                            return _c("tr", { key: custom_product.id }, [
+                              _c("td", [
+                                _vm._v(_vm._s(custom_product.product_name)),
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(_vm._s(custom_product.product_code)),
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(
+                                  _vm._s(custom_product.product_quantity) +
+                                    " " +
+                                    _vm._s(custom_product.product_quantity_type)
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(_vm._s(custom_product.product_price)),
+                                _c("span", { staticClass: "money" }, [
+                                  _vm._v("৳"),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(_vm._s(custom_product.sub_total)),
+                                _c("span", { staticClass: "money" }, [
+                                  _vm._v("৳"),
+                                ]),
+                              ]),
+                            ])
+                          }),
+                        ],
+                        2
                       ),
                     ]
                   ),
@@ -95044,7 +95319,7 @@ var render = function () {
                       return _c("tr", { key: order.id }, [
                         _c("td", [_vm._v(_vm._s(order.name))]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(order.total))]),
+                        _c("td", [_vm._v(_vm._s(order.sub_total))]),
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(order.pay))]),
                         _vm._v(" "),
@@ -95188,7 +95463,7 @@ var render = function () {
                       return _c("tr", { key: order.id }, [
                         _c("td", [_vm._v(_vm._s(order.name))]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(order.total))]),
+                        _c("td", [_vm._v(_vm._s(order.sub_total))]),
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(order.pay))]),
                         _vm._v(" "),
@@ -97138,15 +97413,6 @@ var render = function () {
                                       },
                                     },
                                     [
-                                      _c("img", {
-                                        staticClass: "card-img-top",
-                                        attrs: {
-                                          src: product.image,
-                                          id: "image_size",
-                                          alt: "...",
-                                        },
-                                      }),
-                                      _vm._v(" "),
                                       _c("div", { staticClass: "card-body" }, [
                                         _c(
                                           "h5",
@@ -97160,7 +97426,12 @@ var render = function () {
                                                 _vm._s(product.product_name) +
                                                 "\n                                                            -\n                                                            " +
                                                 _vm._s(product.selling_price) +
-                                                "$\n                                                        "
+                                                " "
+                                            ),
+                                            _c(
+                                              "span",
+                                              { staticClass: "money" },
+                                              [_vm._v("৳")]
                                             ),
                                           ]
                                         ),
@@ -98688,7 +98959,7 @@ var render = function () {
                   staticStyle: { width: "300px" },
                   attrs: {
                     type: "text",
-                    placeholder: "Search By Product Name",
+                    placeholder: "Search By Product Name Or Code",
                   },
                   domProps: { value: _vm.searchTerm },
                   on: {

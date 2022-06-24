@@ -91,7 +91,9 @@ Route::apiResources([
     'expense' => ExpenseController::class,
     'customer' => CustomerController::class,
 ]);
+Route::get('/customers/search',[CustomerController::class,'search']);
 Route::get('/products/search',[ProductController::class,'search']);
+Route::get('/products/stockcheck',[ProductController::class,'stockCheck']);
 Route::get('/products/expired',[ProductController::class,'expired']);
 Route::get('/products/code',[ProductController::class,'productCodeGen']);
 
@@ -138,13 +140,19 @@ Route::post('/due-order/{id}',  [OrderController::class,'DueOrderupdate']);
         Route::get('/year-order', [OrderController::class,'yearOrder']);
         Route::get('/orders/{id}', [OrderController::class,'orders']);
         Route::get('/order/details/{id}', [OrderController::class,'orderDetails']);
+        Route::get('/customorder/details/{id}', [OrderController::class,'custom_order_details']);
         Route::get('/order/duepay/{id}', [OrderController::class,'orderduepay']);
 
         // Dashboard Routes
         Route::get('/today/sell', [PosController::class,'todaySell']);
         Route::get('/today/income', [PosController::class,'todayIncome']);
         Route::get('/today/due', [PosController::class,'todayDue']);
+
         Route::get('/total/expense', [PosController::class,'expenses']);
+        Route::get('/total/totalStock', [PosController::class,'totalStock']);
+        Route::get('/total/totalStockAmount', [PosController::class,'totalStockAmount']);
+
+
         Route::get('/stockout/product', [PosController::class,'stockOut']);
 
         Route::get('/monthly/bar', [PosController::class,'monthlybar']);

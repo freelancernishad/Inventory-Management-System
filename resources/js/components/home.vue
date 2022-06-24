@@ -86,6 +86,7 @@
                     </div>
                 </div>
             </div>
+
             <!-- Pending Requests Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card h-100">
@@ -111,6 +112,72 @@
                     </div>
                 </div>
             </div>
+
+
+
+
+            <!-- Pending Requests Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-uppercase mb-1">
+                                    Total Stock
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                     {{ totalStock }}
+                                </div>
+                                <div class="mt-2 mb-0 text-muted text-xs">
+                                    <!-- <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i>
+                                        1.10%</span>
+                                    <span>Since yesterday</span> -->
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-comments fa-2x text-warning"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <!-- Pending Requests Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-uppercase mb-1">
+                                    Total Stock Amount
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <span class="money">৳</span> {{ totalStockAmount }}
+                                </div>
+                                <div class="mt-2 mb-0 text-muted text-xs">
+                                    <!-- <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i>
+                                        1.10%</span>
+                                    <span>Since yesterday</span> -->
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-shopping-cart fa-2x text-success"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
         </div>
         <div class="row">
             <div class="col-lg-12 mb-4">
@@ -302,6 +369,8 @@ export default {
             income: "",
             due: "",
             expense: "",
+            totalStock: "",
+            totalStockAmount: "",
             stockOutProducts: {},
             expiredProducts: {},
             newdata: new Date(),
@@ -369,7 +438,10 @@ this.countmonth();
         this.todayIncome();
         this.todayDue();
         this.expenses();
-        this.stockOutProduct();
+        this.totalStocks();
+        this.totalStockAmounts();
+
+
         this.expiredProduct();
         this.monthlybar();
         this.dailybar();
@@ -412,6 +484,20 @@ this.countmonth();
             axios
                 .get("/api/total/expense")
                 .then(({ data }) => (this.expense = data))
+                .catch();
+        },
+
+        totalStocks() {
+            axios
+                .get("/api/total/totalStock")
+                .then(({ data }) => (this.totalStock = data))
+                .catch();
+        },
+
+        totalStockAmounts() {
+            axios
+                .get("/api/total/totalStockAmount")
+                .then(({ data }) => (this.totalStockAmount = data))
                 .catch();
         },
         stockOutProduct() {

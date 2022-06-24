@@ -564,7 +564,7 @@ $payable = $orders->pay-$previousDue;
 
         <style>
         @page {
-         margin: 10px;
+         margin: 12px;
         }
         .memoborder{
             width: 49%;
@@ -810,24 +810,50 @@ if($duepaymets==0){
                             }
 $payable = $orders->pay-$previousDue;
 
-                            $html .="
-                            <tr class='tr'>
-                            <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> মোট </p></td>
-                            <td class='td defaltfont'>$subtotal</td>
-                    </tr>
+                    //         $html .="
+                    //         <tr class='tr'>
+                    //         <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> মোট </p></td>
+                    //         <td class='td defaltfont'>$subtotal</td>
+                    // </tr>
 
-                            <tr class='tr'>
-                                    <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> $orders->order_date </p></td>
-                                    <td class='td defaltfont'>$payable</td>
-                            </tr>";
+                    //     <tr class='tr'>
+
+                    //   <td>জমা</td>
+                    // <td  colspan='4' class='td defaltfont'>
+
+                    //     <b> $orders->order_date :</b> $payable টাকা";
+                    //     foreach($duepaymets as $duepaymet){
+                    //         $html .=" <b> $duepaymet->pay_date :</b> $duepaymet->payment_amount টাকা";
+
+                    //       };
+
+                    //     $html .=" </td></td>";
 
 
-                            foreach($duepaymets as $duepaymet){
-                                $html .=" <tr class='tr'>
-                                <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> $duepaymet->pay_date </p></td>
-                                <td class='td defaltfont'>$duepaymet->payment_amount</td>
-                                 </tr>";
-                              }
+
+
+
+                        $html .="
+                        <tr class='tr'>
+                        <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> মোট </p></td>
+                        <td class='td defaltfont'>$subtotal</td>
+                </tr>
+                        <tr class='tr'>
+                                <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> $orders->order_date </p></td>
+                                <td class='td defaltfont'>$payable</td>
+                        </tr>";
+                        foreach($duepaymets as $duepaymet){
+                            $html .=" <tr class='tr'>
+                            <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> $duepaymet->pay_date </p></td>
+                            <td class='td defaltfont'>$duepaymet->payment_amount</td>
+                             </tr>";
+                          }
+
+
+
+
+
+
 
 
 

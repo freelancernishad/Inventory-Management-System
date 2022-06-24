@@ -5,7 +5,7 @@
             <th>Code</th>
             <th>Category</th>
             <th>Group</th>
-            <th>Buy</th>
+            {{-- <th>Buy</th> --}}
             <th>Sell</th>
             <th>Quantity</th>
             <th>Buying Date</th>
@@ -22,7 +22,7 @@
                 <td>{{ $Product->product_code }}</td>
                 <td>{{ $Product->category_name }}</td>
                 <td>{{ $Product->root }}</td>
-                <td>{{ $Product->buying_price }}</td>
+                {{-- <td>{{ $Product->buying_price }}</td> --}}
                 <td>{{ $Product->selling_price }}</td>
                 <td>{{ $Product->product_quantity }}</td>
                 <td>{{ $Product->buying_date }}</td>

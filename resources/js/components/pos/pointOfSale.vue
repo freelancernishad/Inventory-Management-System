@@ -268,8 +268,7 @@
                                                     margin-bottom: 10px;
                                                 ">
 
-                                                    <img :src="product.image" class="card-img-top" id="image_size"
-                                                        alt="..." />
+                                                    <!-- <img :src="product.image" class="card-img-top" id="image_size" alt="..." /> -->
                                                     <div class="card-body">
                                                         <h5 class="card-title text-center">
                                                             {{
@@ -278,7 +277,7 @@
                                                             -
                                                             {{
                                                                     product.selling_price
-                                                            }}$
+                                                            }} <span class="money">৳</span>
                                                         </h5>
                                                         <td v-if="
                                                             product.product_quantity >=

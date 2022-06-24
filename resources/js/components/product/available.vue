@@ -85,7 +85,7 @@ export default {
 
 
 
-			axios.get(`/api/products/search?page=${page}&availble=true`)
+			axios.get(`/api/products/stockcheck?page=${page}&availble=true`)
 			.then(({data}) => (this.products = data))
 			.catch()
 		},
@@ -104,7 +104,7 @@ export default {
                 if (typeof page === 'undefined') {
                      page = 1;
                  }
-                 axios.get('/api/products/search?filter[product_name]=' + this.searchTerm)
+                 axios.get('/api/products/stockcheck?filter[product_name]=' + this.searchTerm)
                  .then(({data}) => {
 
                      this.products = data

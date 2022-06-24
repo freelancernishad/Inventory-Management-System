@@ -5,11 +5,18 @@
 				<div class="col-lg-12 mb-4">
 					<!-- Simple Tables -->
 					<div class="card">
+
+
+
+
+
 						<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 							<h2 class="m-0 font-weight-bold text-primary">Customer List</h2>
-							<input type="text" placeholder="Search By Phone" v-model="searchTerm" class="form-control" style="width: 300px;margin-right: -900px;">
+							<input type="text" placeholder="Search By Name Or Phone" v-model="searchTerm"  v-on:input="searchData" class="form-control" style="width: 300px;">
 							<router-link to="/store-customer" class="btn btn-primary float-right" style="margin-top: 6px;margin-right: 6px;">Add Customer</router-link>
 						</div>
+
+
 						<div class="table-responsive">
 							<table class="table align-items-center table-flush">
 								<thead class="thead-light">
@@ -24,7 +31,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr v-for="customer in filtersearch" :key="customer.id">
+									<tr v-for="customer in customers" :key="customer.id">
 										<td>{{ customer.name }}</td>
 										<!-- <td><img :src="customer.photo" id="img_size"></td> -->
 										<td>{{ customer.phone }}</td>
@@ -59,7 +66,8 @@ export default {
 	data () {
 		return {
 			customers: [],
-			searchTerm:""
+			searchTerm:"",
+               timeout: null,
 		}
 	},
 	computed: {
@@ -70,11 +78,35 @@ export default {
 		}
 	},
 	methods: {
+
 		allCustomer(){
 			axios.get('/api/customer')
 			.then(({data}) => (this.customers = data))
 			.catch()
 		},
+
+
+		searchData(){
+            // clear timeout variable
+            clearTimeout(this.timeout);
+
+            this.timeout = setTimeout( ()=> {
+
+
+
+                 axios.get('/api/customers/search?data=' + this.searchTerm)
+                 .then(({data}) => {
+
+                     this.customers = data
+                    //  this.allitems = data
+                     //  console.log(this.products)
+                 })
+                 .catch()
+
+            }, 300);
+
+		},
+
 
         totaldue(id){
 			axios.get('/api/customer/due/'+id)

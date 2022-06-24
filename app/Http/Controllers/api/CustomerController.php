@@ -149,5 +149,31 @@ class CustomerController extends Controller
             $customer->delete();
         }
     }
+
+
+
+
+
+    public function search(Request $request)
+    {
+        $data = $request->data;
+        $columns = ['name','phone'];
+        $result =  Customer::select('*');
+                foreach($columns as $column)
+                {
+                  $result->orWhere($column, 'like','%'.$data.'%');
+                }
+       $data = $result->get();
+
+        return response()->json($data);
+    }
+
+
+
+
+
+
+
+
 }
 

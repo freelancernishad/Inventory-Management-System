@@ -5,14 +5,18 @@
 				<div class="col-lg-12 mb-4">
 					<!-- Simple Tables -->
 					<div class="card">
+
+
 						<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 
 							<h2 class="m-0 font-weight-bold text-primary">Product List</h2>
 
-							<input type="text" placeholder="Search By Product Name" v-model="searchTerm" v-on:input="searchData" class="form-control" style="width: 300px;">
+							<input type="text" placeholder="Search By Product Name Or Code" v-model="searchTerm" v-on:input="searchData" class="form-control" style="width: 300px;">
 		<router-link to="/store-product" class="btn btn-primary float-right" style="margin-top: 6px;margin-right: 6px;">Add Product</router-link>
 
 						</div>
+
+
 
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                             <div></div>
@@ -195,7 +199,7 @@ export default {
                 if (typeof page === 'undefined') {
                      page = 1;
                  }
-                 axios.get('/api/products/search?filter[product_name]=' + this.searchTerm)
+                 axios.get(`/api/products/search?filter[product_name]=${this.searchTerm}`)
                  .then(({data}) => {
 
                      this.products = data
