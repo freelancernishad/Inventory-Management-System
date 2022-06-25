@@ -71,7 +71,7 @@ span.money {
                 <i class="fas fa-fw fa-table"></i>
                 <span>POS</span></router-link>
               </li>
-{{--
+
               <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap1"
                 aria-expanded="true" aria-controls="collapseBootstrap1">
@@ -81,12 +81,12 @@ span.money {
               <div id="collapseBootstrap1" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                   <router-link class="collapse-item" :to="{name:'Invoice'}">Create Invoice</router-link>
-                  <router-link class="collapse-item" :to="{name:'Invoice_buy'}">Buy Invoice</router-link>
-                  <router-link class="collapse-item" :to="{name:'Invoice_sell'}">Sell Invoice</router-link>
+                  <router-link class="collapse-item" :to="{name:'Invoice_buy'}">Invoices</router-link>
+                  {{-- <router-link class="collapse-item" :to="{name:'Invoice_sell'}">Sell Invoice</router-link> --}}
 
                 </div>
               </div>
-            </li> --}}
+            </li>
 
 
               <hr class="sidebar-divider">

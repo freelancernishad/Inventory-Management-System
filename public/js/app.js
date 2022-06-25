@@ -8805,7 +8805,7 @@ __webpack_require__.r(__webpack_exports__);
         customer_name: null,
         address: null,
         date: null,
-        type: null,
+        type: 'কেনা',
         Invoices: [{
           name: "",
           weight_quantity: "",
@@ -95643,15 +95643,6 @@ var render = function () {
       [
         _vm._m(0),
         _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "btn btn-sm btn-primary",
-            attrs: { href: "/custom/invoice/" + _vm.pramid, target: "_blank" },
-          },
-          [_vm._v("Print")]
-        ),
-        _vm._v(" "),
         _c("div", { staticClass: "row mb-3" }, [
           _c("div", { staticClass: "col-xl-12 col-lg-12" }, [
             _c("div", { staticClass: "card mb-4" }, [
@@ -95776,7 +95767,7 @@ var staticRenderFns = [
       },
       [
         _c("h5", { staticClass: "m-0 font-weight-bold text-primary" }, [
-          _vm._v("Order Details"),
+          _vm._v("Invoice Details"),
         ]),
       ]
     )
@@ -96172,51 +96163,6 @@ var render = function () {
               },
             },
           }),
-        ]),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-6" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "" } }, [_vm._v("ধরণ")]),
-          _vm._v(" "),
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.form.type,
-                  expression: "form.type",
-                },
-              ],
-              staticClass: "form-control",
-              on: {
-                change: function ($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function (o) {
-                      return o.selected
-                    })
-                    .map(function (o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.$set(
-                    _vm.form,
-                    "type",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
-                },
-              },
-            },
-            [
-              _c("option", { attrs: { value: "" } }, [_vm._v("Select")]),
-              _vm._v(" "),
-              _c("option", [_vm._v("কেনা")]),
-              _vm._v(" "),
-              _c("option", [_vm._v("বেচা")]),
-            ]
-          ),
         ]),
       ]),
       _vm._v(" "),

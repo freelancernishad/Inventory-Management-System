@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        <div class="col-md-6">
+        <!-- <div class="col-md-6">
             <div class="form-group">
                 <label for="">ধরণ</label>
                 <select  v-model="form.type" class="form-control">
@@ -27,7 +27,7 @@
                     <option>বেচা</option>
                 </select>
             </div>
-        </div>
+        </div> -->
 
 
         <div class="col-md-6">
@@ -90,7 +90,7 @@ export default {
             customer_name:null,
             address:null,
             date:null,
-            type:null,
+            type:'কেনা',
             Invoices: [
                     {
                     name: "",

@@ -10,14 +10,14 @@
           </div>
 
 
-<a :href="'/custom/invoice/'+pramid" target="_blank" class="btn btn-sm btn-primary">Print</a>
+<!-- <a :href="'/custom/invoice/'+pramid" target="_blank" class="btn btn-sm btn-primary">Print</a> -->
 
           <div class="row mb-3">
             <!-- Table 1 -->
             <div class="col-xl-12 col-lg-12">
               <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h5 class="m-0 font-weight-bold text-primary">Order Details</h5>
+                  <h5 class="m-0 font-weight-bold text-primary">Invoice Details</h5>
                 </div>
                 <div class="card-body">
                 	<div class="table-responsive">
