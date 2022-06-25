@@ -112,16 +112,29 @@ class PosController extends Controller
 
         return response()->json($order_id);
     }
-    public function todaySell()
+    public function todaySell(Request $request)
     {
-        $todaySell = DB::table('orders')->where('order_date', date('d/m/Y'))->sum('sub_total');
+        $date = $request->date;
+        if($date){
+            $date =date('d/m/Y', strtotime($request->date));
+        }else{
+            $date = date("d/m/Y");
+        }
+
+
+        $todaySell = DB::table('orders')->where('order_date', $date)->sum('sub_total');
         return response()->json($todaySell);
     }
-    public function todayIncome()
+    public function todayIncome(Request $request)
     {
+        $date = $request->date;
+        if($date){
+            $date =date('d/m/Y', strtotime($request->date));
+        }else{
+            $date = date("d/m/Y");
+        }
 
-
-         $orders = DB::table('orders')->where('order_date', date('d/m/Y'))->get();
+         $orders = DB::table('orders')->where('order_date', $date)->get();
 $buying_price = 0;
 $product_price = 0;
      foreach ($orders as $key => $value) {
@@ -145,30 +158,44 @@ $todayIncome =  $product_price-$buying_price;
     }
 
 
-    public function todayDue()
+    public function todayDue(Request $request)
     {
-        $todayDue = DB::table('orders')->where('order_date', date('d/m/Y'))->sum('due');
+        $date = $request->date;
+        if($date){
+            $date =date('d/m/Y', strtotime($request->date));
+        }else{
+            $date = date("d/m/Y");
+        }
+
+        $todayDue = DB::table('orders')->where('order_date', $date)->sum('due');
         return response()->json($todayDue);
     }
 
 
-    public function expenses()
+    public function expenses(Request $request)
     {
-        $expenses = DB::table('expenses')->where('expense_date', date('Y-m-d'))->sum('amount');
+
+        $date = $request->date;
+        if($date){
+            $date =date('d/m/Y', strtotime($request->date));
+        }else{
+            $date = date("d/m/Y");
+        }
+
+        $expenses = DB::table('expenses')->where('expense_date', $date)->sum('amount');
         return response()->json($expenses);
     }
 
 
-    public function totalStock()
+    public function totalStock(Request $request)
     {
         $products = DB::table('products')->sum('product_quantity');
         return response()->json($products);
     }
 
 
-    public function totalStockAmount()
+    public function totalStockAmount(Request $request)
     {
-
 
 
         $products = DB::table('products')->get();
@@ -182,7 +209,7 @@ foreach ($products as $key => $value) {
     }
 
 
-    public function stockOut()
+    public function stockOut(Request $request)
     {
         $stockOut = DB::table('products')->where('product_quantity', '<', 1)->get();
         return response()->json($stockOut);

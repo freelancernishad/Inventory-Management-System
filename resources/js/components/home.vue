@@ -10,6 +10,20 @@
             </ol>
         </div>
         <div class="row mb-3">
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="cord-body">
+                        <div class="form-group pl-3">
+                            <label for="">Date</label>
+
+                        <input type="date" class="form-control" v-model="date" @change="datechange" style="width:200px">
+                         </div>
+                    </div>
+                </div>
+
+            </div>
+
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card h-100">
@@ -432,6 +446,7 @@ export default {
         };
     },
     mounted() {
+              this.date = User.dateformat()[0];
         this.monthname = this.newdata.getMonth();
 this.countmonth();
         this.todaySell();
@@ -448,6 +463,7 @@ this.countmonth();
         this.yearslist();
         this.monthslist();
         //   $('#select').select2();
+
     },
     methods: {
         countmonth(){
@@ -462,27 +478,37 @@ this.countmonth();
         this.monthdays = count
         },
 
+
+        datechange(){
+
+            this.todaySell();
+            this.todayIncome();
+            this.todayDue();
+            this.expenses();
+
+        },
+
         todaySell() {
             axios
-                .get("/api/today/sell")
+                .get(`/api/today/sell?date=${this.date}`)
                 .then(({ data }) => (this.todaySells = data))
                 .catch();
         },
         todayIncome() {
             axios
-                .get("/api/today/income")
+                .get(`/api/today/income?date=${this.date}`)
                 .then(({ data }) => (this.income = data))
                 .catch();
         },
         todayDue() {
             axios
-                .get("/api/today/due")
+                .get(`/api/today/due?date=${this.date}`)
                 .then(({ data }) => (this.due = data))
                 .catch();
         },
         expenses() {
             axios
-                .get("/api/total/expense")
+                .get(`/api/total/expense?date=${this.date}`)
                 .then(({ data }) => (this.expense = data))
                 .catch();
         },

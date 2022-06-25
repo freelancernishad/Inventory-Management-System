@@ -7320,6 +7320,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "home",
   created: function created() {
@@ -7430,6 +7444,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
+    this.date = User.dateformat()[0];
     this.monthname = this.newdata.getMonth();
     this.countmonth();
     this.todaySell();
@@ -7451,10 +7466,16 @@ __webpack_require__.r(__webpack_exports__);
 
       this.monthdays = count;
     },
+    datechange: function datechange() {
+      this.todaySell();
+      this.todayIncome();
+      this.todayDue();
+      this.expenses();
+    },
     todaySell: function todaySell() {
       var _this = this;
 
-      axios.get("/api/today/sell").then(function (_ref) {
+      axios.get("/api/today/sell?date=".concat(this.date)).then(function (_ref) {
         var data = _ref.data;
         return _this.todaySells = data;
       })["catch"]();
@@ -7462,7 +7483,7 @@ __webpack_require__.r(__webpack_exports__);
     todayIncome: function todayIncome() {
       var _this2 = this;
 
-      axios.get("/api/today/income").then(function (_ref2) {
+      axios.get("/api/today/income?date=".concat(this.date)).then(function (_ref2) {
         var data = _ref2.data;
         return _this2.income = data;
       })["catch"]();
@@ -7470,7 +7491,7 @@ __webpack_require__.r(__webpack_exports__);
     todayDue: function todayDue() {
       var _this3 = this;
 
-      axios.get("/api/today/due").then(function (_ref3) {
+      axios.get("/api/today/due?date=".concat(this.date)).then(function (_ref3) {
         var data = _ref3.data;
         return _this3.due = data;
       })["catch"]();
@@ -7478,7 +7499,7 @@ __webpack_require__.r(__webpack_exports__);
     expenses: function expenses() {
       var _this4 = this;
 
-      axios.get("/api/total/expense").then(function (_ref4) {
+      axios.get("/api/total/expense?date=".concat(this.date)).then(function (_ref4) {
         var data = _ref4.data;
         return _this4.expense = data;
       })["catch"]();
@@ -93668,6 +93689,40 @@ var render = function () {
     _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "row mb-3" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "cord-body" }, [
+            _c("div", { staticClass: "form-group pl-3" }, [
+              _c("label", { attrs: { for: "" } }, [_vm._v("Date")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.date,
+                    expression: "date",
+                  },
+                ],
+                staticClass: "form-control",
+                staticStyle: { width: "200px" },
+                attrs: { type: "date" },
+                domProps: { value: _vm.date },
+                on: {
+                  change: _vm.datechange,
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.date = $event.target.value
+                  },
+                },
+              }),
+            ]),
+          ]),
+        ]),
+      ]),
+      _vm._v(" "),
       _c("div", { staticClass: "col-xl-3 col-md-6 mb-4" }, [
         _c("div", { staticClass: "card h-100" }, [
           _c("div", { staticClass: "card-body" }, [
