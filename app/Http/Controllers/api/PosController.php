@@ -126,14 +126,25 @@ $buying_price = 0;
 $product_price = 0;
      foreach ($orders as $key => $value) {
         // print_r($value->id);
-        $buying_price += DB::table('order_details')->where('order_id', $value->id)->sum('buying_price');
-        $product_price += DB::table('order_details')->where('order_id', $value->id)->sum('product_price');
+
+
+        $buy = DB::table('order_details')->where('order_id', $value->id)->get();
+        foreach ($buy as $buying_prices) {
+        // print_r($buying_prices);
+        $buying_price += $buying_prices->buying_price*$buying_prices->product_quantity;
+        $product_price += $buying_prices->product_price*$buying_prices->product_quantity;
+        }
+
+        // $product_price += DB::table('order_details')->where('order_id', $value->id)->sum('product_price');
 
      }
+    //  return $product_price;
 $todayIncome =  $product_price-$buying_price;
 
         return response()->json($todayIncome);
     }
+
+
     public function todayDue()
     {
         $todayDue = DB::table('orders')->where('order_date', date('d/m/Y'))->sum('due');
