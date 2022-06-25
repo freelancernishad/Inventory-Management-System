@@ -27,7 +27,7 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<button type="submit" class="btn btn-primary btn-block">Login</button>
+										<button type="submit" class="btn btn-primary btn-block">{{ buttonText }}</button>
 									</div>
 								</form>
 
@@ -37,7 +37,9 @@
 									<router-link to="register" class="font-weight-bold small">Create an Account!</router-link> |
 									<router-link to="forget" class="font-weight-bold small">Forget Password</router-link>
 								</div> -->
+
 								<div class="text-center">
+                                     Developed By <a href="https://api.whatsapp.com/send?phone=8801909756552&text=I%27m%20interested%20in%20your%20services"> Freelancer Nishad</a>
 								</div>
 							</div>
 						</div>
@@ -63,11 +65,13 @@ export default {
 				email: null,
 				password: null
 			},
-			errors:{}
+			errors:{},
+			buttonText:'Login'
 		}
 	},
 	methods:{
 		login(){
+            this.buttonText = 'Looding.....';
 			// alert('done')
 			axios.post('/api/auth/login', this.form)
 			.then(res => {
@@ -78,7 +82,7 @@ export default {
 					icon: 'success',
 					title: 'Signed in successfully'
 				})
-
+  this.buttonText = 'Login';
 				this.$router.push({name: 'home'})
 			})
 			.catch(error => this.errors = error.response.data.errors)

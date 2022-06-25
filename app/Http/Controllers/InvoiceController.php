@@ -34,7 +34,7 @@ class InvoiceController extends Controller
 
         ])
 
-        ->orderBy('id', 'ASC');
+        ->orderBy('id', 'DESC');
 
 
 

@@ -107,7 +107,11 @@ export default {
 
     formsubmit(){
         axios.post(`/api/invoice/create`,this.form).then(({data})=>{
-            console.log(data)
+
+                this.$router.push({
+                    name: "Invoice_buy"
+                });
+
         }).catch()
     },
 

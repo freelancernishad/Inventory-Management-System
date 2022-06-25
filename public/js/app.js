@@ -5316,6 +5316,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   created: function created() {
     if (User.loggedIn()) {
@@ -5330,14 +5332,16 @@ __webpack_require__.r(__webpack_exports__);
         email: null,
         password: null
       },
-      errors: {}
+      errors: {},
+      buttonText: 'Login'
     };
   },
   methods: {
     login: function login() {
       var _this = this;
 
-      // alert('done')
+      this.buttonText = 'Looding.....'; // alert('done')
+
       axios.post('/api/auth/login', this.form).then(function (res) {
         console.log(res);
         User.responseAfterLogin(res);
@@ -5345,6 +5349,7 @@ __webpack_require__.r(__webpack_exports__);
           icon: 'success',
           title: 'Signed in successfully'
         });
+        _this.buttonText = 'Login';
 
         _this.$router.push({
           name: 'home'
@@ -8581,22 +8586,19 @@ __webpack_require__.r(__webpack_exports__);
       searchTerm: ""
     };
   },
-  computed: {
-    filtersearch: function filtersearch() {
-      var _this = this;
-
-      return this.orders.filter(function (order) {
-        return order.customer_name.match(_this.searchTerm);
-      });
-    }
+  computed: {// filtersearch(){
+    // 	return this.orders.filter(order => {
+    // 		return order.customer_name.match(this.searchTerm)
+    // 	})
+    // }
   },
   methods: {
     allOrder: function allOrder() {
-      var _this2 = this;
+      var _this = this;
 
       axios.get("/api/invoice?filter[type]=\u0995\u09C7\u09A8\u09BE").then(function (_ref) {
         var data = _ref.data;
-        return _this2.orders = data;
+        return _this.orders = data;
       })["catch"]();
     }
   },
@@ -8816,9 +8818,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     formsubmit: function formsubmit() {
+      var _this = this;
+
       axios.post("/api/invoice/create", this.form).then(function (_ref) {
         var data = _ref.data;
-        console.log(data);
+
+        _this.$router.push({
+          name: "Invoice_buy"
+        });
       })["catch"]();
     },
     addMore: function addMore() {
@@ -9207,6 +9214,7 @@ __webpack_require__.r(__webpack_exports__);
       postext: "Scan",
       isActive: false,
       cat_id: '',
+      buttonText: 'Submit',
       Invoices: [],
       customtotalObj: {},
       customtotal: 0
@@ -9473,6 +9481,7 @@ __webpack_require__.r(__webpack_exports__);
     orderDone: function orderDone() {
       var _this15 = this;
 
+      this.buttonText = 'Looding....';
       var total = this.sub_total * this.vats.vat / 100 + this.sub_total;
       var data = {
         qty: this.qty,
@@ -9489,6 +9498,7 @@ __webpack_require__.r(__webpack_exports__);
       };
       axios.post("/api/order", data).then(function (_ref13) {
         var data = _ref13.data;
+        _this15.buttonText = 'Submit';
 
         _this15.$router.push({
           name: "orderDetails",
@@ -90780,13 +90790,22 @@ var render = function () {
                     _vm._v(" "),
                     _vm._m(1),
                     _vm._v(" "),
-                    _vm._m(2),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary btn-block",
+                          attrs: { type: "submit" },
+                        },
+                        [_vm._v(_vm._s(_vm.buttonText))]
+                      ),
+                    ]),
                   ]
                 ),
                 _vm._v(" "),
                 _c("hr"),
                 _vm._v(" "),
-                _c("div", { staticClass: "text-center" }),
+                _vm._m(2),
               ]),
             ]),
           ]),
@@ -90827,7 +90846,7 @@ var staticRenderFns = [
               staticClass: "custom-control-label",
               attrs: { for: "customCheck" },
             },
-            [_vm._v("Remember\n\t\t\t\t\t\t\t\t\t\tMe")]
+            [_vm._v("Remember\n\t\t\t\t\t\t\t\t\t\t\tMe")]
           ),
         ]
       ),
@@ -90837,11 +90856,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
+    return _c("div", { staticClass: "text-center" }, [
+      _vm._v("\n                                     Developed By "),
       _c(
-        "button",
-        { staticClass: "btn btn-primary btn-block", attrs: { type: "submit" } },
-        [_vm._v("Login")]
+        "a",
+        {
+          attrs: {
+            href: "https://api.whatsapp.com/send?phone=8801909756552&text=I%27m%20interested%20in%20your%20services",
+          },
+        },
+        [_vm._v(" Freelancer Nishad")]
       ),
     ])
   },
@@ -95878,7 +95902,7 @@ var render = function () {
                   _vm._v(" "),
                   _c(
                     "tbody",
-                    _vm._l(_vm.filtersearch, function (order) {
+                    _vm._l(_vm.orders, function (order) {
                       return _c("tr", { key: order.id }, [
                         _c("td", [_vm._v(_vm._s(order.customer_name))]),
                         _vm._v(" "),
@@ -97212,7 +97236,9 @@ var render = function () {
                         },
                         [
                           _vm._v(
-                            "\n                                        Submit\n                                    "
+                            "\n                                        " +
+                              _vm._s(_vm.buttonText) +
+                              "\n                                    "
                           ),
                         ]
                       ),

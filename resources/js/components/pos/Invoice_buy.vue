@@ -22,7 +22,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr v-for="order in filtersearch" :key="order.id">
+									<tr v-for="order in orders" :key="order.id">
 										<td>{{ order.customer_name }}</td>
 										<td>{{ order.address }}</td>
 										<td>{{ order.total_amount }}</td>
@@ -59,11 +59,11 @@ export default {
 		}
 	},
 	computed: {
-		filtersearch(){
-			return this.orders.filter(order => {
-				return order.customer_name.match(this.searchTerm)
-			})
-		}
+		// filtersearch(){
+		// 	return this.orders.filter(order => {
+		// 		return order.customer_name.match(this.searchTerm)
+		// 	})
+		// }
 	},
 	methods: {
 		allOrder(){

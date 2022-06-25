@@ -202,7 +202,7 @@
                                             </option>
                                         </select>
                                     </div>
-<!-- 
+<!--
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect2">Memo</label>
                                         <select class="form-control" id="exampleFormControlSelect2" v-model="memo">
@@ -225,7 +225,7 @@
 
 
                                     <button class="btn btn-success" type="submit">
-                                        Submit
+                                        {{ buttonText }}
                                     </button>
                                 </form>
                             </div>
@@ -351,6 +351,7 @@ export default {
             postext: "Scan",
             isActive: false,
             cat_id :'',
+            buttonText :'Submit',
             Invoices: [],
             customtotalObj:{},
             customtotal:0,
@@ -640,6 +641,7 @@ this.customtotal = summed;
 
 
         orderDone() {
+            this.buttonText='Looding....';
             let total = (this.sub_total * this.vats.vat) / 100 + this.sub_total;
             var data = {
                 qty: this.qty,
@@ -655,6 +657,7 @@ this.customtotal = summed;
                 total: total,
             };
             axios.post("/api/order", data).then(({ data }) => {
+                  this.buttonText='Submit';
                 this.$router.push({
                     name: "orderDetails",
                     params: { id: data },
