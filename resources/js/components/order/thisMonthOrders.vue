@@ -13,6 +13,7 @@
 							<table class="table align-items-center table-flush">
 								<thead class="thead-light">
 									<tr>
+										   <th>Order Id</th>
 										<th>Name</th>
 										<th>Total Amount</th>
 										<th>Pay</th>
@@ -24,6 +25,7 @@
 								</thead>
 								<tbody>
 									<tr v-for="order in filtersearch" :key="order.id">
+                                     <td>{{ order.orderId }}</td>
 										<td>{{ order.name }}</td>
 										<td>{{ order.sub_total }}</td>
 										<td>{{ order.pay }}</td>

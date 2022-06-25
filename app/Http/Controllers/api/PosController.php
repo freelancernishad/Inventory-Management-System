@@ -34,10 +34,18 @@ class PosController extends Controller
          $customInvoice = $request->customInvoice;
 
 
-
+         $last = DB::table('orders')->latest()->count();
+         if($last==0){
+             $orderId = str_pad(10000, 5, '0', STR_PAD_LEFT);
+         }else{
+             $last = DB::table('orders')->latest()->first();
+             $orderId = $last->orderId;
+            $orderId =  $orderId+1;
+         }
 
 
         $data = [];
+        $data['orderId'] = $request->orderId;
         $data['customer_id'] = $request->customer_id;
         $data['qty'] = $request->qty;
         $data['sub_total'] = $request->sub_total;

@@ -7696,6 +7696,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   created: function created() {
     if (!User.loggedIn()) {
@@ -7813,6 +7815,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   created: function created() {
     if (!User.loggedIn()) {
@@ -7864,6 +7868,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
 //
 //
 //
@@ -8230,6 +8235,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   created: function created() {
     if (!User.loggedIn()) {
@@ -8281,6 +8288,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
 //
 //
 //
@@ -94533,6 +94542,8 @@ var render = function () {
                     "tbody",
                     _vm._l(_vm.filtersearch, function (order) {
                       return _c("tr", { key: order.id }, [
+                        _c("td", [_vm._v(_vm._s(order.orderId))]),
+                        _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(order.name))]),
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(order.sub_total))]),
@@ -94588,6 +94599,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", { staticClass: "thead-light" }, [
       _c("tr", [
+        _c("th", [_vm._v("Order Id")]),
+        _vm._v(" "),
         _c("th", [_vm._v("Name")]),
         _vm._v(" "),
         _c("th", [_vm._v("Total Amount")]),
@@ -94681,6 +94694,8 @@ var render = function () {
                     "tbody",
                     _vm._l(_vm.filtersearch, function (order) {
                       return _c("tr", { key: order.id }, [
+                        _c("td", [_vm._v(_vm._s(order.orderId))]),
+                        _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(order.name))]),
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(order.sub_total))]),
@@ -94732,6 +94747,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", { staticClass: "thead-light" }, [
       _c("tr", [
+        _c("th", [_vm._v("Order Id")]),
+        _vm._v(" "),
         _c("th", [_vm._v("Name")]),
         _vm._v(" "),
         _c("th", [_vm._v("Total Amount")]),
@@ -94793,6 +94810,11 @@ var render = function () {
               _c("div", { staticClass: "card-body" }, [
                 _c("div", { staticClass: "table-responsive" }, [
                   _c("ul", { staticClass: "list-group" }, [
+                    _c("li", { staticClass: "list-group-item" }, [
+                      _c("b", [_vm._v("Order Id : ")]),
+                      _vm._v(_vm._s(_vm.orders.orderId)),
+                    ]),
+                    _vm._v(" "),
                     _c("li", { staticClass: "list-group-item" }, [
                       _c("b", [_vm._v("Name : ")]),
                       _vm._v(_vm._s(_vm.orders.name)),
@@ -95372,6 +95394,8 @@ var render = function () {
                     "tbody",
                     _vm._l(_vm.filtersearch, function (order) {
                       return _c("tr", { key: order.id }, [
+                        _c("td", [_vm._v(_vm._s(order.orderId))]),
+                        _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(order.name))]),
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(order.sub_total))]),
@@ -95425,6 +95449,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", { staticClass: "thead-light" }, [
       _c("tr", [
+        _c("th", [_vm._v("Order Id")]),
+        _vm._v(" "),
         _c("th", [_vm._v("Name")]),
         _vm._v(" "),
         _c("th", [_vm._v("Total Amount")]),
@@ -95516,6 +95542,8 @@ var render = function () {
                     "tbody",
                     _vm._l(_vm.filtersearch, function (order) {
                       return _c("tr", { key: order.id }, [
+                        _c("td", [_vm._v(_vm._s(order.orderId))]),
+                        _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(order.name))]),
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(order.sub_total))]),
@@ -95569,6 +95597,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", { staticClass: "thead-light" }, [
       _c("tr", [
+        _c("th", [_vm._v("Order Id")]),
+        _vm._v(" "),
         _c("th", [_vm._v("Name")]),
         _vm._v(" "),
         _c("th", [_vm._v("Total Amount")]),

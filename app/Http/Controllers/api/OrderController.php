@@ -396,7 +396,7 @@ $memo = $orders->memo;
                                 style='background:#2F77A5;padding:10px 5px;color:white;padding:5px 5px;width:15%;float:left;border-bottom:1px solid #2F77A5;text-align:left'
                                 class='defaltfont'>ক্রমিক নং</td>
                             <td width='20%' style='border-bottom:1px solid #2F77A5;padding-left:6px;color:#2F77A5;text-align:left'
-                                class='defaltfont'> 12345</td>
+                                class='defaltfont'> $orders->orderId</td>
                         </tr>
                         <tr>
                             <td style='background:#935E6C;padding:10px 5px;color:white;padding:5px 5px;width:15%;float:left;text-align:left'
@@ -704,7 +704,7 @@ $payable = $orders->pay-$previousDue;
                                 style='background:#2F77A5;padding:10px 5px;color:white;padding:5px 5px;width:15%;float:left;position: fixed;top:0px;border-bottom:1px solid #2F77A5'
                                 class='defaltfont'>ক্রমিক নং</td>
                             <td width='20%' style='border-bottom:1px solid #2F77A5;padding-left:6px;color:#2F77A5'
-                                class='defaltfont'> 12345</td>
+                                class='defaltfont'> $orders->orderId</td>
                         </tr>
                         <tr>
                             <td style='background:#935E6C;padding:10px 5px;color:white;padding:5px 5px;width:15%;float:left;position: fixed;top:0px'

@@ -22,6 +22,7 @@
                 <div class="card-body">
                 	<div class="table-responsive">
                 		<ul class="list-group">
+                            <li class="list-group-item"><b>Order Id : </b>{{ orders.orderId }}</li>
                             <li class="list-group-item"><b>Name : </b>{{ orders.name }}</li>
                             <li class="list-group-item"><b>Phone : </b>{{ orders.phone }}</li>
                             <li class="list-group-item"><b>Address : </b>{{ orders.address }}</li>
