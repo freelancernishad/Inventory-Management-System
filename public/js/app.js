@@ -7331,9 +7331,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "home",
   created: function created() {
@@ -7453,6 +7450,7 @@ __webpack_require__.r(__webpack_exports__);
     this.expenses();
     this.totalStocks();
     this.totalStockAmounts();
+    this.stockOutProduct();
     this.expiredProduct();
     this.monthlybar();
     this.dailybar();
@@ -94239,12 +94237,12 @@ var render = function () {
                               staticClass: "btn btn-sm btn-primary",
                               attrs: {
                                 to: {
-                                  name: "editStock",
+                                  name: "editProduct",
                                   params: { id: product.id },
                                 },
                               },
                             },
-                            [_vm._v("Edit Stock")]
+                            [_vm._v("Edit")]
                           ),
                         ],
                         1

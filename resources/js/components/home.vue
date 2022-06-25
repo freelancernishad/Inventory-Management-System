@@ -296,10 +296,7 @@
                                         <span class="badge badge-danger">Expired</span>
                                     </td>
                                     <td>
-                                        <router-link :to="{
-                                            name: 'editStock',
-                                            params: { id: product.id },
-                                        }" class="btn btn-sm btn-primary">Edit Stock</router-link>
+                                       <router-link :to="{name: 'editProduct', params: {id: product.id}}" class="btn btn-sm btn-primary">Edit</router-link>
                                     </td>
                                 </tr>
                             </tbody>
@@ -455,6 +452,7 @@ this.countmonth();
         this.expenses();
         this.totalStocks();
         this.totalStockAmounts();
+        this.stockOutProduct();
 
 
         this.expiredProduct();
