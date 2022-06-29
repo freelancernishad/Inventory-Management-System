@@ -45,7 +45,7 @@ class PosController extends Controller
 
 
         $data = [];
-        $data['orderId'] = $request->orderId;
+        $data['orderId'] = $orderId;
         $data['customer_id'] = $request->customer_id;
         $data['qty'] = $request->qty;
         $data['sub_total'] = $request->sub_total;
@@ -185,10 +185,11 @@ $todayIncome =  $product_price-$buying_price;
 
         $date = $request->date;
         if($date){
-            $date =date('d/m/Y', strtotime($request->date));
+            $date =date('Y-m-d', strtotime($request->date));
         }else{
-            $date = date("d/m/Y");
+            $date = date("Y-m-d");
         }
+
 
         $expenses = DB::table('expenses')->where('expense_date', $date)->sum('amount');
         return response()->json($expenses);

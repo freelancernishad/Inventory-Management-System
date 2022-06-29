@@ -555,7 +555,7 @@ this.countmonth();
                 )
                 .then(({ data }) => {
                     this.chartData.datasets = [data.reports2, data.reports];
-                      console.log(this.chartData.datasets)
+                    //   console.log(this.chartData.datasets)
                 })
                 .catch();
         },

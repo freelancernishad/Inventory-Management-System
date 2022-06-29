@@ -7553,8 +7553,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get("/api/monthly/bar?start=" + this.start + "&end=" + this.end + "&year=" + this.year).then(function (_ref9) {
         var data = _ref9.data;
-        _this9.chartData.datasets = [data.reports2, data.reports];
-        console.log(_this9.chartData.datasets);
+        _this9.chartData.datasets = [data.reports2, data.reports]; //   console.log(this.chartData.datasets)
       })["catch"]();
     },
     dailybar: function dailybar() {
