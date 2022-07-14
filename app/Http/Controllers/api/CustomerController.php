@@ -30,11 +30,21 @@ class CustomerController extends Controller
     public function DueCuatomer(Request $request)
     {
          $row = DB::table('customers')
-        ->join('orders', 'customers.id', '=', 'orders.customer_id')
-        ->select('customers.*', 'orders.due')
+
+        // ->join('orders', 'customers.id', '=', 'orders.customer_id')
+        ->join ('orders', function ($query) {
+            $query->on('customers.id', '=', 'orders.customer_id')
+             ->limit(1);
+        })
+
+        ->select('customers.*', 'customers.id')
+        ->distinct('customers.id')
         ->where('orders.due','>',0)
         ->get();
         // $order = DB::table('orders')->where('customer_id',$id)->sum('due');
+
+
+
          return response()->json($row);
     }
 
