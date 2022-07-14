@@ -40,7 +40,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="product in cartProduct" :key="product.id">
+                                        <tr v-for="(product,iii) in cartProduct" :key="product.id">
                                             <td>{{ product.product_name }}</td>
                                             <td>
                                                 <div
@@ -66,7 +66,7 @@
                                                             -
                                                         </button>
                                                     </span>
-                                                    <input type="text" readonly class="form-control" :value="
+                                                    <input type="text" @change="qtychange(iii,product.id)" :id="'qty'+iii"  class="form-control" :value="
                                                         product.product_quantity
                                                     " style="width: 28px" />
                                                     <span class="input-group-btn input-group-append">
@@ -581,6 +581,28 @@ if (this.pay > this.sub_total) this.pay=this.sub_total;
                 })
                 .catch();
         },
+
+            qtychange(index,id){
+                 var product_quantity = document.getElementById('qty'+index).value;
+
+
+                   axios
+                .get(`/api/cart/increment/${id}?custom=${product_quantity}`)
+                .then(({ data }) => {
+                    // console.log(data);
+                    if (data == 0) {
+                        Notification.Out_of_stock();
+                        this.qt = data;
+                        Reload.$emit("afterAddToCart");
+                    } else {
+                        this.qt = data;
+                        Reload.$emit("afterAddToCart");
+                        Notification.success();
+                    }
+                })
+                .catch();
+            },
+
         priceChange(id, price) {
             // console.log(id,price)
             axios

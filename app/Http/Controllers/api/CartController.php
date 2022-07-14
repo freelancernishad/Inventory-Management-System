@@ -112,8 +112,12 @@ public function addToCartprice($id,$price)
 		return response('Done');
 	}
 
-	public function increment($id)
+	public function increment(Request $request,$id)
 	{
+
+     $custom = $request->custom;
+
+
 		$product = DB::table('pos')->where('id', $id)->first();
         // return response()->json($product);
         $product_id = $product->product_id;
@@ -131,6 +135,20 @@ public function addToCartprice($id,$price)
                 return response()->json($product_quantity_stock);
              }else{
 
+
+
+            if($custom){
+                DB::table('pos')->where('id', $id)->update(['product_quantity'=>$custom]);
+
+                $product = DB::table('pos')->where('id', $id)->first();
+                $sub_total = $product->product_price * $product->product_quantity;
+
+                DB::table('pos')->where('id', $id)->update(['sub_total' => $sub_total]);
+
+       return response()->json($sub_total);
+            }
+
+
             DB::table('pos')->where('id', $id)->increment('product_quantity');
 
             $product = DB::table('pos')->where('id', $id)->first();
@@ -144,6 +162,10 @@ public function addToCartprice($id,$price)
             $product_quantity_stock_update = $product_quantity -$product_update->product_quantity;
 
             return response()->json($product_quantity_stock_update);
+
+
+
+
              }
 
 

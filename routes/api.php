@@ -98,6 +98,7 @@ Route::get('/products/expired',[ProductController::class,'expired']);
 Route::get('/products/code',[ProductController::class,'productCodeGen']);
 
 Route::get('/product_code/{product_code}',  [ProductController::class,'product_code']);
+Route::get('/duecuatomer',  [CustomerController::class,'DueCuatomer']);
 Route::get('/customer/due/{id}',  [CustomerController::class,'CustomerDue']);
 Route::get('/due-order/{id}',  [OrderController::class,'DueOrder']);
 Route::post('/due-order/{id}',  [OrderController::class,'DueOrderupdate']);

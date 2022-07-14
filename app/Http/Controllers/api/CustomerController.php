@@ -18,7 +18,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = Customer::all();
+        $customers = Customer::orderBy('id','DESC')->get();
         return response()->json($customers);
     }
 
@@ -26,6 +26,16 @@ class CustomerController extends Controller
     {
         $order = DB::table('orders')->where('customer_id',$id)->sum('due');
         return response()->json($order);
+    }
+    public function DueCuatomer(Request $request)
+    {
+         $row = DB::table('customers')
+        ->join('orders', 'customers.id', '=', 'orders.customer_id')
+        ->select('customers.*', 'orders.due')
+        ->where('orders.due','>',0)
+        ->get();
+        // $order = DB::table('orders')->where('customer_id',$id)->sum('due');
+         return response()->json($row);
     }
 
     /**
@@ -156,7 +166,10 @@ class CustomerController extends Controller
 
     public function search(Request $request)
     {
+
         $data = $request->data;
+
+
         $columns = ['name','phone'];
         $result =  Customer::select('*');
                 foreach($columns as $column)

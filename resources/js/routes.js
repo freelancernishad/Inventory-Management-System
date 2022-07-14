@@ -34,6 +34,7 @@ let editExpense = require('./components/expense/edit.vue').default;
 
 // Custpmer Components
 let storeCustomer = require('./components/customer/create.vue').default;
+let duecustomer = require('./components/customer/due.vue').default;
 let customer = require('./components/customer/index.vue').default;
 let editCustomer = require('./components/customer/edit.vue').default;
 let customerdue = require('./components/customer/customerdue.vue').default;
@@ -114,6 +115,7 @@ export const routes = [
   // Customer Routes
   { path: '/store-customer', component: storeCustomer, name:'storeCustomer' },
   { path: '/customer', component: customer, name:'customer' },
+  { path: '/duecustomer', component: duecustomer, name:'duecustomer' },
   { path: '/edit-customer/:id', component: editCustomer, name:'editCustomer' },
   { path: '/customer/due/:id', component: customerdue, name:'customerdue' },
 
