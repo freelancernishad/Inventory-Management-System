@@ -34,13 +34,13 @@ class PosController extends Controller
          $customInvoice = $request->customInvoice;
 
 
-         $last = DB::table('orders')->latest()->count();
+         $last = DB::table('orders')->latest('id')->count();
          if($last==0){
-             $orderId = str_pad(10000, 5, '0', STR_PAD_LEFT);
+             $orderId = str_pad(1, 1, '0', STR_PAD_LEFT);
          }else{
-             $last = DB::table('orders')->latest()->first();
-             $orderId = $last->orderId;
-            $orderId =  $orderId+1;
+              $last = DB::table('orders')->latest('id')->first();
+              $orderIdold = $last->orderId;
+            $orderId =  $orderIdold+1;
          }
 
 
@@ -94,7 +94,7 @@ class PosController extends Controller
 
 
         if($sms){
-            $customer =  Customer::find($request->customer_id);
+             $customer =  Customer::find($request->customer_id);
              $phone = $customer->phone;
              $deccription ='description';
              $messages = array();
