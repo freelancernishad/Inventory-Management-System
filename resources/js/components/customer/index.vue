@@ -14,11 +14,11 @@
 
 							<h2 class="m-0 font-weight-bold text-primary">Customer List</h2>
 
-                     <div class="form-group" style="width: 250px;">
-                            <label for="">Type</label>
+                     <div class="form-group" style="width: 250px;    margin: 0 !important;">
+
                             <select v-model='type' class="form-control" @change="allCustomer" >
-                                <option>Local</option>
-                                <option>Wholesell</option>
+                                <option value="Local">খুচরা</option>
+                                <option value="Wholesell">পাইকারি</option>
                             </select>
                         </div>
 

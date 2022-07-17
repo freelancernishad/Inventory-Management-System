@@ -21,9 +21,8 @@
 		<!-- <input type="hidden" class="form-control" id="exampleInputEmail" placeholder="Enter Email" v-model='form.email' > -->
 
                                                 <select v-model='form.email' class="form-control" >
-
-                                                    <option>Local</option>
-                                                    <option>Wholesell</option>
+                                <option value="Local">খুচরা</option>
+                                <option value="Wholesell">পাইকারি</option>
                                                 </select>
 
 												<small class="text-danger" v-if="errors.email">{{ errors.email[0] }}</small>

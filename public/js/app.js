@@ -6226,7 +6226,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   created: function created() {
     if (!User.loggedIn()) {
@@ -91795,9 +91794,15 @@ var render = function () {
                                 },
                               },
                               [
-                                _c("option", [_vm._v("Local")]),
+                                _c("option", { attrs: { value: "Local" } }, [
+                                  _vm._v("খুচরা"),
+                                ]),
                                 _vm._v(" "),
-                                _c("option", [_vm._v("Wholesell")]),
+                                _c(
+                                  "option",
+                                  { attrs: { value: "Wholesell" } },
+                                  [_vm._v("পাইকারি")]
+                                ),
                               ]
                             ),
                             _vm._v(" "),
@@ -92125,11 +92130,9 @@ var render = function () {
                   "div",
                   {
                     staticClass: "form-group",
-                    staticStyle: { width: "250px" },
+                    staticStyle: { width: "250px", margin: "0 !important" },
                   },
                   [
-                    _c("label", { attrs: { for: "" } }, [_vm._v("Type")]),
-                    _vm._v(" "),
                     _c(
                       "select",
                       {
@@ -92162,9 +92165,13 @@ var render = function () {
                         },
                       },
                       [
-                        _c("option", [_vm._v("Local")]),
+                        _c("option", { attrs: { value: "Local" } }, [
+                          _vm._v("খুচরা"),
+                        ]),
                         _vm._v(" "),
-                        _c("option", [_vm._v("Wholesell")]),
+                        _c("option", { attrs: { value: "Wholesell" } }, [
+                          _vm._v("পাইকারি"),
+                        ]),
                       ]
                     ),
                   ]
@@ -92444,9 +92451,15 @@ var render = function () {
                                 },
                               },
                               [
-                                _c("option", [_vm._v("Local")]),
+                                _c("option", { attrs: { value: "Local" } }, [
+                                  _vm._v("খুচরা"),
+                                ]),
                                 _vm._v(" "),
-                                _c("option", [_vm._v("Wholesell")]),
+                                _c(
+                                  "option",
+                                  { attrs: { value: "Wholesell" } },
+                                  [_vm._v("পাইকারি")]
+                                ),
                               ]
                             ),
                             _vm._v(" "),
@@ -92620,11 +92633,9 @@ var render = function () {
                   "div",
                   {
                     staticClass: "form-group",
-                    staticStyle: { width: "250px" },
+                    staticStyle: { width: "250px", margin: "0 !important" },
                   },
                   [
-                    _c("label", { attrs: { for: "" } }, [_vm._v("Type")]),
-                    _vm._v(" "),
                     _c(
                       "select",
                       {
@@ -92657,9 +92668,13 @@ var render = function () {
                         },
                       },
                       [
-                        _c("option", [_vm._v("Local")]),
+                        _c("option", { attrs: { value: "Local" } }, [
+                          _vm._v("খুচরা"),
+                        ]),
                         _vm._v(" "),
-                        _c("option", [_vm._v("Wholesell")]),
+                        _c("option", { attrs: { value: "Wholesell" } }, [
+                          _vm._v("পাইকারি"),
+                        ]),
                       ]
                     ),
                   ]
