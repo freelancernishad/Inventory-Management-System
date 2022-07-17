@@ -36,7 +36,7 @@ class PosController extends Controller
 
          $last = DB::table('orders')->latest('id')->count();
          if($last==0){
-             $orderId = str_pad(1, 1, '0', STR_PAD_LEFT);
+             $orderId = str_pad(1, 5, '0', STR_PAD_LEFT);
          }else{
               $last = DB::table('orders')->latest('id')->first();
               $orderIdold = $last->orderId;

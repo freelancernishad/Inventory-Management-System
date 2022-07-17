@@ -18,7 +18,16 @@
 												<small class="text-danger" v-if="errors.name"> {{ errors.name[0] }} </small>
 											</div>
 											<div class="col-md-6">
-												<input type="email" class="form-control" id="exampleInputEmail" placeholder="Enter Email" v-model='form.email'>
+
+
+												<!-- <input type="hidden" class="form-control" id="exampleInputEmail" placeholder="Enter Email" v-model='form.email' > -->
+
+                                                <select v-model='form.email' class="form-control" >
+
+                                                    <option>Local</option>
+                                                    <option>Wholesell</option>
+                                                </select>
+
 												<small class="text-danger" v-if="errors.email">{{ errors.email[0] }}</small>
 											</div>
 										</div>
@@ -77,7 +86,7 @@ export default {
 		return {
 			form:{
 				name: null,
-				email: null,
+				email: 'Local',
 				phone: null,
 				address: null,
 				photo: null,

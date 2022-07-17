@@ -12,6 +12,15 @@
 
 						<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 							<h2 class="m-0 font-weight-bold text-primary">Customer Due List</h2>
+
+                            <div class="form-group" style="width: 250px;">
+                                <label for="">Type</label>
+                                <select v-model='type' class="form-control" @change="allCustomer" >
+                                    <option>Local</option>
+                                    <option>Wholesell</option>
+                                </select>
+                            </div>
+
 							<input type="text" placeholder="Search By Name Or Phone" v-model="searchTerm"  v-on:input="searchData" class="form-control" style="width: 300px;">
 							<router-link to="/store-customer" class="btn btn-primary float-right" style="margin-top: 6px;margin-right: 6px;">Add Customer</router-link>
 						</div>
@@ -67,6 +76,7 @@ export default {
 		return {
 			customers: [],
 			searchTerm:"",
+            type:"Local",
                timeout: null,
 		}
 	},
@@ -80,7 +90,7 @@ export default {
 	methods: {
 
 		allCustomer(){
-			axios.get('/api/duecuatomer')
+			axios.get(`/api/duecuatomer?type=${this.type}`)
 			.then(({data}) => (this.customers = data))
 			.catch()
 		},

@@ -16,19 +16,24 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $customers = Customer::orderBy('id','DESC')->get();
+        $type = $request->type;
+
+        $customers = Customer::where('email',$type)->orderBy('id','DESC')->get();
         return response()->json($customers);
     }
 
-    public function CustomerDue($id)
+    public function CustomerDue(Request $request,$id)
     {
-        $order = DB::table('orders')->where('customer_id',$id)->sum('due');
+
+        $order = DB::table('orders')->where(['customer_id'=>$id])->sum('due');
         return response()->json($order);
     }
     public function DueCuatomer(Request $request)
     {
+        $type = $request->type;
+
          $row = DB::table('customers')
 
         // ->join('orders', 'customers.id', '=', 'orders.customer_id')
@@ -39,6 +44,7 @@ class CustomerController extends Controller
 
         ->select('customers.*', 'customers.id')
         ->distinct('customers.id')
+        ->where(['email' => $type])
         ->where('orders.due','>',0)
         ->get();
         // $order = DB::table('orders')->where('customer_id',$id)->sum('due');

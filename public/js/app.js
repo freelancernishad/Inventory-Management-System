@@ -5763,6 +5763,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   created: function created() {
     if (!User.loggedIn()) {
@@ -5775,7 +5784,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       form: {
         name: null,
-        email: null,
+        email: 'Local',
         phone: null,
         address: null,
         photo: null
@@ -6033,6 +6042,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   created: function created() {
     if (!User.loggedIn()) {
@@ -6045,6 +6063,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       customers: [],
       searchTerm: "",
+      type: "Local",
       timeout: null
     };
   },
@@ -6061,7 +6080,7 @@ __webpack_require__.r(__webpack_exports__);
     allCustomer: function allCustomer() {
       var _this2 = this;
 
-      axios.get('/api/duecuatomer').then(function (_ref) {
+      axios.get("/api/duecuatomer?type=".concat(this.type)).then(function (_ref) {
         var data = _ref.data;
         return _this2.customers = data;
       })["catch"]();
@@ -6201,6 +6220,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   created: function created() {
     if (!User.loggedIn()) {
@@ -6213,7 +6239,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       form: {
         name: '',
-        email: '',
+        email: 'Local',
         phone: '',
         address: '',
         photo: '',
@@ -6336,6 +6362,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   created: function created() {
     if (!User.loggedIn()) {
@@ -6348,6 +6385,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       customers: [],
       searchTerm: "",
+      type: "Local",
       timeout: null
     };
   },
@@ -6364,7 +6402,7 @@ __webpack_require__.r(__webpack_exports__);
     allCustomer: function allCustomer() {
       var _this2 = this;
 
-      axios.get('/api/customer').then(function (_ref) {
+      axios.get("/api/customer?type=".concat(this.type)).then(function (_ref) {
         var data = _ref.data;
         return _this2.customers = data;
       })["catch"]();
@@ -91720,35 +91758,48 @@ var render = function () {
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-md-6" }, [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.form.email,
-                                  expression: "form.email",
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.form.email,
+                                    expression: "form.email",
+                                  },
+                                ],
+                                staticClass: "form-control",
+                                on: {
+                                  change: function ($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call(
+                                        $event.target.options,
+                                        function (o) {
+                                          return o.selected
+                                        }
+                                      )
+                                      .map(function (o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      _vm.form,
+                                      "email",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  },
                                 },
-                              ],
-                              staticClass: "form-control",
-                              attrs: {
-                                type: "email",
-                                id: "exampleInputEmail",
-                                placeholder: "Enter Email",
                               },
-                              domProps: { value: _vm.form.email },
-                              on: {
-                                input: function ($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.form,
-                                    "email",
-                                    $event.target.value
-                                  )
-                                },
-                              },
-                            }),
+                              [
+                                _c("option", [_vm._v("Local")]),
+                                _vm._v(" "),
+                                _c("option", [_vm._v("Wholesell")]),
+                              ]
+                            ),
                             _vm._v(" "),
                             _vm.errors.email
                               ? _c("small", { staticClass: "text-danger" }, [
@@ -92070,6 +92121,55 @@ var render = function () {
                   _vm._v("Customer Due List"),
                 ]),
                 _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "form-group",
+                    staticStyle: { width: "250px" },
+                  },
+                  [
+                    _c("label", { attrs: { for: "" } }, [_vm._v("Type")]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.type,
+                            expression: "type",
+                          },
+                        ],
+                        staticClass: "form-control",
+                        on: {
+                          change: [
+                            function ($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function (o) {
+                                  return o.selected
+                                })
+                                .map(function (o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.type = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            },
+                            _vm.allCustomer,
+                          ],
+                        },
+                      },
+                      [
+                        _c("option", [_vm._v("Local")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("Wholesell")]),
+                      ]
+                    ),
+                  ]
+                ),
+                _vm._v(" "),
                 _c("input", {
                   directives: [
                     {
@@ -92307,35 +92407,48 @@ var render = function () {
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-md-6" }, [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.form.email,
-                                  expression: "form.email",
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.form.email,
+                                    expression: "form.email",
+                                  },
+                                ],
+                                staticClass: "form-control",
+                                on: {
+                                  change: function ($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call(
+                                        $event.target.options,
+                                        function (o) {
+                                          return o.selected
+                                        }
+                                      )
+                                      .map(function (o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      _vm.form,
+                                      "email",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  },
                                 },
-                              ],
-                              staticClass: "form-control",
-                              attrs: {
-                                type: "email",
-                                id: "exampleInputEmail",
-                                placeholder: "Enter Email",
                               },
-                              domProps: { value: _vm.form.email },
-                              on: {
-                                input: function ($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.form,
-                                    "email",
-                                    $event.target.value
-                                  )
-                                },
-                              },
-                            }),
+                              [
+                                _c("option", [_vm._v("Local")]),
+                                _vm._v(" "),
+                                _c("option", [_vm._v("Wholesell")]),
+                              ]
+                            ),
                             _vm._v(" "),
                             _vm.errors.email
                               ? _c("small", { staticClass: "text-danger" }, [
@@ -92502,6 +92615,55 @@ var render = function () {
                 _c("h2", { staticClass: "m-0 font-weight-bold text-primary" }, [
                   _vm._v("Customer List"),
                 ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "form-group",
+                    staticStyle: { width: "250px" },
+                  },
+                  [
+                    _c("label", { attrs: { for: "" } }, [_vm._v("Type")]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.type,
+                            expression: "type",
+                          },
+                        ],
+                        staticClass: "form-control",
+                        on: {
+                          change: [
+                            function ($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function (o) {
+                                  return o.selected
+                                })
+                                .map(function (o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.type = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            },
+                            _vm.allCustomer,
+                          ],
+                        },
+                      },
+                      [
+                        _c("option", [_vm._v("Local")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("Wholesell")]),
+                      ]
+                    ),
+                  ]
+                ),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
