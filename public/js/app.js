@@ -97725,8 +97725,15 @@ var render = function () {
                                 _vm._v(
                                   "\n                                                " +
                                     _vm._s(customer.name) +
-                                    "\n                                            "
+                                    " (" +
+                                    _vm._s(customer.phone) +
+                                    " ) "
                                 ),
+                                customer.email == "Local"
+                                  ? _c("span", [_vm._v("(খুচরা)")])
+                                  : customer.email == "Wholesell"
+                                  ? _c("span", [_vm._v("(পাইকারি)")])
+                                  : _vm._e(),
                               ]
                             )
                           }),

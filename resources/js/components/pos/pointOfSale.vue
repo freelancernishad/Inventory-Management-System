@@ -172,7 +172,7 @@
                                         <select class="form-control" id="exampleFormControlSelect1"
                                             v-model="customer_id">
                                             <option v-for="customer in customers" :value="customer.id">
-                                                {{ customer.name }}
+                                                {{ customer.name }} ({{ customer.phone }} ) <span v-if="customer.email=='Local'">(খুচরা)</span> <span v-else-if="customer.email=='Wholesell'">(পাইকারি)</span>
                                             </option>
                                         </select>
                                     </div>
