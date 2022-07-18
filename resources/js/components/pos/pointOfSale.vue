@@ -483,7 +483,7 @@ if (this.pay > this.sub_total) this.pay=this.sub_total;
         },
         allCustomers() {
             axios
-                .get("/api/customer")
+                .get("/api/customer?type=")
                 .then(({ data }) => (this.customers = data))
                 .catch();
         },

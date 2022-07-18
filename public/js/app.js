@@ -9529,7 +9529,7 @@ __webpack_require__.r(__webpack_exports__);
     allCustomers: function allCustomers() {
       var _this8 = this;
 
-      axios.get("/api/customer").then(function (_ref5) {
+      axios.get("/api/customer?type=").then(function (_ref5) {
         var data = _ref5.data;
         return _this8.customers = data;
       })["catch"]();

@@ -19,8 +19,12 @@ class CustomerController extends Controller
     public function index(Request $request)
     {
         $type = $request->type;
+if($type==''){
+    $customers = Customer::orderBy('id','DESC')->get();
+}else{
+    $customers = Customer::where('email',$type)->orderBy('id','DESC')->get();
+}
 
-        $customers = Customer::where('email',$type)->orderBy('id','DESC')->get();
         return response()->json($customers);
     }
 
