@@ -2,6 +2,36 @@
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
 
+
+
+function PdfMaker($pageSize='A4',$html,$Filename,$Watermark=true)
+{
+    // $schoolDetails = school_detail::where('school_id',$school_id)->first();
+
+    $mpdf = new \Mpdf\Mpdf([
+        'mode' => 'utf-8', 'format' => $pageSize, 'default_font' => 'bangla', 'margin_left' => 5,
+        'margin_right' => 5,
+        'margin_top' => 6,
+        'margin_bottom' => 6,
+        'setAutoTopMargin' => 'stretch',
+    ]);
+    $mpdf->SetDisplayMode('fullpage');
+    // $mpdf->SetHTMLHeader(SchoolPad($school_id));
+    $mpdf->defaultheaderfontsize = 10;
+    $mpdf->defaultheaderfontstyle = 'B';
+    $mpdf->defaultheaderline = 0;
+    // $mpdf->WriteHTML('<watermarkimage src="'.base64('National_emblem_of_Bangladesh.png').'" alpha="0.2" size="80,80" />');
+    // $mpdf->SetWatermarkImage(base64($schoolDetails->logo),0.15);
+    if($Watermark){
+        $mpdf->showWatermarkImage = $Watermark;
+        $mpdf->SetWatermarkImage(base64('National_emblem_of_Bangladesh.png'),0.2,array(60,60),array(72,90));
+    }
+
+    $mpdf->WriteHTML($html);
+    $mpdf->Output($Filename, 'I');
+}
+
+
 function month_en_to_bn($month)
 {
 
@@ -36,15 +66,29 @@ function base64($Image)
 //  return $Image;
 
     if(File::exists(env('FILE_PATH').$Image)){
-
         $Image= env('FILE_PATH').$Image;
     }else{
         $Image= env('FILE_PATH').'backend/image.png';
 
     }
+ 
 
-$ext =  pathinfo($Image, PATHINFO_EXTENSION);;
+    $ext =  pathinfo($Image, PATHINFO_EXTENSION);;
     return $b64image = "data:image/$ext;base64,".base64_encode(file_get_contents($Image));
+}
+
+ function getTemporaryImageLink($imagePath)
+{
+  // Get the disk where the image is stored
+  $disk = Storage::disk('public');
+
+  // Get the URL for the image
+  $imageUrl = $disk->url($imagePath);
+
+  // Generate a temporary URL with a 1-hour expiration time
+  $temporaryLink = $imageUrl.'?temporary_link=true';
+
+  return $temporaryLink;
 }
 
 function sent_response($message,$data=[]){
