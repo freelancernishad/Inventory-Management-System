@@ -202,11 +202,51 @@ class OrderController extends Controller
 
         $numto = new NumberToBangla();
         $amount = $numto->bnMoney($orders->sub_total);
-        $fileName = 'Invoice-' . date('Y-m-d H:m:s');
+        $fileName = 'Invoice-' . date('Y-m-d H:m:s').'.pdf';
         $data['fileName'] = $fileName;
         $memo = $orders->memo;
-        $logo =  base64('m.png');
-        return $temporaryLink = getTemporaryImageLink('m.png');
+         $logo =  base64('m.png');
+
+
+
+         $customer_id = $orders->customer_id;
+
+          $allOrders = DB::table('orders')
+         ->where('customer_id', $customer_id)
+         ->select('due')
+         ->get();
+         $totalDue = 0;
+         foreach ($allOrders as $value) {
+            $totalDue += $value->due;
+         }
+
+      
+
+      $allDuePayments = DB::table('duepayments')
+         ->where('customer_id', $customer_id)
+         ->select('payment_amount','pay_date')
+         ->get();
+
+         $todayPay = 0;
+         $totalDuePay = 0;
+         foreach ($allDuePayments as $value) {
+            $totalDuePay += $value->payment_amount;
+
+            $order_date = strtotime($orders->order_date);
+            $pay_date = strtotime($value->pay_date);
+
+            if($order_date==$pay_date){
+                $todayPay = $value->payment_amount;
+            }
+
+         }
+
+     
+         $nowCustomerDue = $totalDue;
+
+
+
+
         $datas = [
             'orders'=>$orders,
             'orderDetails'=>$orderDetails,
@@ -214,15 +254,26 @@ class OrderController extends Controller
             'amount'=>$amount,
             'custom_order_details'=>$custom_order_details,
             'logo'=>$logo,
+            'nowCustomerDue'=>$nowCustomerDue,
+            'todayPay'=>$todayPay,
         ];
 
 
         if ($memo == 'memo1') {
             $html = invoice1($datas, 'right');
-            return  PdfMaker('A4', $html, $fileName);
+            return  PdfMaker('A4-L', $html, $fileName);
         } else if ($memo == 'memo2') {
-            return $html = invoice2($datas, 'right');
-            return  PdfMaker('A4', $html, $fileName);
+
+            $html = invoice2($datas, 'right');
+            // return  PdfMaker('A4-L', $html, $fileName);
+
+            $header = header3($datas);
+            $html = invoice3($datas, 'right');
+            $footer = footer3($datas);
+
+            // $html = '<h1>body</h1>';
+
+            return  PdfMakerwithHeader('A4', $html,$header,$footer, $fileName);
         }
 
 

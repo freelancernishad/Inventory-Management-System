@@ -309,13 +309,13 @@ function invoice1($datas, $float)
 function invoice2($datas, $float)
 {
 
-    return $datas;
-    $orders = $datas->orders;
-    $orderDetails = $datas->orderDetails;
-    $duepaymets = $datas->duepaymets;
-    $amount = $datas->amount;
-    $custom_order_details = $datas->custom_order_details;
-    return $logo = $datas->logo;
+
+    $orders = $datas['orders'];
+    $orderDetails = $datas['orderDetails'];
+    $duepaymets = $datas['duepaymets'];
+    $amount = $datas['amount'];
+    $custom_order_details = $datas['custom_order_details'];
+     $logo = $datas['logo'];
 
     $html = "
 
@@ -438,8 +438,8 @@ function invoice2($datas, $float)
             <p class='defalttext'>বিসমিল্লাহির রাহমানির রাহিম</p>
             <table>
                 <tr>
-                    <td width='155px'><img style='position:fixed;width:50px;top:0px;left:0px' src='" . $logo . "'></td>
-                    <td><h1 class='companiname'> মেসার্স রনি ট্রেডার্স</h1></td>
+                    <td width='170px'><img style='position:fixed;width:50px;top:0px;left:0px' src='" . $logo . "'></td>
+                    <td><h1 class='companiname'> মেসার্স &nbsp;রনি &nbsp;ট্রেডার্স</h1></td>
                 </tr>
             </table>
 
@@ -500,11 +500,10 @@ function invoice2($datas, $float)
                                     <td class='td defaltfont'>$product->product_price</td>
                                     <td class='td defaltfont'>$product->sub_total</td>
                                 </tr>";
-
         $index++;
         // $subtotal += $product->sub_total;
-
     }
+
     foreach ($custom_order_details as $productCustom) {
         $html .= " <tr class='tr'>
                                     <td class='td defaltfont'>" . int_en_to_bn($index) . "</td>
@@ -517,7 +516,6 @@ function invoice2($datas, $float)
 
         $index++;
         // $subtotal += $productCustom->sub_total;
-
     };
 
     $totalrow = 19 - $index;
@@ -643,5 +641,347 @@ function invoice2($datas, $float)
     ";
 
 
+
+
+
+
+
+
+    return $html;
+}
+function header3($datas){
+    $logo = $datas['logo'];
+    $orders = $datas['orders'];
+
+    $html = "
+
+
+
+    <div class='memoHead' style='text-align: center;color: #444B8F;line-height:22px'>
+        <p class='defalttext' style='margin:0'>বিসমিল্লাহির রাহমানির রাহিম</p>
+        <table>
+            <tr>
+                <td width='240px'><img style='position:fixed;width:50px;top:0px;left:0px' src='" . $logo . "'></td>
+                <td><h1 class='companiname' style='color:#955564'> মেসার্স &nbsp;রনি &nbsp;ট্রেডার্স</h1></td>
+            </tr>
+        </table>
+
+
+
+        <p class='defalttext name' style='background: #6A4B5A;width: 269px;margin: 0 auto;color: white;border-radius: 50px;padding: 3px 0px 3px 0px;'>প্রোঃ মোঃ হাছেন আলী </p>
+        <p class='defalttext' style='margin:0'>এখানে রাসায়নিক সার কীটনাশক ও বীজ বিক্রিয় করা হয়</p>
+        <p class='defalttext address' style='background: #D25664;width: 100%;margin: 0 auto;color: white;padding: 3px 0px 3px 0px;'>কালীগঞ্জ বাজার, দেবিগঞ্জ, পঞ্চগড় </p>
+        <p class='defalttext' style='color:#6A4B5A;margin:0'>মোবাইল নং : ০১৭৪০৯২৯৩০২, ০১৭৮৫৪৯৪২১৬ </p>
+    </div>
+
+
+
+
+
+    <table width='100%' style='border: 1px solid #2F77A5;margin-bottom:20px' cellspacing='0'>
+    <tr style='border-bottom:1px solid black'>
+
+        <td style='background:#2F77A5;padding:10px 5px;color:white;width:15%;float:left;border-bottom:1px solid #2F77A5  !important;'>নাম</td>
+
+        <td style='border-bottom:1px solid #2F77A5 !important;padding-left:6px;color:#2F77A5;font-size:13px'>$orders->name</td>
+
+        <td width='10%' style='background:#2F77A5;padding:10px 5px;color:white;width:15%;float:left;border-bottom:1px solid #2F77A5 !important'>ক্রমিক নং</td>
+
+        <td width='20%' style='border-bottom:1px solid #2F77A5 !important;padding-left:6px;color:#2F77A5;font-size:13px' > $orders->orderId</td>
+    </tr>
+    <tr>
+        <td style='background:#935E6C;padding:10px 5px;color:white;padding:5px 5px;width:15%;float:left;position: fixed;top:0px'
+            >ঠিকানা</td>
+        <td  style='padding-left:6px;color:#2F77A5;font-size:13px'> $orders->address</td>
+        <td style='background:#935E6C;padding:10px 5px;color:white;padding:5px 5px;width:15%;float:left;position: fixed;top:0px'
+            >তারিখ</td>
+        <td  style='padding-left:6px;color:#2F77A5;font-size:13px'>$orders->order_date
+        </td>
+    </tr>
+</table>
+
+
+
+
+
+
+    ";
+    return $html;
+
+
+}function footer3($datas){
+
+    $orders = $datas['orders'];
+    $orderDetails = $datas['orderDetails'];
+    $duepaymets = $datas['duepaymets'];
+    $amount = $datas['amount'];
+    $custom_order_details = $datas['custom_order_details'];
+     $logo = $datas['logo'];
+     $nowCustomerDue = $datas['nowCustomerDue'];
+     $todayPay = $datas['todayPay'];
+
+     $subtotal = $orders->sub_total;
+     $totalpay = $orders->pay;
+     $totaldue = $orders->due;
+
+    $html ="
+    <div>
+    <table width='100%'>
+        <tr>
+            <td style='text-align:center;background:red;color:white;'><h2>বাকী, জমা এবং মোট</h2></td>
+        </tr>
+    </table>
+    
+
+    <table width='100%'>";
+
+
+$html .= " <tr class='tr'>
+        <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> মোট </p></td>
+        <td class='td defaltfont'>" . int_en_to_bn($subtotal) . "</td>
+         </tr>
+
+         
+        <tr class='tr'>
+                <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> কথায় </p></td>
+                <td class='td defaltfont'>$amount</td>
+        </tr>
+        
+        
+         
+        <tr class='tr'>
+                <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p>  জমা </p></td>
+                <td class='td defaltfont'>" . int_en_to_bn($totalpay) . "</td>
+        </tr>
+        
+        
+
+      
+        
+
+
+        <tr class='tr'>
+                <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> বাকি </p></td>
+                <td class='td defaltfont'>" . int_en_to_bn($totaldue) . "</td>
+        </tr>
+
+        <tr class='tr'>
+                <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> $orders->name এর মোট বাকী </p></td>
+                <td class='td defaltfont'>" . int_en_to_bn($nowCustomerDue) . "</td>
+        </tr>
+
+        ";
+
+//         <tr class='tr'>
+//         <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> আজকে পূর্বের বাকী জমা </p></td>
+//         <td class='td defaltfont'>" . int_en_to_bn($todayPay) . "</td>
+// </tr>
+
+$html .= "</table>
+
+</div>
+";
+
+
+
+
+
+
+
+
+
+    $html .= "           <div  style='padding-top:50px'>
+    <p style='float:left;width:30%;padding:10px 15px' class='defaltfont'>ক্রেতার সাক্ষর</p>
+    <p style='float:right;width:30%;text-align:right;padding:10px 15px' class='defaltfont'>বিক্রেতার
+        সাক্ষর</p>
+</div>";
+return $html;
+
+}
+function invoice3($datas, $float)
+{
+
+
+    $orders = $datas['orders'];
+    $orderDetails = $datas['orderDetails'];
+    $duepaymets = $datas['duepaymets'];
+    $amount = $datas['amount'];
+    $custom_order_details = $datas['custom_order_details'];
+     $logo = $datas['logo'];
+     $nowCustomerDue = $datas['nowCustomerDue'];
+     $todayPay = $datas['todayPay'];
+
+    $html = "
+
+    <style>
+
+
+
+
+
+
+        p {
+            color: #2F77A5;
+            margin: 0;
+        }
+
+        div {
+            color: #2F77A5;
+            margin: 0;
+        }
+
+
+
+        p.defalttext {
+            font-weight: 600;
+            font-size: 16px;
+            margin: 0;
+            /* transform: scaleX(1.2); */
+        }
+
+        .thead .tr {
+            background: #3F6D49;
+        }
+
+        .thead .tr .th {
+            color: white;
+        }
+        .tr {
+            border: 1px solid #2F77A5;
+        }
+        .th {
+            border: 1px solid #444B8F;
+            border-right: 1px solid white;
+        }
+        .td {
+            border: 1px solid #2F77A5;
+        }
+        .table,
+        .td {
+            border: 1px solid #2F77A5;
+            border-collapse: collapse;
+            text-align: center;
+            color: #2F77A5;
+        }
+        .th,
+            {
+            border: 1px solid white;
+            border-collapse: collapse;
+        }
+        .td {
+            height: 18.5px;
+
+        }
+        .slNo {
+            float: right;
+            width: 300px;
+        }
+        .addLebel {
+            position: fixed;
+            left: 2em;
+        }
+        .defaltfont {
+            font-size: 14px;
+        }
+        /* .posisionfixed{
+    position: fixed;
+    top: 50px;
+    left:0;
+} */
+    </style>
+
+
+
+                <div class='productDetails' >
+                    <table class='table' style='border:1px solid #444B8F;width:100%' cellspacing='0'>
+                        <thead class='thead'>
+                            <tr class='tr'>
+                                <th class='th defaltfont' width='10%'>সংখ্যা</th>
+                                <th class='th defaltfont' width='45%'>বিবরন</th>
+                                <th class='th defaltfont' width='15%'>পরিমান</th>
+                                <th class='th defaltfont' width='15%'>দর</th>
+                                <th class='th defaltfont' width='15%'>টাকা</th>
+                            </tr>
+                        </thead>
+                        <tbody class='tbody'>";
+
+
+    $subtotal = $orders->sub_total;
+    $totalpay = $orders->pay;
+    $totaldue = $orders->due;
+    $index = 1;
+
+    foreach ($orderDetails as $product) {
+        $html .= "  <tr class='tr'>
+                                    <td class='td defaltfont'>" . int_en_to_bn($index) . "</td>
+                                    <td class='td defaltfont'>$product->product_name</td>
+                                    <td class='td defaltfont'>" . int_en_to_bn($product->product_quantity) . "</td>
+                                    <td class='td defaltfont'>" . int_en_to_bn($product->product_price) . "</td>
+                                    <td class='td defaltfont'>" . int_en_to_bn($product->sub_total) . "</td>
+                                </tr>";
+        $index++;
+        // $subtotal += $product->sub_total;
+    }
+
+    foreach ($custom_order_details as $productCustom) {
+        $html .= " <tr class='tr'>
+                                    <td class='td defaltfont'>" . int_en_to_bn($index) . "</td>
+                                    <td class='td defaltfont'>$productCustom->product_name</td>
+                                    <td class='td defaltfont'>" . int_en_to_bn($productCustom->product_quantity) . "
+                                        $productCustom->product_quantity_type</td>
+                                    <td class='td defaltfont'>" . int_en_to_bn($productCustom->product_price) . "</td>
+                                    <td class='td defaltfont'>" . int_en_to_bn($productCustom->sub_total) . "</td>
+                                </tr>";
+
+        $index++;
+        // $subtotal += $productCustom->sub_total;
+    };
+
+
+    if($index<=21){
+        $totalrow = 22 - $index;
+    }elseif($index<=42){
+        $totalrow = 43 - $index;
+    }elseif($index<=63){
+        $totalrow = 64 - $index;
+    }elseif($index<=84){
+        $totalrow = 85 - $index;
+    }elseif($index<=105){
+        $totalrow = 106 - $index;
+    }elseif($index<=126){
+        $totalrow = 127 - $index;
+    }elseif($index<=147){
+        $totalrow = 148 - $index;
+    }elseif($index<=168){
+        $totalrow = 169 - $index;
+    }elseif($index<=189){
+        $totalrow = 190 - $index;
+    }else{
+        $totalrow = 211 - $index;
+    }
+
+
+    for ($i = 0; $i < $totalrow; $i++) {
+        $html .= " <tr class='tr'>
+                                <td class='td defaltfont'>" . int_en_to_bn($i + $index) . "</td>
+                                <td class='td defaltfont'></td>
+                                <td class='td defaltfont'></td>
+                                <td class='td defaltfont'></td>
+                                <td class='td defaltfont'></td>
+                            </tr>";
+    }
+
+
+
+
+
+    $html .= " </tbody>
+                        <tfoot class='tfoot'>";
+
+    $html .= " </tfoot>
+                    </table>
+
+
+                </div>";
     return $html;
 }

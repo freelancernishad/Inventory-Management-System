@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\File;
 
 
 
-function PdfMaker($pageSize='A4',$html,$Filename,$Watermark=true)
+function PdfMaker($pageSize='A4',$html,$Filename,$Watermark=false)
 {
     // $schoolDetails = school_detail::where('school_id',$school_id)->first();
 
@@ -30,6 +30,43 @@ function PdfMaker($pageSize='A4',$html,$Filename,$Watermark=true)
     $mpdf->WriteHTML($html);
     $mpdf->Output($Filename, 'I');
 }
+
+
+function PdfMakerwithHeader($pageSize='A4',$html,$header,$footer,$filename,$Watermark=false)
+{
+
+    $mpdf = new \Mpdf\Mpdf([
+        'default_font_size' => 12,
+        'default_font' => 'bangla',
+        'mode' => 'utf-8',
+        'format' => $pageSize,
+        'setAutoTopMargin' => 'stretch',
+        'setAutoBottomMargin' => 'stretch'
+    ]);
+    $mpdf->SetDisplayMode('fullpage');
+
+    $mpdf->SetHTMLHeader($header);
+    $mpdf->SetHTMLFooter($footer);
+
+    // $mpdf->SetHTMLHeader('Document Title|Center Text|{PAGENO}');
+    $mpdf->defaultheaderfontsize = 10;
+    $mpdf->defaultheaderfontstyle = 'B';
+    $mpdf->defaultheaderline = 0;
+    $mpdf->defaultfooterfontsize = 10;
+    $mpdf->defaultfooterfontstyle = 'BI';
+    $mpdf->defaultfooterline = 0;
+    if($Watermark){
+        $mpdf->showWatermarkImage = $Watermark;
+        $mpdf->SetWatermarkImage(base64('National_emblem_of_Bangladesh.png'),0.2,array(60,60),array(72,90));
+    }
+    $mpdf->SetDisplayMode('fullpage');
+    $mpdf->WriteHTML($html);
+    $mpdf->useSubstitutions = false;
+    $mpdf->simpleTables = true;
+    $mpdf->Output($filename, 'I');
+}
+
+
 
 
 function month_en_to_bn($month)
@@ -71,7 +108,7 @@ function base64($Image)
         $Image= env('FILE_PATH').'backend/image.png';
 
     }
- 
+
 
     $ext =  pathinfo($Image, PATHINFO_EXTENSION);;
     return $b64image = "data:image/$ext;base64,".base64_encode(file_get_contents($Image));

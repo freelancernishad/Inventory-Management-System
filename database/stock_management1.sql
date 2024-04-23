@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 26, 2022 at 07:02 AM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 8.0.3
+-- Generation Time: Apr 22, 2024 at 01:01 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `categories` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `category_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `category_name` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -53,7 +53,8 @@ INSERT INTO `categories` (`id`, `category_name`, `created_at`, `updated_at`) VAL
 (16, 'c14', '2022-05-07 09:44:14', '2022-05-07 09:44:14'),
 (17, 'bish', '2022-06-13 09:04:42', '2022-06-13 09:04:42'),
 (18, 'sdf', '2022-06-20 07:37:44', '2022-06-20 07:37:44'),
-(19, 'product1', '2022-06-20 07:38:22', '2022-06-20 07:38:22');
+(19, 'product1', '2022-06-20 07:38:22', '2022-06-20 07:38:22'),
+(20, 'uria', '2022-08-25 17:05:36', '2022-08-25 17:05:36');
 
 -- --------------------------------------------------------
 
@@ -63,11 +64,11 @@ INSERT INTO `categories` (`id`, `category_name`, `created_at`, `updated_at`) VAL
 
 CREATE TABLE `customers` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `photo` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -78,7 +79,8 @@ CREATE TABLE `customers` (
 
 INSERT INTO `customers` (`id`, `name`, `email`, `phone`, `address`, `photo`, `created_at`, `updated_at`) VALUES
 (1, 'Md Nishad Hossain cu', 'tmscedu2019@gmail.com', '01909756552', 'Baneshorpara, Tepriganj, Debiganj, Panchagarh', 'backend/customer/1651898903.jpeg', '2022-05-07 04:48:23', '2022-05-07 04:48:23'),
-(2, 'Nishad Hossain', 'freelancernishad123@gmail.com', '01909756553', 'Baneshorpara, Tepriganj, Debiganj, Panchagarh', 'backend/customer/1652115202.jpeg', '2022-05-09 16:53:22', '2022-05-09 16:53:22');
+(2, 'Nishad Hossain', 'freelancernishad123@gmail.com', '01909756553', 'Baneshorpara, Tepriganj, Debiganj, Panchagarh', 'backend/customer/1652115202.jpeg', '2022-05-09 16:53:22', '2022-05-09 16:53:22'),
+(3, 'Freelancer Nishad', 'Local', '+8801909756552', 'Baneshorpara, Tepriganj, Debiganj, Panchagarh', NULL, '2022-07-17 15:34:23', '2022-07-17 15:34:23');
 
 -- --------------------------------------------------------
 
@@ -89,11 +91,11 @@ INSERT INTO `customers` (`id`, `name`, `email`, `phone`, `address`, `photo`, `cr
 CREATE TABLE `custom_order_details` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `order_id` int(11) DEFAULT NULL,
-  `product_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `product_quantity` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `product_quantity_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `product_price` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sub_total` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `product_name` varchar(255) DEFAULT NULL,
+  `product_quantity` varchar(255) DEFAULT NULL,
+  `product_quantity_type` varchar(255) DEFAULT NULL,
+  `product_price` varchar(255) DEFAULT NULL,
+  `sub_total` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -105,7 +107,8 @@ CREATE TABLE `custom_order_details` (
 INSERT INTO `custom_order_details` (`id`, `order_id`, `product_name`, `product_quantity`, `product_quantity_type`, `product_price`, `sub_total`, `created_at`, `updated_at`) VALUES
 (39, 18, 'p1', '5', 'কেজি', '20', '100', NULL, NULL),
 (40, 18, 'p2', '15', 'কেজি', '10', '150', NULL, NULL),
-(41, 28, 'Name', '5', 'কেজি', '10', '50', NULL, NULL);
+(41, 28, 'Name', '5', 'কেজি', '10', '50', NULL, NULL),
+(42, 42, 'uria', '5', 'বস্তা', '1000', '5000', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -117,11 +120,11 @@ CREATE TABLE `duepayments` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `customer_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
-  `payment_amount` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payBy` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pay_date` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pay_month` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pay_year` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payment_amount` varchar(255) NOT NULL,
+  `payBy` varchar(255) NOT NULL,
+  `pay_date` varchar(255) NOT NULL,
+  `pay_month` varchar(255) NOT NULL,
+  `pay_year` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -145,14 +148,14 @@ INSERT INTO `duepayments` (`id`, `customer_id`, `order_id`, `payment_amount`, `p
 
 CREATE TABLE `employees` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
   `salary` double(8,2) NOT NULL,
-  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `nid` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `joining_date` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `photo` varchar(255) DEFAULT NULL,
+  `nid` varchar(255) DEFAULT NULL,
+  `joining_date` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -173,9 +176,9 @@ INSERT INTO `employees` (`id`, `name`, `email`, `phone`, `address`, `salary`, `p
 
 CREATE TABLE `expenses` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `details` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `amount` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `expense_date` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `details` text NOT NULL,
+  `amount` varchar(255) NOT NULL,
+  `expense_date` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -185,7 +188,8 @@ CREATE TABLE `expenses` (
 --
 
 INSERT INTO `expenses` (`id`, `details`, `amount`, `expense_date`, `created_at`, `updated_at`) VALUES
-(1, 'gdg', '10', '2022-05-19', '2022-05-19 03:35:28', '2022-05-19 03:35:28');
+(1, 'gdg', '10', '2022-05-19', '2022-05-19 03:35:28', '2022-05-19 03:35:28'),
+(2, 'gfhgh', '6', '2022-06-29', '2022-06-29 08:42:56', '2022-06-29 08:42:56');
 
 -- --------------------------------------------------------
 
@@ -196,11 +200,11 @@ INSERT INTO `expenses` (`id`, `details`, `amount`, `expense_date`, `created_at`,
 CREATE TABLE `extra` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `vat` int(11) NOT NULL,
-  `logo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `favicon` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `logo` varchar(255) NOT NULL,
+  `favicon` varchar(255) NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -213,10 +217,10 @@ CREATE TABLE `extra` (
 
 CREATE TABLE `failed_jobs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -228,12 +232,12 @@ CREATE TABLE `failed_jobs` (
 
 CREATE TABLE `invoices` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `customer_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `date` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Invoices` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `total_amount` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `customer_name` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `date` varchar(255) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `Invoices` longtext DEFAULT NULL,
+  `total_amount` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -261,7 +265,7 @@ INSERT INTO `invoices` (`id`, `customer_name`, `address`, `date`, `type`, `Invoi
 
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -300,11 +304,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `oauth_access_tokens` (
-  `id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(100) NOT NULL,
   `user_id` bigint(20) UNSIGNED DEFAULT NULL,
   `client_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `scopes` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `scopes` text DEFAULT NULL,
   `revoked` tinyint(1) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -324,13 +328,17 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('1c69551be92a09a6fcbea40144aa20552337423237e2ca75f54f1683c2776da14d3ffb64ffe9ddbf', 3, 3, 'accessToken', '[]', 0, '2022-06-13 09:00:30', '2022-06-13 09:00:30', '2023-06-13 15:00:30'),
 ('1d898d494251ed9777d777bb9819e23f57318526f16ccaf30befd607fbbad94a31a970bad23e8a81', 3, 3, 'accessToken', '[]', 0, '2022-05-10 15:19:22', '2022-05-10 15:19:22', '2023-05-10 21:19:22'),
 ('1f7748f80407bb24438edc9024cfc2d58ce2884ddcb49704ca7eb4ae8ec7d01ce0a03ab9bec7d0fe', 3, 3, 'accessToken', '[]', 0, '2022-05-09 17:51:56', '2022-05-09 17:51:56', '2023-05-09 23:51:56'),
+('231bba60a72862842156e330b32f34d0635799c82e97e559a918793b6d46f9bde7f2bff1a2e8499a', 3, 3, 'accessToken', '[]', 0, '2022-07-18 05:03:13', '2022-07-18 05:03:13', '2023-07-18 11:03:13'),
 ('23a6ac90695d1e76ef670ea971d3a82b0e78fa18be1fbc590af293b0dccb6c270637c8cac546ba0b', 3, 3, 'accessToken', '[]', 0, '2022-06-20 03:13:09', '2022-06-20 03:13:09', '2023-06-20 09:13:09'),
 ('2641d7fcd93b456e4382c716f0bcfd579e3f2d02d33d67ded7a79ef26b9bf360f71406bfd99f47ad', 3, 3, 'accessToken', '[]', 0, '2022-06-26 04:40:14', '2022-06-26 04:40:14', '2023-06-26 10:40:14'),
 ('2a0086967cea70693f5c1a3d1cc4edbe6e69dfba78e59a62ba4c68dd82997f8dad7e95c063a7bbf1', 3, 3, 'accessToken', '[]', 0, '2022-05-10 16:21:29', '2022-05-10 16:21:29', '2023-05-10 22:21:29'),
 ('2ed3ca8375f2fa577113b46aa9d9b3fd7ae9b04eba780f91e723c1e1ab901648b0a011cd25a08572', 3, 3, 'accessToken', '[]', 0, '2022-06-26 04:54:27', '2022-06-26 04:54:27', '2023-06-26 10:54:27'),
+('3d96f631f52b979cfda9988a38e7d8e0a664886c8e2386bd8192297a300c9b850df852b875e65697', 3, 3, 'accessToken', '[]', 0, '2022-07-17 15:18:44', '2022-07-17 15:18:44', '2023-07-17 21:18:44'),
 ('45da066dba301aefdf155020a5e38049f86eddaa27295c5bcc48b70ec46ecf1163cf191528d0e877', 3, 3, 'accessToken', '[]', 0, '2022-05-10 16:21:29', '2022-05-10 16:21:29', '2023-05-10 22:21:29'),
 ('48ae9f8f54a71a9ae0563739033260c5ae730804431bbd807c6ee12ad9cc119a5c6a223bc93e5b3d', 3, 3, 'accessToken', '[]', 0, '2022-05-09 18:31:05', '2022-05-09 18:31:05', '2023-05-10 00:31:05'),
+('4c0f8066d298d7f8853041c8a1a3bc921d811e6bcab48be3830111b7adc0e93e2d78fcd9582a646f', 3, 3, 'accessToken', '[]', 0, '2022-07-17 15:18:45', '2022-07-17 15:18:45', '2023-07-17 21:18:45'),
 ('4e1e2ff738fba8a954f1ecc116e846b368e96185d5f8e2398869f9ba74785e42208667c82d94dedf', 3, 3, 'accessToken', '[]', 0, '2022-06-25 16:29:17', '2022-06-25 16:29:17', '2023-06-25 22:29:17'),
+('50698280efc7bdb0e610fa96b1dfc394a6ff7c0d802567141f3fb290306455ba0be6c2bed02e63de', 3, 3, 'accessToken', '[]', 0, '2024-04-22 04:54:37', '2024-04-22 04:54:37', '2025-04-22 10:54:37'),
 ('50a54f84e182d1f386e9e6d11cf5b6c8a1845ded276361cf272ee5096de7e8f2fbb314a18ce08133', 3, 3, 'accessToken', '[]', 0, '2022-06-25 16:35:16', '2022-06-25 16:35:16', '2023-06-25 22:35:16'),
 ('59dd29a406dd820b976d0316ebe30c448802c82597c6061645de60e8b415f8b55e001444624bbfe1', 3, 3, 'accessToken', '[]', 0, '2022-06-26 04:53:48', '2022-06-26 04:53:48', '2023-06-26 10:53:48'),
 ('5adb93a841a0ccc5e5a727ec582e64d3e688756586e001dae78b22c8398b24d5731396120d8afbea', 3, 3, 'accessToken', '[]', 0, '2022-06-26 05:00:47', '2022-06-26 05:00:47', '2023-06-26 11:00:47'),
@@ -347,6 +355,7 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('9108b1939d33660b162c8b76ae2e6433edf4d6652c0325964365dbedb67b572967d35775dd6f9091', 3, 3, 'accessToken', '[]', 0, '2022-06-13 08:55:50', '2022-06-13 08:55:50', '2023-06-13 14:55:50'),
 ('94b6f3f4438ee10deb0d95532006d4a60cdc95f513701662cdeb163600b67d18dc1274f85ff14497', 3, 3, 'accessToken', '[]', 0, '2022-06-26 04:51:46', '2022-06-26 04:51:46', '2023-06-26 10:51:46'),
 ('966e30ea737a0e27a2a71a87b3dec3bd2e6618a1dc94072f03f5fd9a5208e39ae291982d1934263c', 3, 3, 'accessToken', '[]', 0, '2022-06-26 04:40:14', '2022-06-26 04:40:14', '2023-06-26 10:40:14'),
+('97a6e083a1b4807e694981f0f9ffd2058e0bef9f16372ea68918a949b08570cfb794a5e1ea0c7b7e', 3, 3, 'accessToken', '[]', 0, '2024-04-22 04:54:37', '2024-04-22 04:54:37', '2025-04-22 10:54:37'),
 ('a2d141dda6ad54f6815bcf6f29f82d059c590db843ab48df8a04da0d80dc033e9d70dd1ae15b92eb', 3, 3, 'accessToken', '[]', 0, '2022-06-26 05:00:47', '2022-06-26 05:00:47', '2023-06-26 11:00:47'),
 ('a6f7e5b28e04e81a6833f5ca2319a2e11cebad5ec632d48b199502546869e8608e3a6f729af49da6', 3, 3, 'accessToken', '[]', 0, '2022-06-20 07:17:38', '2022-06-20 07:17:38', '2023-06-20 13:17:38'),
 ('b48905d0c95177a05f230e5cce48d3511c511d81c4ccc5e0943f7fb193069d96b99d4ab6bae19938', 3, 3, 'accessToken', '[]', 0, '2022-05-09 18:46:16', '2022-05-09 18:46:16', '2023-05-10 00:46:16'),
@@ -359,6 +368,7 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('ed9e2f05d18cdd40becddfcf265599d264ff57919e2d025e2386082a9a4018333f0a7c98d448861d', 3, 3, 'accessToken', '[]', 0, '2022-06-26 04:52:50', '2022-06-26 04:52:50', '2023-06-26 10:52:50'),
 ('ef84316ab52dacd64aa72ec7ceb0d261c50cb87a97bc911ea5ceb86f4896f3f164fa9245509f2c35', 1, 1, 'accessToken', '[]', 0, '2022-05-09 17:49:37', '2022-05-09 17:49:37', '2023-05-09 23:49:37'),
 ('f0bb22572bf84c100e4c20b99281c618b477766580c75deb937d396ac2a262a44f21f95876de1bd6', 3, 3, 'accessToken', '[]', 0, '2022-06-26 04:58:10', '2022-06-26 04:58:10', '2023-06-26 10:58:10'),
+('fb611219f70e02b53774bebede72c68db5396bef83cd4c8b7fd64131ef8ebe37723a3a4f2b4f5a67', 3, 3, 'accessToken', '[]', 0, '2022-07-18 05:03:13', '2022-07-18 05:03:13', '2023-07-18 11:03:13'),
 ('fe1192e846f840f4a4b03973883fd2b21523bdf394cc09cefaa7eb0e87d840b4112337fad8c259e9', 3, 3, 'accessToken', '[]', 0, '2022-06-26 04:58:10', '2022-06-26 04:58:10', '2023-06-26 10:58:10');
 
 -- --------------------------------------------------------
@@ -368,10 +378,10 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 --
 
 CREATE TABLE `oauth_auth_codes` (
-  `id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(100) NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `client_id` bigint(20) UNSIGNED NOT NULL,
-  `scopes` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `scopes` text DEFAULT NULL,
   `revoked` tinyint(1) NOT NULL,
   `expires_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -385,10 +395,10 @@ CREATE TABLE `oauth_auth_codes` (
 CREATE TABLE `oauth_clients` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `user_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `secret` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `provider` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `redirect` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `secret` varchar(100) DEFAULT NULL,
+  `provider` varchar(255) DEFAULT NULL,
+  `redirect` text NOT NULL,
   `personal_access_client` tinyint(1) NOT NULL,
   `password_client` tinyint(1) NOT NULL,
   `revoked` tinyint(1) NOT NULL,
@@ -434,8 +444,8 @@ INSERT INTO `oauth_personal_access_clients` (`id`, `client_id`, `created_at`, `u
 --
 
 CREATE TABLE `oauth_refresh_tokens` (
-  `id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `access_token_id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(100) NOT NULL,
+  `access_token_id` varchar(100) NOT NULL,
   `revoked` tinyint(1) NOT NULL,
   `expires_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -448,19 +458,19 @@ CREATE TABLE `oauth_refresh_tokens` (
 
 CREATE TABLE `orders` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `orderId` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `orderId` varchar(255) DEFAULT NULL,
   `customer_id` int(11) NOT NULL,
-  `qty` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sub_total` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `vat` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `total` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `pay` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `due` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `payBy` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `memo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `order_date` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `order_month` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `order_year` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `qty` varchar(255) DEFAULT NULL,
+  `sub_total` varchar(255) DEFAULT NULL,
+  `vat` varchar(255) DEFAULT NULL,
+  `total` varchar(255) DEFAULT NULL,
+  `pay` varchar(255) DEFAULT NULL,
+  `due` varchar(255) DEFAULT NULL,
+  `payBy` varchar(255) DEFAULT NULL,
+  `memo` varchar(255) DEFAULT NULL,
+  `order_date` varchar(255) DEFAULT NULL,
+  `order_month` varchar(255) DEFAULT NULL,
+  `order_year` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -470,13 +480,12 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `orderId`, `customer_id`, `qty`, `sub_total`, `vat`, `total`, `pay`, `due`, `payBy`, `memo`, `order_date`, `order_month`, `order_year`, `created_at`, `updated_at`) VALUES
-(19, '10000', 2, '1', '11', NULL, NULL, '11', '0', 'Hand Cash', 'memo2', '21/06/2022', 'June', '2022', NULL, NULL),
-(20, '10001', 1, '2', '23', NULL, NULL, '23', '0', 'Hand Cash', 'memo2', '21/06/2022', 'June', '2022', NULL, NULL),
-(27, '10002', 2, '4', '36', NULL, NULL, '36', '0', 'Hand Cash', 'memo2', '22/06/2022', 'June', '2022', NULL, NULL),
-(28, '10003', 2, '0', '50', NULL, NULL, '50', '0', 'Hand Cash', 'memo2', '24/06/2022', 'June', '2022', NULL, NULL),
-(29, '10004', 1, '2', '23', NULL, NULL, '20', '3', 'Hand Cash', 'memo2', '24/06/2022', 'June', '2022', NULL, NULL),
-(30, '10005', 1, '1', '11', NULL, NULL, '11', '0', 'Hand Cash', 'memo2', '24/06/2022', 'June', '2022', NULL, NULL),
-(31, '10006', 1, '4', '36', NULL, NULL, '36', '0', 'Hand Cash', 'memo2', '25/06/2022', 'June', '2022', NULL, NULL);
+(37, '1', 1, '2', '23', NULL, NULL, '23', '0', 'Cheque', 'memo2', '15/07/2022', 'July', '2022', NULL, NULL),
+(38, '00002', 1, '1', '11', NULL, NULL, '11', '0', 'Cheque', 'memo2', '15/07/2022', 'July', '2022', NULL, NULL),
+(39, '3', 2, '1', '11', NULL, NULL, '11', '0', 'Hand Cash', 'memo2', '15/07/2022', 'July', '2022', NULL, NULL),
+(40, '44441', 2, '2', '23', NULL, NULL, '23', '0', 'Cheque', 'memo2', '15/07/2022', 'July', '2022', NULL, NULL),
+(41, '44442', 2, '7000', '77000', NULL, NULL, '30', '76970', 'Cheque', 'memo2', '17/07/2022', 'July', '2022', NULL, NULL),
+(42, '44443', 3, '0', '5000', NULL, NULL, '5000', '0', 'Cheque', 'memo2', '25/08/2022', 'August', '2022', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -488,10 +497,10 @@ CREATE TABLE `order_details` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `order_id` int(11) DEFAULT NULL,
   `product_id` int(11) DEFAULT NULL,
-  `product_quantity` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `buying_price` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `product_price` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sub_total` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `product_quantity` varchar(255) DEFAULT NULL,
+  `buying_price` varchar(255) DEFAULT NULL,
+  `product_price` varchar(255) DEFAULT NULL,
+  `sub_total` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -508,7 +517,21 @@ INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `product_quantity`,
 (45, 29, 5, '1', '11', '11', '11', NULL, NULL),
 (46, 29, 4, '1', '11', '12', '12', NULL, NULL),
 (47, 30, 5, '1', '11', '11', '11', NULL, NULL),
-(48, 31, 4, '4', '11', '12', '36', NULL, NULL);
+(48, 31, 4, '4', '11', '12', '36', NULL, NULL),
+(49, 32, 5, '1', '11', '11', '11', NULL, NULL),
+(50, 33, 5, '1', '11', '11', '11', NULL, NULL),
+(51, 33, 4, '1', '11', '12', '12', NULL, NULL),
+(52, 34, 5, '400', '11', '11', '4400', NULL, NULL),
+(53, 34, 4, '50', '11', '12', '600', NULL, NULL),
+(54, 35, 4, '5', '11', '12', '60', NULL, NULL),
+(55, 36, 5, '1', '11', '11', '11', NULL, NULL),
+(56, 37, 5, '1', '11', '11', '11', NULL, NULL),
+(57, 37, 4, '1', '11', '12', '12', NULL, NULL),
+(58, 38, 5, '1', '11', '11', '11', NULL, NULL),
+(59, 39, 5, '1', '11', '11', '11', NULL, NULL),
+(60, 40, 5, '1', '11', '11', '11', NULL, NULL),
+(61, 40, 4, '1', '11', '12', '12', NULL, NULL),
+(62, 41, 5, '7000', '11', '11', '77000', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -517,8 +540,8 @@ INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `product_quantity`,
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -530,11 +553,11 @@ CREATE TABLE `password_resets` (
 
 CREATE TABLE `personal_access_tokens` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_type` varchar(255) NOT NULL,
   `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -549,11 +572,11 @@ CREATE TABLE `personal_access_tokens` (
 CREATE TABLE `pos` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `product_id` int(11) NOT NULL,
-  `product_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `product_name` varchar(255) DEFAULT NULL,
   `product_quantity` int(11) DEFAULT NULL,
-  `buying_price` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `product_price` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sub_total` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `buying_price` varchar(255) DEFAULT NULL,
+  `product_price` varchar(255) DEFAULT NULL,
+  `sub_total` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -568,15 +591,15 @@ CREATE TABLE `products` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `category_id` int(11) NOT NULL,
   `supplier_id` int(11) DEFAULT NULL,
-  `product_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `product_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `root` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `buying_price` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `selling_price` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `buying_date` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `expired_date` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `product_quantity` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_name` varchar(255) NOT NULL,
+  `product_code` varchar(255) DEFAULT NULL,
+  `root` varchar(255) DEFAULT NULL,
+  `buying_price` varchar(255) DEFAULT NULL,
+  `selling_price` varchar(255) NOT NULL,
+  `buying_date` varchar(255) DEFAULT NULL,
+  `expired_date` varchar(255) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `product_quantity` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -586,8 +609,8 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `category_id`, `supplier_id`, `product_name`, `product_code`, `root`, `buying_price`, `selling_price`, `buying_date`, `expired_date`, `image`, `product_quantity`, `created_at`, `updated_at`) VALUES
-(4, 19, 1, 'product1', '10000000', 'kkk', '11', '12', '2022-06-01', '2022-06-19', NULL, '0', '2022-06-20 15:58:10', '2022-06-20 16:00:13'),
-(5, 19, 1, 'product3', '10000001', NULL, '11', '11', '2022-06-20', '2022-06-21', NULL, '0', '2022-06-20 16:01:42', '2022-06-20 16:09:23');
+(4, 19, 1, 'product1', '10000000', 'kkk', '11', '12', '2022-06-01', '2022-07-08', NULL, '9942', '2022-06-20 15:58:10', '2022-06-29 08:37:20'),
+(5, 19, 1, 'product3', '10000001', NULL, '11', '11', '2022-06-20', '2022-07-08', NULL, '-6407', '2022-06-20 16:01:42', '2022-06-29 08:37:26');
 
 -- --------------------------------------------------------
 
@@ -598,10 +621,10 @@ INSERT INTO `products` (`id`, `category_id`, `supplier_id`, `product_name`, `pro
 CREATE TABLE `salaries` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `employee_id` int(11) NOT NULL,
-  `amount` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `salary_date` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `salary_month` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `salary_year` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `amount` varchar(255) NOT NULL,
+  `salary_date` varchar(255) NOT NULL,
+  `salary_month` varchar(255) NOT NULL,
+  `salary_year` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -623,12 +646,12 @@ INSERT INTO `salaries` (`id`, `employee_id`, `amount`, `salary_date`, `salary_mo
 
 CREATE TABLE `suppliers` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `shopName` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `photo` varchar(255) DEFAULT NULL,
+  `shopName` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -648,11 +671,11 @@ INSERT INTO `suppliers` (`id`, `name`, `email`, `phone`, `address`, `photo`, `sh
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -828,19 +851,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `custom_order_details`
 --
 ALTER TABLE `custom_order_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `duepayments`
@@ -858,7 +881,7 @@ ALTER TABLE `employees`
 -- AUTO_INCREMENT for table `expenses`
 --
 ALTER TABLE `expenses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `extra`
@@ -900,13 +923,13 @@ ALTER TABLE `oauth_personal_access_clients`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -918,7 +941,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `pos`
 --
 ALTER TABLE `pos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=172;
 
 --
 -- AUTO_INCREMENT for table `products`
