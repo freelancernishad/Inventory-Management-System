@@ -700,6 +700,14 @@ function header3($datas){
     </tr>
 </table>
 
+<table width='100%'>
+    <tr>
+        <td width='25%'></td>
+        <td width='50%' style='color:white;background:#955564;width:20px;margin:0 auto;text-align:center'><h6 >Page - {PAGENO}/{nb}</h6> </td>
+        <td width='25%'></td>
+    </tr>
+</table>
+
 
 
 
@@ -731,7 +739,7 @@ function header3($datas){
             <td style='text-align:center;background:red;color:white;'><h2>বাকী, জমা এবং মোট</h2></td>
         </tr>
     </table>
-    
+
 
     <table width='100%'>";
 
@@ -741,23 +749,23 @@ $html .= " <tr class='tr'>
         <td class='td defaltfont'>" . int_en_to_bn($subtotal) . "</td>
          </tr>
 
-         
+
         <tr class='tr'>
                 <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> কথায় </p></td>
                 <td class='td defaltfont'>$amount</td>
         </tr>
-        
-        
-         
+
+
+
         <tr class='tr'>
                 <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p>  জমা </p></td>
                 <td class='td defaltfont'>" . int_en_to_bn($totalpay) . "</td>
         </tr>
-        
-        
 
-      
-        
+
+
+
+
 
 
         <tr class='tr'>
@@ -890,7 +898,7 @@ function invoice3($datas, $float)
 } */
     </style>
 
-
+    
 
                 <div class='productDetails' >
                     <table class='table' style='border:1px solid #444B8F;width:100%' cellspacing='0'>
@@ -938,26 +946,26 @@ function invoice3($datas, $float)
     };
 
 
-    if($index<=21){
-        $totalrow = 22 - $index;
-    }elseif($index<=42){
-        $totalrow = 43 - $index;
-    }elseif($index<=63){
-        $totalrow = 64 - $index;
-    }elseif($index<=84){
-        $totalrow = 85 - $index;
-    }elseif($index<=105){
-        $totalrow = 106 - $index;
-    }elseif($index<=126){
-        $totalrow = 127 - $index;
-    }elseif($index<=147){
-        $totalrow = 148 - $index;
-    }elseif($index<=168){
-        $totalrow = 169 - $index;
-    }elseif($index<=189){
-        $totalrow = 190 - $index;
+    if($index<=20){
+        $totalrow = 21 - $index;
+    }elseif($index<=40){
+        $totalrow = 41 - $index;
+    }elseif($index<=60){
+        $totalrow = 61 - $index;
+    }elseif($index<=80){
+        $totalrow = 81 - $index;
+    }elseif($index<=100){
+        $totalrow = 101 - $index;
+    }elseif($index<=120){
+        $totalrow = 121 - $index;
+    }elseif($index<=140){
+        $totalrow = 141 - $index;
+    }elseif($index<=160){
+        $totalrow = 161 - $index;
+    }elseif($index<=180){
+        $totalrow = 181 - $index;
     }else{
-        $totalrow = 211 - $index;
+        $totalrow = 201 - $index;
     }
 
 

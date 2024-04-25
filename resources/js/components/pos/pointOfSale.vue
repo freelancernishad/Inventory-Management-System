@@ -40,7 +40,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="(product,iii) in cartProduct" :key="product.id">
+                                        <tr v-for="(product,iii) in cartProduct" :key="product.id" :style="[Number(product.product_price) < Number(product.buying_price) ? { background: '#ff6a00', color: 'white' } : {}]">
                                             <td>{{ product.product_name }}</td>
                                             <td>
                                                 <div
@@ -261,7 +261,7 @@
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-lg-3 col-md-6 col-sm-6 col-6 btn btn-sm" v-for="product in products.data"
+                                        <div class="col-lg-3 col-md-6 col-sm-6 col-6 btn btn-sm"  v-for="product in products.data"
                                             :key="product.id"  @click.prevent="addToCart(product.id)">
                                             <div class="card" style="
                                                     align-items: center;
@@ -269,7 +269,7 @@
                                                 ">
 
                                                     <!-- <img :src="product.image" class="card-img-top" id="image_size" alt="..." /> -->
-                                                    <div class="card-body">
+                                                    <div class="card-body" :style="[Number(product.selling_price) < Number(product.buying_price) ? { background: '#ff6a00', color: 'white' } : {}]">
                                                         <h5 class="card-title text-center">
                                                             {{
                                                                     product.product_name

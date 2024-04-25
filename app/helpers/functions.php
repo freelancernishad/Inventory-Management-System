@@ -47,6 +47,7 @@ function PdfMakerwithHeader($pageSize='A4',$html,$header,$footer,$filename,$Wate
 
     $mpdf->SetHTMLHeader($header);
     $mpdf->SetHTMLFooter($footer);
+    
 
     // $mpdf->SetHTMLHeader('Document Title|Center Text|{PAGENO}');
     $mpdf->defaultheaderfontsize = 10;

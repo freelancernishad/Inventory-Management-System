@@ -96,6 +96,7 @@ Route::get('/products/search',[ProductController::class,'search']);
 Route::get('/products/stockcheck',[ProductController::class,'stockCheck']);
 Route::get('/products/expired',[ProductController::class,'expired']);
 Route::get('/products/code',[ProductController::class,'productCodeGen']);
+Route::post('/update/product_quantity',[ProductController::class,'update_product_quantity']);
 
 Route::get('/product_code/{product_code}',  [ProductController::class,'product_code']);
 Route::get('/duecuatomer',  [CustomerController::class,'DueCuatomer']);

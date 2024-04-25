@@ -10521,6 +10521,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   created: function created() {
     if (!User.loggedIn()) {
@@ -10531,14 +10553,20 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      form: {
+        id: '',
+        product_quantity: 1
+      },
       products: [],
+      product: [],
       allitems: {},
       searchTerm: "",
       barcodeValue: 'test',
       modalShow: false,
       barcodeid: '',
       timeout: null,
-      todaydate: null
+      todaydate: null,
+      loading: false
     };
   },
   computed: {
@@ -10552,6 +10580,31 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    addProductSubmit: function addProductSubmit() {
+      var _this2 = this;
+
+      this.loading = true;
+      axios.post('/api/update/product_quantity', this.form).then(function (_ref) {
+        var data = _ref.data;
+        _this2.modalShow = false;
+        _this2.loading = false;
+
+        _this2.allProduct();
+      })["catch"]();
+    },
+    addMoreProduct: function addMoreProduct(product) {
+      var _this3 = this;
+
+      this.product = product;
+      this.form.id = product.id;
+      console.log(product);
+      this.modalShow = true;
+      setTimeout(function () {
+        var input = _this3.$refs.product_quantity;
+        input.focus();
+        input.select();
+      }, 0);
+    },
     print: function print(id) {
       var prtContent = document.getElementById(id);
       var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
@@ -10565,7 +10618,7 @@ __webpack_require__.r(__webpack_exports__);
       this.modalShow = true;
     },
     allProduct: function allProduct(page) {
-      var _this2 = this;
+      var _this4 = this;
 
       this.todaydate = User.dateformat()[0];
 
@@ -10573,14 +10626,14 @@ __webpack_require__.r(__webpack_exports__);
         page = 1;
       }
 
-      axios.get('/api/product?page=' + page).then(function (_ref) {
-        var data = _ref.data;
-        _this2.products = data;
-        _this2.allitems = data; //   console.log(data)
+      axios.get('/api/product?page=' + page).then(function (_ref2) {
+        var data = _ref2.data;
+        _this4.products = data;
+        _this4.allitems = data; //   console.log(data)
       })["catch"]();
     },
     searchData: function searchData(page) {
-      var _this3 = this;
+      var _this5 = this;
 
       // clear timeout variable
       clearTimeout(this.timeout);
@@ -10589,15 +10642,15 @@ __webpack_require__.r(__webpack_exports__);
           page = 1;
         }
 
-        axios.get("/api/products/search?filter[product_name]=".concat(_this3.searchTerm)).then(function (_ref2) {
-          var data = _ref2.data;
-          _this3.products = data;
-          _this3.allitems = data; //  console.log(this.products)
+        axios.get("/api/products/search?filter[product_name]=".concat(_this5.searchTerm)).then(function (_ref3) {
+          var data = _ref3.data;
+          _this5.products = data;
+          _this5.allitems = data; //  console.log(this.products)
         })["catch"]();
       }, 300);
     },
     deleteProduct: function deleteProduct(id) {
-      var _this4 = this;
+      var _this6 = this;
 
       Swal.fire({
         title: 'Are you sure?',
@@ -10612,13 +10665,13 @@ __webpack_require__.r(__webpack_exports__);
           axios["delete"]('/api/product/' + id).then(function () {
             Notification.customdelete('Product Deleted');
 
-            _this4.allProduct();
+            _this6.allProduct();
 
-            _this4.products = _this4.products.filter(function (product) {
+            _this6.products = _this6.products.filter(function (product) {
               return product.id != id;
             });
           })["catch"](function () {
-            _this4.$router.push({
+            _this6.$router.push({
               name: 'product'
             });
           });
@@ -97212,188 +97265,205 @@ var render = function () {
                           "tbody",
                           [
                             _vm._l(_vm.cartProduct, function (product, iii) {
-                              return _c("tr", { key: product.id }, [
-                                _c("td", [
-                                  _vm._v(_vm._s(product.product_name)),
-                                ]),
-                                _vm._v(" "),
-                                _c("td", [
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "input-group bootstrap-touchspin bootstrap-touchspin-injected",
-                                    },
-                                    [
-                                      _c(
-                                        "span",
-                                        {
-                                          staticClass:
-                                            "input-group-btn input-group-prepend",
-                                        },
-                                        [
-                                          product.product_quantity >= 2
-                                            ? _c(
-                                                "button",
-                                                {
-                                                  staticClass:
-                                                    "btn btn-primary btn-sm bootstrap-touchspin-down",
-                                                  attrs: { type: "button" },
-                                                  on: {
-                                                    click: function ($event) {
-                                                      $event.preventDefault()
-                                                      return _vm.decrement(
-                                                        product.id
-                                                      )
-                                                    },
-                                                  },
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                                                            -\n                                                        "
-                                                  ),
-                                                ]
-                                              )
-                                            : _c(
-                                                "button",
-                                                {
-                                                  staticClass:
-                                                    "btn btn-primary btn-sm bootstrap-touchspin-down",
-                                                  attrs: {
-                                                    type: "button",
-                                                    disabled: "",
-                                                  },
-                                                  on: {
-                                                    click: function ($event) {
-                                                      $event.preventDefault()
-                                                      return _vm.decrement(
-                                                        product.id
-                                                      )
-                                                    },
-                                                  },
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                                                            -\n                                                        "
-                                                  ),
-                                                ]
-                                              ),
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c("input", {
-                                        staticClass: "form-control",
-                                        staticStyle: { width: "28px" },
-                                        attrs: {
-                                          type: "text",
-                                          id: "qty" + iii,
-                                        },
-                                        domProps: {
-                                          value: product.product_quantity,
-                                        },
-                                        on: {
-                                          change: function ($event) {
-                                            return _vm.qtychange(
-                                              iii,
-                                              product.id
-                                            )
+                              return _c(
+                                "tr",
+                                {
+                                  key: product.id,
+                                  style: [
+                                    Number(product.product_price) <
+                                    Number(product.buying_price)
+                                      ? {
+                                          background: "#ff6a00",
+                                          color: "white",
+                                        }
+                                      : {},
+                                  ],
+                                },
+                                [
+                                  _c("td", [
+                                    _vm._v(_vm._s(product.product_name)),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "input-group bootstrap-touchspin bootstrap-touchspin-injected",
+                                      },
+                                      [
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass:
+                                              "input-group-btn input-group-prepend",
                                           },
-                                        },
-                                      }),
-                                      _vm._v(" "),
-                                      _c(
-                                        "span",
-                                        {
-                                          staticClass:
-                                            "input-group-btn input-group-append",
-                                        },
-                                        [
-                                          _c(
-                                            "button",
-                                            {
-                                              staticClass:
-                                                "btn btn-primary btn-sm bootstrap-touchspin-up",
-                                              attrs: { type: "button" },
-                                              on: {
-                                                click: function ($event) {
-                                                  $event.preventDefault()
-                                                  return _vm.increment(
-                                                    product.id
-                                                  )
+                                          [
+                                            product.product_quantity >= 2
+                                              ? _c(
+                                                  "button",
+                                                  {
+                                                    staticClass:
+                                                      "btn btn-primary btn-sm bootstrap-touchspin-down",
+                                                    attrs: { type: "button" },
+                                                    on: {
+                                                      click: function ($event) {
+                                                        $event.preventDefault()
+                                                        return _vm.decrement(
+                                                          product.id
+                                                        )
+                                                      },
+                                                    },
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                                            -\n                                                        "
+                                                    ),
+                                                  ]
+                                                )
+                                              : _c(
+                                                  "button",
+                                                  {
+                                                    staticClass:
+                                                      "btn btn-primary btn-sm bootstrap-touchspin-down",
+                                                    attrs: {
+                                                      type: "button",
+                                                      disabled: "",
+                                                    },
+                                                    on: {
+                                                      click: function ($event) {
+                                                        $event.preventDefault()
+                                                        return _vm.decrement(
+                                                          product.id
+                                                        )
+                                                      },
+                                                    },
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                                            -\n                                                        "
+                                                    ),
+                                                  ]
+                                                ),
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          staticClass: "form-control",
+                                          staticStyle: { width: "28px" },
+                                          attrs: {
+                                            type: "text",
+                                            id: "qty" + iii,
+                                          },
+                                          domProps: {
+                                            value: product.product_quantity,
+                                          },
+                                          on: {
+                                            change: function ($event) {
+                                              return _vm.qtychange(
+                                                iii,
+                                                product.id
+                                              )
+                                            },
+                                          },
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass:
+                                              "input-group-btn input-group-append",
+                                          },
+                                          [
+                                            _c(
+                                              "button",
+                                              {
+                                                staticClass:
+                                                  "btn btn-primary btn-sm bootstrap-touchspin-up",
+                                                attrs: { type: "button" },
+                                                on: {
+                                                  click: function ($event) {
+                                                    $event.preventDefault()
+                                                    return _vm.increment(
+                                                      product.id
+                                                    )
+                                                  },
                                                 },
                                               },
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                                                            +\n                                                        "
-                                              ),
-                                            ]
-                                          ),
-                                        ]
-                                      ),
-                                    ]
-                                  ),
-                                ]),
-                                _vm._v(" "),
-                                _c("td", [
-                                  _vm._v(_vm._s(product.buying_price) + " "),
-                                ]),
-                                _vm._v(" "),
-                                _c("td", [
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
+                                              [
+                                                _vm._v(
+                                                  "\n                                                            +\n                                                        "
+                                                ),
+                                              ]
+                                            ),
+                                          ]
+                                        ),
+                                      ]
+                                    ),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _vm._v(_vm._s(product.buying_price) + " "),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: product.product_price,
+                                          expression:
+                                            "\n                                                    product.product_price\n                                                ",
+                                        },
+                                      ],
+                                      staticClass: "form-control",
+                                      attrs: { type: "number" },
+                                      domProps: {
                                         value: product.product_price,
-                                        expression:
-                                          "\n                                                    product.product_price\n                                                ",
                                       },
-                                    ],
-                                    staticClass: "form-control",
-                                    attrs: { type: "number" },
-                                    domProps: { value: product.product_price },
-                                    on: {
-                                      change: function ($event) {
-                                        return _vm.priceChange(
-                                          product.id,
-                                          product.product_price
-                                        )
-                                      },
-                                      input: function ($event) {
-                                        if ($event.target.composing) {
-                                          return
-                                        }
-                                        _vm.$set(
-                                          product,
-                                          "product_price",
-                                          $event.target.value
-                                        )
-                                      },
-                                    },
-                                  }),
-                                ]),
-                                _vm._v(" "),
-                                _c("td", [
-                                  _vm._v(_vm._s(product.sub_total) + "৳"),
-                                ]),
-                                _vm._v(" "),
-                                _c("td", [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "btn btn-sm btn-danger",
-                                      staticStyle: { color: "white" },
                                       on: {
-                                        click: function ($event) {
-                                          return _vm.deleteItem(product.id)
+                                        change: function ($event) {
+                                          return _vm.priceChange(
+                                            product.id,
+                                            product.product_price
+                                          )
+                                        },
+                                        input: function ($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            product,
+                                            "product_price",
+                                            $event.target.value
+                                          )
                                         },
                                       },
-                                    },
-                                    [_vm._v("X")]
-                                  ),
-                                ]),
-                              ])
+                                    }),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _vm._v(_vm._s(product.sub_total) + "৳"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "btn btn-sm btn-danger",
+                                        staticStyle: { color: "white" },
+                                        on: {
+                                          click: function ($event) {
+                                            return _vm.deleteItem(product.id)
+                                          },
+                                        },
+                                      },
+                                      [_vm._v("X")]
+                                    ),
+                                  ]),
+                                ]
+                              )
                             }),
                             _vm._v(" "),
                             _vm._l(_vm.Invoices, function (Invoice, index) {
@@ -98110,69 +98180,86 @@ var render = function () {
                                       },
                                     },
                                     [
-                                      _c("div", { staticClass: "card-body" }, [
-                                        _c(
-                                          "h5",
-                                          {
-                                            staticClass:
-                                              "card-title text-center",
-                                          },
-                                          [
-                                            _vm._v(
-                                              "\n                                                            " +
-                                                _vm._s(product.product_name) +
-                                                "\n                                                            -\n                                                            " +
-                                                _vm._s(product.selling_price) +
-                                                " "
-                                            ),
-                                            _c(
-                                              "span",
-                                              { staticClass: "money" },
-                                              [_vm._v("৳")]
-                                            ),
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        product.product_quantity >= 1
-                                          ? _c("td", [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass: "card-body",
+                                          style: [
+                                            Number(product.selling_price) <
+                                            Number(product.buying_price)
+                                              ? {
+                                                  background: "#ff6a00",
+                                                  color: "white",
+                                                }
+                                              : {},
+                                          ],
+                                        },
+                                        [
+                                          _c(
+                                            "h5",
+                                            {
+                                              staticClass:
+                                                "card-title text-center",
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                                            " +
+                                                  _vm._s(product.product_name) +
+                                                  "\n                                                            -\n                                                            " +
+                                                  _vm._s(
+                                                    product.selling_price
+                                                  ) +
+                                                  " "
+                                              ),
                                               _c(
                                                 "span",
-                                                {
-                                                  staticClass:
-                                                    "badge badge-success",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "Available\n                                                                "
-                                                  ),
-                                                  _c(
-                                                    "span",
-                                                    {
-                                                      staticClass:
-                                                        "badge badge-light",
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        _vm._s(
-                                                          product.product_quantity
-                                                        )
-                                                      ),
-                                                    ]
-                                                  ),
-                                                ]
+                                                { staticClass: "money" },
+                                                [_vm._v("৳")]
                                               ),
-                                            ])
-                                          : _c("td", [
-                                              _c(
-                                                "span",
-                                                {
-                                                  staticClass:
-                                                    "badge badge-danger",
-                                                },
-                                                [_vm._v("Stock Out")]
-                                              ),
-                                            ]),
-                                      ]),
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          product.product_quantity >= 1
+                                            ? _c("td", [
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "badge badge-success",
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "Available\n                                                                "
+                                                    ),
+                                                    _c(
+                                                      "span",
+                                                      {
+                                                        staticClass:
+                                                          "badge badge-light",
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            product.product_quantity
+                                                          )
+                                                        ),
+                                                      ]
+                                                    ),
+                                                  ]
+                                                ),
+                                              ])
+                                            : _c("td", [
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "badge badge-danger",
+                                                  },
+                                                  [_vm._v("Stock Out")]
+                                                ),
+                                              ]),
+                                        ]
+                                      ),
                                     ]
                                   ),
                                 ]
@@ -99627,200 +99714,305 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row justify-content-center" }, [
-    _c("div", { staticClass: "col-xl-12 col-lg-12 col-md-12" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-lg-12 mb-4" }, [
-          _c("div", { staticClass: "card" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "card-header py-3 d-flex flex-row align-items-center justify-content-between",
+  return _c(
+    "div",
+    { staticClass: "row justify-content-center" },
+    [
+      _c("div", { staticClass: "col-xl-12 col-lg-12 col-md-12" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-lg-12 mb-4" }, [
+            _c("div", { staticClass: "card" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "card-header py-3 d-flex flex-row align-items-center justify-content-between",
+                },
+                [
+                  _c(
+                    "h2",
+                    { staticClass: "m-0 font-weight-bold text-primary" },
+                    [_vm._v("Product List")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.searchTerm,
+                        expression: "searchTerm",
+                      },
+                    ],
+                    staticClass: "form-control",
+                    staticStyle: { width: "300px" },
+                    attrs: {
+                      type: "text",
+                      placeholder: "Search By Product Name Or Code",
+                    },
+                    domProps: { value: _vm.searchTerm },
+                    on: {
+                      input: [
+                        function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.searchTerm = $event.target.value
+                        },
+                        _vm.searchData,
+                      ],
+                    },
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "btn btn-primary float-right",
+                      staticStyle: {
+                        "margin-top": "6px",
+                        "margin-right": "6px",
+                      },
+                      attrs: { to: "/store-product" },
+                    },
+                    [_vm._v("Add Product")]
+                  ),
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "table-responsive" }, [
+                _c(
+                  "table",
+                  { staticClass: "table align-items-center table-flush" },
+                  [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      _vm._l(_vm.products.data, function (product) {
+                        return _c(
+                          "tr",
+                          {
+                            key: product.id,
+                            style: [
+                              Number(product.selling_price) <
+                              Number(product.buying_price)
+                                ? { background: "#ff6a00", color: "white" }
+                                : {},
+                            ],
+                          },
+                          [
+                            _c("td", [_vm._v(_vm._s(product.product_name))]),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              [
+                                _c(
+                                  "barcode",
+                                  {
+                                    staticStyle: {
+                                      width: "10px",
+                                      height: "10px",
+                                      display: "none",
+                                    },
+                                    attrs: {
+                                      id: product.id,
+                                      value: product.product_code,
+                                    },
+                                  },
+                                  [_vm._v("Show this if the rendering fails.")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "b-button",
+                                  {
+                                    staticClass: "btn btn-success btn-xs",
+                                    attrs: { color: "green darken-1" },
+                                    on: {
+                                      click: function ($event) {
+                                        return _vm.print(product.id)
+                                      },
+                                    },
+                                  },
+                                  [_c("i", { staticClass: "fas fa-download" })]
+                                ),
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(product.product_code))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(product.category_name))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(product.root))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(product.buying_price))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(product.selling_price))]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(_vm._s(product.product_quantity) + " "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-info",
+                                  on: {
+                                    click: function ($event) {
+                                      return _vm.addMoreProduct(product)
+                                    },
+                                  },
+                                },
+                                [_vm._v("+")]
+                              ),
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(product.buying_date))]),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    staticClass: "btn btn-sm btn-primary",
+                                    attrs: {
+                                      to: {
+                                        name: "editProduct",
+                                        params: { id: product.id },
+                                      },
+                                    },
+                                  },
+                                  [_vm._v("Edit")]
+                                ),
+                              ],
+                              1
+                            ),
+                          ]
+                        )
+                      }),
+                      0
+                    ),
+                  ]
+                ),
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "card-footer" },
+                [
+                  _c("pagination", {
+                    attrs: {
+                      data: _vm.allitems,
+                      showDisabled: true,
+                      icon: "chevron",
+                    },
+                    on: { "change-page": _vm.allProduct },
+                  }),
+                ],
+                1
+              ),
+            ]),
+          ]),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          attrs: { "hide-footer": "" },
+          model: {
+            value: _vm.modalShow,
+            callback: function ($$v) {
+              _vm.modalShow = $$v
+            },
+            expression: "modalShow",
+          },
+        },
+        [
+          _c("h3", { staticStyle: { "text-align": "center" } }, [
+            _vm._v(
+              "বর্তমান এ " +
+                _vm._s(_vm.product.product_name) +
+                " আছে " +
+                _vm._s(_vm.product.product_quantity) +
+                " টি। আরো " +
+                _vm._s(_vm.product.product_name) +
+                " টি যোগ করতে চান? তাহলে যতটি " +
+                _vm._s(_vm.product.product_name) +
+                " যোগ করতে চান তা নিচের বক্স এ বসিয়ে যোগ করুন বাটন এ চাপ দেন।"
+            ),
+          ]),
+          _vm._v(" "),
+          _c(
+            "form",
+            {
+              on: {
+                submit: function ($event) {
+                  $event.preventDefault()
+                  return _vm.addProductSubmit.apply(null, arguments)
+                },
               },
-              [
-                _c("h2", { staticClass: "m-0 font-weight-bold text-primary" }, [
-                  _vm._v("Product List"),
-                ]),
+            },
+            [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "" } }, [_vm._v("Quantity")]),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.searchTerm,
-                      expression: "searchTerm",
+                      value: _vm.form.product_quantity,
+                      expression: "form.product_quantity",
                     },
                   ],
+                  ref: "product_quantity",
                   staticClass: "form-control",
-                  staticStyle: { width: "300px" },
-                  attrs: {
-                    type: "text",
-                    placeholder: "Search By Product Name Or Code",
-                  },
-                  domProps: { value: _vm.searchTerm },
+                  attrs: { type: "tel", min: "1" },
+                  domProps: { value: _vm.form.product_quantity },
                   on: {
-                    input: [
-                      function ($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.searchTerm = $event.target.value
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.form,
+                        "product_quantity",
+                        $event.target.value
+                      )
+                    },
+                  },
+                }),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _vm.loading
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success",
+                        attrs: { type: "button" },
                       },
-                      _vm.searchData,
-                    ],
-                  },
-                }),
-                _vm._v(" "),
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "btn btn-primary float-right",
-                    staticStyle: { "margin-top": "6px", "margin-right": "6px" },
-                    attrs: { to: "/store-product" },
-                  },
-                  [_vm._v("Add Product")]
-                ),
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _vm._m(0),
-            _vm._v(" "),
-            _c("div", { staticClass: "table-responsive" }, [
-              _c(
-                "table",
-                { staticClass: "table align-items-center table-flush" },
-                [
-                  _vm._m(1),
-                  _vm._v(" "),
-                  _c(
-                    "tbody",
-                    _vm._l(_vm.products.data, function (product) {
-                      return _c("tr", { key: product.id }, [
-                        _c("td", [_vm._v(_vm._s(product.product_name))]),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          [
-                            _c(
-                              "barcode",
-                              {
-                                staticStyle: {
-                                  width: "10px",
-                                  height: "10px",
-                                  display: "none",
-                                },
-                                attrs: {
-                                  id: product.id,
-                                  value: product.product_code,
-                                },
-                              },
-                              [_vm._v("Show this if the rendering fails.")]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "b-button",
-                              {
-                                staticClass: "btn btn-success btn-xs",
-                                attrs: { color: "green darken-1" },
-                                on: {
-                                  click: function ($event) {
-                                    return _vm.print(product.id)
-                                  },
-                                },
-                              },
-                              [_c("i", { staticClass: "fas fa-download" })]
-                            ),
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(product.product_code))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(product.category_name))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(product.root))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(product.buying_price))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(product.selling_price))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(product.product_quantity))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(product.buying_date))]),
-                        _vm._v(" "),
-                        product.expired_date > _vm.todaydate
-                          ? _c(
-                              "td",
-                              {
-                                staticStyle: {
-                                  background: "green",
-                                  color: "white",
-                                  "text-align": "center",
-                                },
-                              },
-                              [_vm._v(" " + _vm._s(product.expired_date))]
-                            )
-                          : _c(
-                              "td",
-                              {
-                                staticStyle: {
-                                  background: "red",
-                                  color: "white",
-                                  "text-align": "center",
-                                },
-                              },
-                              [_vm._v(_vm._s(product.expired_date))]
-                            ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          [
-                            _c(
-                              "router-link",
-                              {
-                                staticClass: "btn btn-sm btn-primary",
-                                attrs: {
-                                  to: {
-                                    name: "editProduct",
-                                    params: { id: product.id },
-                                  },
-                                },
-                              },
-                              [_vm._v("Edit")]
-                            ),
-                          ],
-                          1
-                        ),
-                      ])
-                    }),
-                    0
-                  ),
-                ]
-              ),
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "card-footer" },
-              [
-                _c("pagination", {
-                  attrs: {
-                    data: _vm.allitems,
-                    showDisabled: true,
-                    icon: "chevron",
-                  },
-                  on: { "change-page": _vm.allProduct },
-                }),
-              ],
-              1
-            ),
-          ]),
-        ]),
-      ]),
-    ]),
-  ])
+                      [_vm._v("অপেক্ষা করুন")]
+                    )
+                  : _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success",
+                        attrs: { type: "submit" },
+                      },
+                      [_vm._v("যোগ করুন")]
+                    ),
+              ]),
+            ]
+          ),
+        ]
+      ),
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function () {
@@ -99871,8 +100063,6 @@ var staticRenderFns = [
         _c("th", { attrs: { width: "5%" } }, [_vm._v("Quantity")]),
         _vm._v(" "),
         _c("th", { attrs: { width: "10%" } }, [_vm._v("Buying Date")]),
-        _vm._v(" "),
-        _c("th", { attrs: { width: "10%" } }, [_vm._v("Expired")]),
         _vm._v(" "),
         _c("th", { attrs: { width: "15%" } }, [_vm._v("Action")]),
       ]),

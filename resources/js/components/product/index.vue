@@ -39,7 +39,7 @@
 										<th width="5%">Sell</th>
 										<th width="5%">Quantity</th>
 										<th width="10%">Buying Date</th>
-										<th width="10%">Expired</th>
+										<!-- <th width="10%">Expired</th> -->
 										<th width="15%">Action</th>
 									</tr>
 								</thead>
@@ -48,7 +48,7 @@
 
 <!-- v-for="lang in paginated('languages')" -->
 
-									<tr v-for="product in products.data" :key="product.id">
+<tr v-for="product in products.data" :key="product.id" :style="[Number(product.selling_price) < Number(product.buying_price) ? { background: '#ff6a00', color: 'white' } : {}]">
 										<td>{{ product.product_name }}</td>
 										<!-- <td><img :src="product.image" id="img_size"></td> -->
 										<td>
@@ -72,10 +72,13 @@
 										<td>{{ product.root }}</td>
 										<td>{{ product.buying_price }}</td>
 										<td>{{ product.selling_price }}</td>
-										<td>{{ product.product_quantity }}</td>
+										<td>{{ product.product_quantity }} <button class='btn btn-info' @click="addMoreProduct(product)">+</button> </td>
 										<td>{{ product.buying_date }}</td>
-										<td style="background: green;color: white;text-align: center;" v-if="product.expired_date>todaydate"> {{ product.expired_date }}</td>
-										<td style="background: red;color: white;text-align: center;" v-else>{{ product.expired_date }}</td>
+
+										<!-- <td style="background: green;color: white;text-align: center;" v-if="product.expired_date>todaydate"> {{ product.expired_date }}</td>
+										<td style="background: red;color: white;text-align: center;" v-else>{{ product.expired_date }}</td> -->
+
+
 										<td>
 											<router-link :to="{name: 'editProduct', params: {id: product.id}}" class="btn btn-sm btn-primary">Edit</router-link>
 											<!-- <a @click="deleteProduct(product.id)" class="btn btn-sm btn-danger" style="color: white">Delete</a> -->
@@ -115,6 +118,25 @@
 </paginate> -->
 
 
+    <b-modal hide-footer  v-model="modalShow">
+        <h3 style='text-align:center'>বর্তমান এ {{ product.product_name }} আছে {{ product.product_quantity }} টি। আরো {{ product.product_name }} টি যোগ করতে চান? তাহলে যতটি {{ product.product_name }} যোগ করতে চান তা নিচের বক্স এ বসিয়ে যোগ করুন বাটন এ চাপ দেন।</h3>
+
+        <form @submit.prevent='addProductSubmit' >
+
+
+           <div class="form-group">
+			<label for="">Quantity</label>
+			<input type="tel" class="form-control" min="1" ref="product_quantity" v-model="form.product_quantity">
+		   </div>
+		   <div class="form-group">
+			<button type="button" v-if="loading" class='btn btn-success'>অপেক্ষা করুন</button>
+			<button type="submit" v-else class='btn btn-success'>যোগ করুন</button>
+		   </div>
+
+        </form>
+
+    </b-modal>
+
     <!-- <b-modal  v-model="modalShow"><barcode id="print" :value="barcodeid">Show this if the rendering fails.</barcode>
 
      <b-button color="green darken-1"  @click="print()">Print</b-button>
@@ -134,7 +156,12 @@ export default {
 
 	data () {
 		return {
+			form:{
+				id:'',
+				product_quantity:1,
+			},
 			products: [],
+			product: [],
 			allitems: {},
 			searchTerm:"",
             barcodeValue: 'test',
@@ -142,6 +169,7 @@ export default {
             barcodeid: '',
              timeout: null,
              todaydate: null,
+             loading:false,
 
 		}
 	},
@@ -154,6 +182,27 @@ export default {
 		}
 	},
 	methods: {
+		addProductSubmit(){
+            this.loading=true
+			axios.post('/api/update/product_quantity',this.form)
+			.then(({data}) => {
+                this.modalShow = false
+                this.loading=false
+                this.allProduct();
+            })
+			.catch()
+		},
+        addMoreProduct(product){
+            this.product = product;
+            this.form.id = product.id;
+            console.log(product);
+            this.modalShow = true;
+			setTimeout(() => {
+				const input = this.$refs.product_quantity;
+				input.focus();
+				input.select();
+				}, 0);
+        },
 
     print(id) {
       var prtContent = document.getElementById(id);

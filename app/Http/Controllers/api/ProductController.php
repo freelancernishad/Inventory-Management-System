@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Exports\ProductsExport;
+use App\Models\AddProductQuantity;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
@@ -355,6 +356,27 @@ class ProductController extends Controller
     }
 
 
+    function update_product_quantity(Request $request) {
+
+
+        $id = $request->id;
+        $product_quantity = $request->product_quantity;
+         $product = Product::find($id);
+
+         $product_quantity_update = $product->product_quantity+$product_quantity;
+                $addProductQuantity = new AddProductQuantity([
+                    'product_id' => $id,
+                    'date' => date('Y-m-d H:i:s'),
+                    'quantity' => $product_quantity,
+                    'pre_quantity' => $product->product_quantity,
+                    'current_quantity' => $product_quantity_update,
+                ]);
+                // Save the AddProductQuantity instance
+                $addProductQuantity->save();
+                $product->update(['product_quantity'=>$product_quantity_update]);
+                return $product;
+        
+    }
 
 
 
