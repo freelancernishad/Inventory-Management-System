@@ -728,7 +728,9 @@ function header3($datas){
      $nowCustomerDue = $datas['nowCustomerDue'];
      $todayPay = $datas['todayPay'];
 
-     $subtotal = $orders->sub_total;
+     $subtotal = $orders->total;
+     $sub_total = $orders->sub_total;
+     $discount = $orders->discount;
      $totalpay = $orders->pay;
      $totaldue = $orders->due;
 
@@ -744,10 +746,26 @@ function header3($datas){
     <table width='100%'>";
 
 
-$html .= " <tr class='tr'>
-        <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> মোট </p></td>
-        <td class='td defaltfont'>" . int_en_to_bn($subtotal) . "</td>
-         </tr>
+$html .= "
+
+
+        <tr class='tr'>
+            <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> মোট দাম </p></td>
+            <td class='td defaltfont'>" . int_en_to_bn($subtotal) . "</td>
+        </tr>
+
+
+        <tr class='tr'>
+            <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> ডিসকাউন্ট </p></td>
+            <td class='td defaltfont'>" . int_en_to_bn($discount) . "</td>
+        </tr>
+
+
+
+        <tr class='tr'>
+            <td colspan='4' class='defalttext td defaltfont'style='text-align:right;    padding: 0 13px;'><p> মোট </p></td>
+            <td class='td defaltfont'>" . int_en_to_bn($sub_total) . "</td>
+        </tr>
 
 
         <tr class='tr'>
@@ -898,7 +916,7 @@ function invoice3($datas, $float)
 } */
     </style>
 
-    
+
 
                 <div class='productDetails' >
                     <table class='table' style='border:1px solid #444B8F;width:100%' cellspacing='0'>
@@ -944,29 +962,37 @@ function invoice3($datas, $float)
         $index++;
         // $subtotal += $productCustom->sub_total;
     };
-
-
-    if($index<=20){
-        $totalrow = 21 - $index;
-    }elseif($index<=40){
-        $totalrow = 41 - $index;
-    }elseif($index<=60){
-        $totalrow = 61 - $index;
-    }elseif($index<=80){
-        $totalrow = 81 - $index;
-    }elseif($index<=100){
-        $totalrow = 101 - $index;
-    }elseif($index<=120){
-        $totalrow = 121 - $index;
-    }elseif($index<=140){
-        $totalrow = 141 - $index;
-    }elseif($index<=160){
-        $totalrow = 161 - $index;
-    }elseif($index<=180){
-        $totalrow = 181 - $index;
-    }else{
-        $totalrow = 201 - $index;
+$totalrow = 0;
+    for ($i = 0; $i <= 900; $i += 18) {
+        if ($index <= $i + 18) {
+            $totalrow = ($i + 1) + 18 - $index;
+            break;
+        }
     }
+
+
+
+    // if($index<=18){
+    //     $totalrow = 19 - $index;
+    // }elseif($index<=36){
+    //     $totalrow = 37 - $index;
+    // }elseif($index<=54){
+    //     $totalrow = 55 - $index;
+    // }elseif($index<=72){
+    //     $totalrow = 73 - $index;
+    // }elseif($index<=90){
+    //     $totalrow = 91 - $index;
+    // }elseif($index<=108){
+    //     $totalrow = 109 - $index;
+    // }elseif($index<=126){
+    //     $totalrow = 127 - $index;
+    // }elseif($index<=144){
+    //     $totalrow = 145 - $index;
+    // }elseif($index<=162){
+    //     $totalrow = 163 - $index;
+    // }else{
+    //     $totalrow = 181 - $index;
+    // }
 
 
     for ($i = 0; $i < $totalrow; $i++) {
