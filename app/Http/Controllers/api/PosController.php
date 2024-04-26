@@ -49,8 +49,9 @@ class PosController extends Controller
         $data['customer_id'] = $request->customer_id;
         $data['qty'] = $request->qty;
         $data['sub_total'] = $request->sub_total;
+        $data['discount'] = $request->discount;
         $data['vat'] = $request->vat;
-        $data['total'] = $request->total;
+        $data['total'] = $request->sub_total+$request->discount;
         $data['pay'] = $request->pay;
         $data['due'] = $request->due;
         $data['payBy'] = $request->payBy;

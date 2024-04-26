@@ -83,14 +83,7 @@
                                             </td>
                                              <td>{{  product.buying_price }} </td>
                                             <td>
-                                                <input type="number" v-model="
-                                                    product.product_price
-                                                " @change="
-    priceChange(
-        product.id,
-        product.product_price
-    )
-" class="form-control" />
+                                                <input type="number" v-model="product.product_price" @change="priceChange(product.id,product.product_price)" class="form-control" />
                                             </td>
 
 
@@ -139,6 +132,12 @@
                                 </table>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label for="">Discount</label>
+                            <input type="text" v-model="discount" class="form-control">
+                        </div>
+
                         <div class="card-footer">
                             <div class="order-md-2 mb-4">
                                 <ul class="list-group mb-3">
@@ -159,9 +158,23 @@
 
                                     <li class="list-group-item d-flex justify-content-between lh-condensed">
                                         <div>
-                                            <h6 class="my-0">Sub Total</h6>
+                                            <h6 class="my-0">Total</h6>
                                         </div>
                                         <span class="text-muted">৳{{ sub_total }}</span>
+                                    </li>
+
+                                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                        <div>
+                                            <h6 class="my-0">Discount</h6>
+                                        </div>
+                                        <span class="text-muted">৳ {{ discount }}</span>
+                                    </li>
+
+                                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                        <div>
+                                            <h6 class="my-0">Sub Total</h6>
+                                        </div>
+                                        <span class="text-muted">৳{{ discountedamount }}</span>
                                     </li>
 
 
@@ -355,6 +368,7 @@ export default {
             Invoices: [],
             customtotalObj:{},
             customtotal:0,
+            discount:0,
         };
     },
     computed: {
@@ -375,21 +389,34 @@ export default {
             }
             return sum;
         },
+
         sub_total() {
             let sum = 0;
             for (let i = 0; i < this.cartProduct.length; i++) {
                 sum += parseFloat(this.cartProduct[i].sub_total);
             }
-            return sum+this.customtotal;
+            var price = Number(sum+this.customtotal);
+
+            return price;
         },
+
+        discountedamount() {
+
+            if(this.discount<0){
+                return 0;
+            }
+            var discount =  Number(this.sub_total)-Number(this.discount);
+            return discount;
+        },
+
     },
     methods: {
 
         duecount(){
 // console.log(this.pay);
-if (this.pay > this.sub_total) this.pay=this.sub_total;
+if (this.pay > this.discountedamount) this.pay=this.discountedamount;
 
-            this.due = this.sub_total-this.pay
+            this.due = this.discountedamount-this.pay
         },
 
 
@@ -664,10 +691,11 @@ this.customtotal = summed;
 
         orderDone() {
             this.buttonText='Looding....';
-            let total = (this.sub_total * this.vats.vat) / 100 + this.sub_total;
+            let total = (this.discountedamount * this.vats.vat) / 100 + this.discountedamount;
             var data = {
                 qty: this.qty,
-                sub_total: this.sub_total,
+                sub_total: this.discountedamount,
+                discount: this.discount,
                 customer_id: this.customer_id,
                 pay: this.pay,
                 due: this.due,

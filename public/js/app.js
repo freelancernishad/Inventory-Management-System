@@ -9362,6 +9362,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   created: function created() {
     if (!User.loggedIn()) {
@@ -9411,7 +9424,8 @@ __webpack_require__.r(__webpack_exports__);
       buttonText: 'Submit',
       Invoices: [],
       customtotalObj: {},
-      customtotal: 0
+      customtotal: 0,
+      discount: 0
     };
   },
   computed: {
@@ -9445,14 +9459,23 @@ __webpack_require__.r(__webpack_exports__);
         sum += parseFloat(this.cartProduct[i].sub_total);
       }
 
-      return sum + this.customtotal;
+      var price = Number(sum + this.customtotal);
+      return price;
+    },
+    discountedamount: function discountedamount() {
+      if (this.discount < 0) {
+        return 0;
+      }
+
+      var discount = Number(this.sub_total) - Number(this.discount);
+      return discount;
     }
   },
   methods: {
     duecount: function duecount() {
       // console.log(this.pay);
-      if (this.pay > this.sub_total) this.pay = this.sub_total;
-      this.due = this.sub_total - this.pay;
+      if (this.pay > this.discountedamount) this.pay = this.discountedamount;
+      this.due = this.discountedamount - this.pay;
     },
     allProduct: function allProduct(page) {
       var _this4 = this;
@@ -9695,10 +9718,11 @@ __webpack_require__.r(__webpack_exports__);
       var _this16 = this;
 
       this.buttonText = 'Looding....';
-      var total = this.sub_total * this.vats.vat / 100 + this.sub_total;
+      var total = this.discountedamount * this.vats.vat / 100 + this.discountedamount;
       var data = {
         qty: this.qty,
-        sub_total: this.sub_total,
+        sub_total: this.discountedamount,
+        discount: this.discount,
         customer_id: this.customer_id,
         pay: this.pay,
         due: this.due,
@@ -97413,8 +97437,7 @@ var render = function () {
                                           name: "model",
                                           rawName: "v-model",
                                           value: product.product_price,
-                                          expression:
-                                            "\n                                                    product.product_price\n                                                ",
+                                          expression: "product.product_price",
                                         },
                                       ],
                                       staticClass: "form-control",
@@ -97691,6 +97714,32 @@ var render = function () {
                 ),
               ]),
               _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "" } }, [_vm._v("Discount")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.discount,
+                      expression: "discount",
+                    },
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.discount },
+                  on: {
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.discount = $event.target.value
+                    },
+                  },
+                }),
+              ]),
+              _vm._v(" "),
               _c("div", { staticClass: "card-footer" }, [
                 _c("div", { staticClass: "order-md-2 mb-4" }, [
                   _c("ul", { staticClass: "list-group mb-3" }, [
@@ -97735,6 +97784,36 @@ var render = function () {
                         _vm._v(" "),
                         _c("span", { staticClass: "text-muted" }, [
                           _vm._v("৳" + _vm._s(_vm.sub_total)),
+                        ]),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      {
+                        staticClass:
+                          "list-group-item d-flex justify-content-between lh-condensed",
+                      },
+                      [
+                        _vm._m(5),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "text-muted" }, [
+                          _vm._v("৳ " + _vm._s(_vm.discount)),
+                        ]),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      {
+                        staticClass:
+                          "list-group-item d-flex justify-content-between lh-condensed",
+                      },
+                      [
+                        _vm._m(6),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "text-muted" }, [
+                          _vm._v("৳" + _vm._s(_vm.discountedamount)),
                         ]),
                       ]
                     ),
@@ -98374,6 +98453,18 @@ var staticRenderFns = [
     return _c("div", [
       _c("h6", { staticClass: "my-0" }, [_vm._v("Custom Total")]),
     ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [_c("h6", { staticClass: "my-0" }, [_vm._v("Total")])])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [_c("h6", { staticClass: "my-0" }, [_vm._v("Discount")])])
   },
   function () {
     var _vm = this
