@@ -133,10 +133,15 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="">Discount</label>
-                            <input type="text" v-model="discount" class="form-control">
+                        <div class="card-footer">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="">Discount</label>
+                                    <input type="text" v-model="discount" class="form-control">
+                                </div>
+                            </div>
                         </div>
+
 
                         <div class="card-footer">
                             <div class="order-md-2 mb-4">
@@ -617,7 +622,7 @@ if (this.pay > this.discountedamount) this.pay=this.discountedamount;
                 .get(`/api/cart/increment/${id}?custom=${product_quantity}`)
                 .then(({ data }) => {
                     // console.log(data);
-                    if (data == 0) {
+                    if (data <= 0) {
                         Notification.Out_of_stock();
                         this.qt = data;
                         Reload.$emit("afterAddToCart");

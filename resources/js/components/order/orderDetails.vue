@@ -46,6 +46,8 @@
 
 
                         <ul class="list-group" v-if="duepaymets==0">
+                            <li class="list-group-item"><b>Total : </b>{{ orders.total }}৳</li>
+                            <li class="list-group-item"><b>Discount : </b>{{ orders.discount }}৳</li>
                             <li class="list-group-item"><b>Sub Total : </b>{{ orders.sub_total }}৳</li>
                             <li class="list-group-item"><b>Pay Amount : </b>{{ orders.pay }}৳</li>
                             <li class="list-group-item"><b>Due Amount : </b>{{ orders.due }}৳</li>
@@ -53,6 +55,8 @@
 
 
                         <ul class="list-group" v-else>
+                            <li class="list-group-item"><b>Total : </b>{{ orders.total }}৳</li>
+                            <li class="list-group-item"><b>Discount : </b>{{ orders.discount }}৳</li>
                             <li class="list-group-item"><b>Sub Total : </b>{{ orders.sub_total }}৳</li>
                             <li class="list-group-item"><b>{{ orders.order_date }} : </b>{{ orders.pay-previousDue }}৳</li>
                             <li class="list-group-item" v-for="duepaymet in duepaymets"><b>{{ duepaymet.pay_date }} : </b>{{ duepaymet.payment_amount }}৳</li>

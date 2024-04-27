@@ -145,7 +145,8 @@ public function addToCartprice($id,$price)
 
                 DB::table('pos')->where('id', $id)->update(['sub_total' => $sub_total]);
 
-       return response()->json($sub_total);
+                return response()->json($product_quantity_stock);
+                return response()->json($sub_total);
             }
 
 
