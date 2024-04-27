@@ -662,16 +662,16 @@ function header3($datas){
         <table>
             <tr>
                 <td width='240px'><img style='position:fixed;width:50px;top:0px;left:0px' src='" . $logo . "'></td>
-                <td><h1 class='companiname' style='color:#955564'> মেসার্স &nbsp;রনি &nbsp;ট্রেডার্স</h1></td>
+                <td><h1 class='companiname' style='color:#955564'> মেসার্স &nbsp;আজাদ &nbsp;ট্রেডার্স</h1></td>
             </tr>
         </table>
 
 
 
-        <p class='defalttext name' style='background: #6A4B5A;width: 269px;margin: 0 auto;color: white;border-radius: 50px;padding: 3px 0px 3px 0px;'>প্রোঃ মোঃ হাছেন আলী </p>
-        <p class='defalttext' style='margin:0'>এখানে রাসায়নিক সার কীটনাশক ও বীজ বিক্রিয় করা হয়</p>
+        <p class='defalttext name' style='background: #6A4B5A;width: 269px;margin: 0 auto;color: white;border-radius: 50px;padding: 3px 0px 3px 0px;'>প্রোঃ মোঃ আফছার আলী </p>
+        <p class='defalttext' style='margin:0'>সিমেন্ট, ফ্লাইবার, রড়, এঙ্গেল, পাতি ও এম এস, তার সুলভ মূল্যে পাইকারী ও খুচরা বিক্রয় করা হয়</p>
         <p class='defalttext address' style='background: #D25664;width: 100%;margin: 0 auto;color: white;padding: 3px 0px 3px 0px;'>কালীগঞ্জ বাজার, দেবিগঞ্জ, পঞ্চগড় </p>
-        <p class='defalttext' style='color:#6A4B5A;margin:0'>মোবাইল নং : ০১৭৪০৯২৯৩০২, ০১৭৮৫৪৯৪২১৬ </p>
+        <p class='defalttext' style='color:#6A4B5A;margin:0'>মোবাইল নং : ০১৭১৯১৭১৫৭৪, ০১৭৪৭৬৬৬৪৩৪ </p>
     </div>
 
 
