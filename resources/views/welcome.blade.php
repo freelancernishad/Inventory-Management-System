@@ -58,7 +58,7 @@ span.money {
             <div class="sidebar-brand-icon">
               <img src="{{ asset('m.png') }}">
             </div>
-            <div class="sidebar-brand-text mx-3">Msronytraders</div>
+            <div class="sidebar-brand-text mx-3">Msazadtraders</div>
           </a>
           <hr class="sidebar-divider my-0">
           <li class="nav-item active">
