@@ -46,6 +46,9 @@ class ProductController extends Controller
          }
     }
 
+    function customProducts(){
+        return Product::where('product_type','custom')->orderBy('id','desc')->get();
+    }
 
 
     public function index(Request $request)
@@ -378,7 +381,7 @@ class ProductController extends Controller
                 $addProductQuantity->save();
                 $product->update(['product_quantity'=>$product_quantity_update]);
                 return $product;
-        
+
     }
 
 

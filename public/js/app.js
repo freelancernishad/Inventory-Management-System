@@ -9384,6 +9384,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   created: function created() {
     if (!User.loggedIn()) {
@@ -9406,6 +9422,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      customProducts: [],
       products: [],
       allitems: {},
       qt: null,
@@ -9507,6 +9524,21 @@ __webpack_require__.r(__webpack_exports__);
         _this4.allitems = data;
         _this4.qt = data.data[0].product_quantity; // console.log(data);
       })["catch"]();
+      axios.get('/api/custom/products').then(function (_ref2) {
+        var data = _ref2.data;
+        _this4.customProducts = data;
+      })["catch"]();
+    },
+    addCustomProduct: function addCustomProduct(event, index) {
+      var selectedValue = event.target.value;
+      var product = this.customProducts.find(function (product) {
+        return product.product_name.toLowerCase() === selectedValue.toLowerCase();
+      }); //   console.log(product);
+      // Perform your custom logic with the selected product
+
+      this.Invoices[index].id = product.id;
+      this.Invoices[index].buyprice = product.buying_price;
+      this.Invoices[index].price = product.selling_price;
     },
     searchData: function searchData(page) {
       var _this5 = this;
@@ -9526,8 +9558,8 @@ __webpack_require__.r(__webpack_exports__);
           page = 1;
         }
 
-        axios.get(s_url).then(function (_ref2) {
-          var data = _ref2.data;
+        axios.get(s_url).then(function (_ref3) {
+          var data = _ref3.data;
           _this5.products = data;
           _this5.allitems = data; //  console.log(this.products)
         })["catch"]();
@@ -9536,8 +9568,8 @@ __webpack_require__.r(__webpack_exports__);
     allCategory: function allCategory() {
       var _this6 = this;
 
-      axios.get("/api/category").then(function (_ref3) {
-        var data = _ref3.data;
+      axios.get("/api/category").then(function (_ref4) {
+        var data = _ref4.data;
         _this6.categories = data;
       })["catch"]();
     },
@@ -9547,8 +9579,8 @@ __webpack_require__.r(__webpack_exports__);
       this.cat_id = id;
 
       if (this.searchTerm == '') {
-        axios.get("/api/category/product/" + id).then(function (_ref4) {
-          var data = _ref4.data;
+        axios.get("/api/category/product/" + id).then(function (_ref5) {
+          var data = _ref5.data;
           //  this.categoryProducts = data
           _this7.products = data;
           _this7.allitems = data;
@@ -9561,8 +9593,8 @@ __webpack_require__.r(__webpack_exports__);
     allCustomers: function allCustomers() {
       var _this8 = this;
 
-      axios.get("/api/customer?type=").then(function (_ref5) {
-        var data = _ref5.data;
+      axios.get("/api/customer?type=").then(function (_ref6) {
+        var data = _ref6.data;
         return _this8.customers = data;
       })["catch"]();
     },
@@ -9571,8 +9603,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this9 = this;
 
       axios.get("/api/addToCart/" + id) // .then(({data}) => (console.log(data)))
-      .then(function (_ref6) {
-        var data = _ref6.data;
+      .then(function (_ref7) {
+        var data = _ref7.data;
 
         //   console.log(data);
         if (data == 0) {
@@ -9592,8 +9624,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this10 = this;
 
       if (this.pos != "") {
-        axios.get("/api/product_code/" + this.pos).then(function (_ref7) {
-          var data = _ref7.data;
+        axios.get("/api/product_code/" + this.pos).then(function (_ref8) {
+          var data = _ref8.data;
 
           //    console.log(data[0].id)
           if (data == 0) {
@@ -9617,8 +9649,8 @@ __webpack_require__.r(__webpack_exports__);
     cartProducts: function cartProducts() {
       var _this11 = this;
 
-      axios.get("/api/cart-products").then(function (_ref8) {
-        var data = _ref8.data;
+      axios.get("/api/cart-products").then(function (_ref9) {
+        var data = _ref9.data;
         _this11.cartProduct = data; //    this.qt = this.qt-this.qty
         //     console.log(this.qty);
         //  console.log(this.cartProduct);
@@ -9634,8 +9666,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this12 = this;
 
       // console.log(id);
-      axios.get("/api/cart/increment/" + id).then(function (_ref9) {
-        var data = _ref9.data;
+      axios.get("/api/cart/increment/" + id).then(function (_ref10) {
+        var data = _ref10.data;
 
         // console.log(data);
         if (data == 0) {
@@ -9652,8 +9684,8 @@ __webpack_require__.r(__webpack_exports__);
     decrement: function decrement(id) {
       var _this13 = this;
 
-      axios.get("/api/cart/decrement/" + id).then(function (_ref10) {
-        var data = _ref10.data;
+      axios.get("/api/cart/decrement/" + id).then(function (_ref11) {
+        var data = _ref11.data;
         _this13.qt = data;
         Reload.$emit("afterAddToCart");
         Notification.success(); // Reload.$emit('afterAddToCart')
@@ -9664,8 +9696,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this14 = this;
 
       var product_quantity = document.getElementById('qty' + index).value;
-      axios.get("/api/cart/increment/".concat(id, "?custom=").concat(product_quantity)).then(function (_ref11) {
-        var data = _ref11.data;
+      axios.get("/api/cart/increment/".concat(id, "?custom=").concat(product_quantity)).then(function (_ref12) {
+        var data = _ref12.data;
 
         // console.log(data);
         if (data <= 0) {
@@ -9681,8 +9713,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     priceChange: function priceChange(id, price) {
       // console.log(id,price)
-      axios.get("/api/cart/price/" + id + "/" + price).then(function (_ref12) {
-        var data = _ref12.data;
+      axios.get("/api/cart/price/" + id + "/" + price).then(function (_ref13) {
+        var data = _ref13.data;
         Reload.$emit("afterAddToCart");
         Notification.success(); // Reload.$emit('afterAddToCart')
         // Notification.success()
@@ -9691,15 +9723,17 @@ __webpack_require__.r(__webpack_exports__);
     vat: function vat() {
       var _this15 = this;
 
-      axios.get("/api/vat").then(function (_ref13) {
-        var data = _ref13.data;
+      axios.get("/api/vat").then(function (_ref14) {
+        var data = _ref14.data;
         return _this15.vats = data;
       })["catch"]();
     },
     addMore: function addMore() {
       this.Invoices.push({
+        id: "",
         name: "",
         weight_quantity: "",
+        buyprice: "",
         price: ""
       });
     },
@@ -9742,18 +9776,22 @@ __webpack_require__.r(__webpack_exports__);
         customInvoice: this.Invoices,
         total: total
       };
-      axios.post("/api/order", data).then(function (_ref14) {
-        var data = _ref14.data;
+      axios.post("/api/order", data).then(function (_ref15) {
+        var data = _ref15.data;
         _this16.buttonText = 'Submit';
 
-        _this16.$router.push({
-          name: "orderDetails",
-          params: {
-            id: data
-          }
-        });
+        if (data == 'Custom Product Not Available') {
+          Notification.error();
+        } else {
+          _this16.$router.push({
+            name: "orderDetails",
+            params: {
+              id: data
+            }
+          });
 
-        Notification.success();
+          Notification.success();
+        }
       });
     }
   }
@@ -51646,7 +51684,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#img_size[data-v-8e3009e8]{\n\twidth: 40px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#img_size[data-v-8e3009e8]{\r\n\twidth: 40px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -51670,7 +51708,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#img_size[data-v-786bfa20] {\n  width: 40px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#img_size[data-v-786bfa20] {\r\n  width: 40px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -51694,7 +51732,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#img_size[data-v-20369a8e]{\n\twidth: 40px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#img_size[data-v-20369a8e]{\r\n\twidth: 40px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -51718,7 +51756,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#img_size[data-v-2418a5ec]{\n\twidth: 40px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#img_size[data-v-2418a5ec]{\r\n\twidth: 40px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -51790,7 +51828,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#img_size[data-v-fa6affac] {\n    width: 40px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#img_size[data-v-fa6affac] {\r\n    width: 40px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -51814,7 +51852,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#img_size[data-v-2af1d86a] {\n  width: 40px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#img_size[data-v-2af1d86a] {\r\n  width: 40px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -51838,7 +51876,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#img_size[data-v-159f145c]{\n\twidth: 40px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#img_size[data-v-159f145c]{\r\n\twidth: 40px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -51862,7 +51900,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#image_size[data-v-75a93980]{\n\theight: 100px;\n\twidth: 135px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#image_size[data-v-75a93980]{\r\n\theight: 100px;\r\n\twidth: 135px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -51886,7 +51924,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#img_size[data-v-66c96f0b]{\n\twidth: 40px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#img_size[data-v-66c96f0b]{\r\n\twidth: 40px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -51910,7 +51948,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#img_size[data-v-2a118828]{\n\twidth: 40px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#img_size[data-v-2a118828]{\r\n\twidth: 40px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -51934,7 +51972,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#image_size[data-v-0ad42dca]{\n\theight: 100px;\n\twidth: 135px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#image_size[data-v-0ad42dca]{\r\n\theight: 100px;\r\n\twidth: 135px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -51958,7 +51996,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#img_size[data-v-4f6b09c4]{\n\twidth: 40px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#img_size[data-v-4f6b09c4]{\r\n\twidth: 40px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -51982,7 +52020,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#img_size[data-v-94a1a82c]{\n\twidth: 40px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#img_size[data-v-94a1a82c]{\r\n\twidth: 40px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -52006,7 +52044,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-pink-600[data-v-7f6d4f12] {\n    --tw-bg-opacity: 1;\n    background-color: rgba(219,39,119,var(--tw-bg-opacity));\n}\n.bg-red-600[data-v-7f6d4f12] {\n    --tw-bg-opacity: 1;\n    background-color: rgba(220,38,38,var(--tw-bg-opacity));\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-pink-600[data-v-7f6d4f12] {\r\n    --tw-bg-opacity: 1;\r\n    background-color: rgba(219,39,119,var(--tw-bg-opacity));\n}\n.bg-red-600[data-v-7f6d4f12] {\r\n    --tw-bg-opacity: 1;\r\n    background-color: rgba(220,38,38,var(--tw-bg-opacity));\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -52054,7 +52092,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#img_size[data-v-655d0324]{\n\twidth: 40px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#img_size[data-v-655d0324]{\r\n\twidth: 40px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -52078,7 +52116,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#img_size[data-v-1081be77]{\n\twidth: 40px;\n}\nth[data-v-1081be77],td[data-v-1081be77] {\n    font-size: 12px;\n        padding: 4px 7px !important;\n}\n\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#img_size[data-v-1081be77]{\r\n\twidth: 40px;\n}\nth[data-v-1081be77],td[data-v-1081be77] {\r\n    font-size: 12px;\r\n        padding: 4px 7px !important;\n}\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -52102,7 +52140,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#img_size[data-v-6db5a88c]{\n\twidth: 40px;\n}\nth[data-v-6db5a88c],td[data-v-6db5a88c] {\n    font-size: 12px;\n        padding: 4px 7px !important;\n}\n\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#img_size[data-v-6db5a88c]{\r\n\twidth: 40px;\n}\nth[data-v-6db5a88c],td[data-v-6db5a88c] {\r\n    font-size: 12px;\r\n        padding: 4px 7px !important;\n}\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -52126,7 +52164,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#img_size[data-v-e78e6a8a]{\n\twidth: 40px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#img_size[data-v-e78e6a8a]{\r\n\twidth: 40px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -97543,32 +97581,87 @@ var render = function () {
                             _vm._l(_vm.Invoices, function (Invoice, index) {
                               return _c("tr", { key: index }, [
                                 _c("td", [
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: Invoice.name,
-                                        expression: "Invoice.name",
+                                  _c(
+                                    "select",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: Invoice.name,
+                                          expression: "Invoice.name",
+                                        },
+                                      ],
+                                      staticClass:
+                                        "form-control w-full py-2 border border-indigo-500 rounded",
+                                      attrs: {
+                                        placeholder: "প্রোডাক্ট এর নাম",
                                       },
-                                    ],
-                                    staticClass:
-                                      "form-control w-full py-2 border border-indigo-500 rounded",
-                                    attrs: { placeholder: "প্রোডাক্ট এর নাম" },
-                                    domProps: { value: Invoice.name },
-                                    on: {
-                                      input: function ($event) {
-                                        if ($event.target.composing) {
-                                          return
-                                        }
-                                        _vm.$set(
-                                          Invoice,
-                                          "name",
-                                          $event.target.value
-                                        )
+                                      on: {
+                                        change: [
+                                          function ($event) {
+                                            var $$selectedVal =
+                                              Array.prototype.filter
+                                                .call(
+                                                  $event.target.options,
+                                                  function (o) {
+                                                    return o.selected
+                                                  }
+                                                )
+                                                .map(function (o) {
+                                                  var val =
+                                                    "_value" in o
+                                                      ? o._value
+                                                      : o.value
+                                                  return val
+                                                })
+                                            _vm.$set(
+                                              Invoice,
+                                              "name",
+                                              $event.target.multiple
+                                                ? $$selectedVal
+                                                : $$selectedVal[0]
+                                            )
+                                          },
+                                          function ($event) {
+                                            return _vm.addCustomProduct(
+                                              $event,
+                                              index
+                                            )
+                                          },
+                                        ],
                                       },
                                     },
-                                  }),
+                                    [
+                                      _c("option", { attrs: { value: "" } }, [
+                                        _vm._v("Select Custom POroduct"),
+                                      ]),
+                                      _vm._v(" "),
+                                      _vm._l(
+                                        _vm.customProducts,
+                                        function (customProduct, indexNo) {
+                                          return _c(
+                                            "option",
+                                            {
+                                              key: "indexNo" + indexNo,
+                                              domProps: {
+                                                value:
+                                                  customProduct.product_name,
+                                              },
+                                            },
+                                            [
+                                              _vm._v(
+                                                _vm._s(
+                                                  customProduct.product_name
+                                                )
+                                              ),
+                                            ]
+                                          )
+                                        }
+                                      ),
+                                    ],
+                                    2
+                                  ),
                                 ]),
                                 _vm._v(" "),
                                 _c("td", { staticStyle: { display: "flex" } }, [
@@ -97661,6 +97754,41 @@ var render = function () {
                                       _c("option", [_vm._v("গ্রাম")]),
                                     ]
                                   ),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: Invoice.buyprice,
+                                        expression: "Invoice.buyprice",
+                                      },
+                                    ],
+                                    staticClass:
+                                      "form-control w-full py-2 border border-indigo-500 rounded",
+                                    attrs: {
+                                      type: "number",
+                                      placeholder: "কেনা দাম",
+                                      min: "0",
+                                      step: "5",
+                                    },
+                                    domProps: { value: Invoice.buyprice },
+                                    on: {
+                                      change: _vm.totalcount,
+                                      input: function ($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          Invoice,
+                                          "buyprice",
+                                          $event.target.value
+                                        )
+                                      },
+                                    },
+                                  }),
                                 ]),
                                 _vm._v(" "),
                                 _c("td", [

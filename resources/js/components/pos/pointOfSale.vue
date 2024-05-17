@@ -96,7 +96,19 @@
                                         </tr>
 
                     <tr  v-for="(Invoice, index) in Invoices" :key="index">
-                        <td><input v-model="Invoice.name" placeholder="প্রোডাক্ট এর নাম" class="form-control w-full py-2 border border-indigo-500 rounded"/></td>
+
+                        <td>
+
+                            <!-- <input v-model="Invoice.name" placeholder="প্রোডাক্ট এর নাম" class="form-control w-full py-2 border border-indigo-500 rounded"/> -->
+
+                            <select v-model="Invoice.name" placeholder="প্রোডাক্ট এর নাম" @change="addCustomProduct($event,index)" class="form-control w-full py-2 border border-indigo-500 rounded">
+
+                                <option value="">Select Custom POroduct</option>
+                                <option v-for="(customProduct,indexNo) in customProducts" :key="`indexNo${indexNo}`" :value="customProduct.product_name">{{ customProduct.product_name }}</option>
+                            </select>
+
+                        </td>
+
                         <td style="display:flex;">
                             <input type="number" @change="totalcount" v-model="Invoice.weight_quantity" placeholder="প্রোডাক্ট এর ওজন/পরিমাণ" class="form-control w-full py-2 border border-indigo-500 rounded" min="0" step="5"/>
 
@@ -109,7 +121,11 @@
                                 </select>
 
                             </td>
+
+                        <td><input type="number" v-model="Invoice.buyprice"  @change="totalcount" placeholder="কেনা দাম" class="form-control w-full py-2 border border-indigo-500 rounded" min="0" step="5"/></td>
+
                         <td><input type="number" v-model="Invoice.price"  @change="totalcount" placeholder="ইউনিট দাম" class="form-control w-full py-2 border border-indigo-500 rounded" min="0" step="5"/></td>
+
                         <td>
 
 
@@ -345,6 +361,7 @@ export default {
     },
     data() {
         return {
+            customProducts: [],
             products: [],
             allitems: {},
             qt: null,
@@ -435,7 +452,6 @@ if (this.pay > this.discountedamount) this.pay=this.discountedamount;
                 s_url = "/api/product?page=" + page;
             }else{
                 s_url = '/api/products/search?filter[product_name]=' + this.searchTerm;
-
             }
 
             axios
@@ -447,8 +463,29 @@ if (this.pay > this.discountedamount) this.pay=this.discountedamount;
                     // console.log(data);
                 })
                 .catch();
+
+            axios
+                .get('/api/custom/products')
+                .then(({ data }) => {
+                    this.customProducts = data;
+                })
+                .catch();
         },
 
+
+
+        addCustomProduct(event,index) {
+      const selectedValue = event.target.value;
+      const product = this.customProducts.find(product =>
+        product.product_name.toLowerCase() === selectedValue.toLowerCase()
+      );
+    //   console.log(product);
+      // Perform your custom logic with the selected product
+      this.Invoices[index].id = product.id
+      this.Invoices[index].buyprice = product.buying_price
+      this.Invoices[index].price = product.selling_price
+
+    },
 
 
 		searchData(page){
@@ -657,8 +694,10 @@ if (this.pay > this.discountedamount) this.pay=this.discountedamount;
 
     addMore() {
       this.Invoices.push({
+        id: "",
         name: "",
         weight_quantity: "",
+        buyprice: "",
         price: "",
       });
     },
@@ -713,11 +752,18 @@ this.customtotal = summed;
             };
             axios.post("/api/order", data).then(({ data }) => {
                   this.buttonText='Submit';
-                this.$router.push({
-                    name: "orderDetails",
-                    params: { id: data },
-                });
-                Notification.success();
+
+                  if(data=='Custom Product Not Available'){
+                    Notification.error();
+                  }else{
+                        this.$router.push({
+                        name: "orderDetails",
+                        params: { id: data },
+                        });
+                        Notification.success();
+                  }
+
+
             });
         },
     },

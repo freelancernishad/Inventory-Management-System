@@ -4,6 +4,7 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Exception;
 class PosController extends Controller
 {
@@ -76,15 +77,41 @@ class PosController extends Controller
         }
         foreach ($customInvoice as $value) {
 
+            $weight_quantity =  $value['weight_quantity'];
             // print_r($value['name']);
             $customdata['order_id'] = $order_id;
 
             $customdata['product_name'] = $value['name'];
-            $customdata['product_quantity'] = $value['weight_quantity'];
+            $customdata['product_quantity'] = $weight_quantity;
             $customdata['product_quantity_type'] = $value['weight_type'];
             $customdata['product_price'] = $value['price'];
             $customdata['sub_total'] = $value['weight_quantity']*$value['price'];
+
+            $customProductId = $value['id'];
+
+            $customProduct = Product::find($customProductId);
+
+            $product_quantity = $customProduct->product_quantity;
+
+
+
+            if($weight_quantity>$product_quantity){
+                return 'Custom Product Not Available';
+            }
+            if($product_quantity<1){
+                return 'Custom Product Not Available';
+            }
+
+
+            $newqt = $product_quantity-$weight_quantity;
+
+            $customProduct->update(['product_quantity'=>$newqt]);
+
+
+
             DB::table('custom_order_details')->insert($customdata);
+
+
             // print_r($customdata);
         }
 
