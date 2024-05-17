@@ -57,29 +57,56 @@
 											</div>
 										</div>
 									</div>
+
+
+
 									<div class="form-group">
-
 										<div class="form-row">
-
-											<div class="col-md-4">
+											<div class="col-md-6">
                                                 <label for="">Buying Date</label>
 												<input type="date" class="form-control" id="exampleInputAddress" placeholder="Enter Buying Date" v-model='form.buying_date'>
 												<small class="text-danger" v-if="errors.buying_date">{{ errors.buying_date[0] }}</small>
 											</div>
 
-											<div class="col-md-4">
+											<div class="col-md-6">
                                                 <label for="">Expired Date</label>
 												<input type="date" class="form-control" id="exampleInputAddress" placeholder="Enter Buying Date" v-model='form.expired_date'>
 												<small class="text-danger" v-if="errors.expired_date">{{ errors.expired_date[0] }}</small>
 											</div>
 
-											<div class="col-md-4">
+										</div>
+									</div>
+
+
+									<div class="form-group">
+										<div class="form-row">
+											
+
+											<div class="col-md-6">
+												<label for="exampleFormControlSelect1">Select Product Type</label>
+												<select class="form-control" id="exampleFormControlSelect1" v-model="form.productType" required>
+													<option value="normal">Normal</option>
+													<option value="custom">Custom</option>
+												</select>
+											</div>
+
+											<div class="col-md-6" v-if="form.productType=='normal'">
                                                  <label for="">Product Quantity</label>
 												<input type="number" class="form-control" id="exampleInputNid" placeholder="Enter Product Quantity" v-model='form.product_quantity'>
 												<small class="text-danger" v-if="errors.product_quantity">{{ errors.product_quantity[0] }}</small>
 											</div>
+
+											<div class="col-md-6" v-else-if="form.productType=='custom'">
+                                                 <label for="">Product Weight (কেজি)</label>
+												<input type="number" class="form-control" id="exampleInputNid" placeholder="Enter Product Weight (কেজি)" v-model='form.product_quantity'>
+												<small class="text-danger" v-if="errors.product_quantity">{{ errors.product_quantity[0] }}</small>
+											</div>
+
 										</div>
 									</div>
+
+
+
 									<!-- <div class="form-group">
 										<div class="form-row">
 											<div class="col-md-6">
@@ -130,6 +157,7 @@ export default {
 				selling_price: null,
 				buying_date: null,
 				expired_date: null,
+				productType: 'normal',
 				product_quantity: null,
 				image: null,
 			},

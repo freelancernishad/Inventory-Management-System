@@ -78,6 +78,7 @@ class ProductController extends Controller
             'selling_price'    => 'required|max:80',
             'buying_date'      => 'required|max:80',
             'expired_date'      => 'required|max:80',
+            'productType' => 'required',
             'product_quantity' => 'required',
         ]);
 
@@ -103,6 +104,7 @@ class ProductController extends Controller
             $product->selling_price = $request->selling_price;
             $product->buying_date = $request->buying_date;
             $product->expired_date = $request->expired_date;
+            $product->product_type = $request->productType;
             $product->product_quantity = $request->product_quantity;
             $product->image = $image_url;
             $product->save();
@@ -117,6 +119,7 @@ class ProductController extends Controller
             $product->selling_price = $request->selling_price;
             $product->buying_date = $request->buying_date;
             $product->expired_date = $request->expired_date;
+            $product->product_type = $request->productType;
             $product->product_quantity = $request->product_quantity;
             $product->save();
         }
