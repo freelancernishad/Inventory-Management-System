@@ -29,9 +29,9 @@
                                             <th style="padding: 12px 38px">
                                                 Qty
                                             </th>
-                                            <th style="padding: 12px 50px">
+                                            <!-- <th style="padding: 12px 50px">
                                                 Buy
-                                            </th>
+                                            </th> -->
                                             <th style="padding: 12px 50px">
                                                 Sell
                                             </th>
@@ -81,7 +81,7 @@
                                                     </span>
                                                 </div>
                                             </td>
-                                             <td>{{  product.buying_price }} </td>
+                                             <!-- <td>{{  product.buying_price }} </td> -->
                                             <td>
                                                 <input type="number" v-model="product.product_price" @change="priceChange(product.id,product.product_price)" class="form-control" />
                                             </td>
@@ -95,7 +95,7 @@
                                             </td>
                                         </tr>
 
-                    <tr  v-for="(Invoice, index) in Invoices" :key="index">
+                    <tr  v-for="(Invoice, index) in Invoices" :key="index" :style="[Number(Invoice.price) < Number(Invoice.buyprice) ? { background: '#ff6a00', color: 'white' } : {}]">
 
                         <td>
 
@@ -112,19 +112,16 @@
                         <td style="display:flex;">
                             <input type="number" @change="totalcount" v-model="Invoice.weight_quantity" placeholder="প্রোডাক্ট এর ওজন/পরিমাণ" class="form-control w-full py-2 border border-indigo-500 rounded" min="0" step="5"/>
 
-                                <select style="width: 75px;"  v-model="Invoice.weight_type" class="form-control">
+                                <!-- <select style="width: 75px;"  v-model="Invoice.weight_type" class="form-control">
                                     <option value="">Select</option>
-                                    <option>বস্তা</option>
                                     <option>কেজি</option>
-                                    <option>মন</option>
-                                    <option>গ্রাম</option>
-                                </select>
+                                </select> -->
 
                             </td>
 
-                        <td><input type="number" v-model="Invoice.buyprice"  @change="totalcount" placeholder="কেনা দাম" class="form-control w-full py-2 border border-indigo-500 rounded" min="0" step="5"/></td>
+                        <!-- <td><input type="number" v-model="Invoice.buyprice"  @change="totalcount" placeholder="কেনা দাম" class="form-control w-full py-2 border border-indigo-500 rounded" disabled min="0" step="5"/></td> -->
 
-                        <td><input type="number" v-model="Invoice.price"  @change="totalcount" placeholder="ইউনিট দাম" class="form-control w-full py-2 border border-indigo-500 rounded" min="0" step="5"/></td>
+                        <td><input type="number" v-model="Invoice.price"  @change="totalcount"  placeholder="ইউনিট দাম" class="form-control w-full py-2 border border-indigo-500 rounded" min="0" step="5"/></td>
 
                         <td>
 
@@ -697,6 +694,7 @@ if (this.pay > this.discountedamount) this.pay=this.discountedamount;
         id: "",
         name: "",
         weight_quantity: "",
+        weight_type: "কেজি",
         buyprice: "",
         price: "",
       });
