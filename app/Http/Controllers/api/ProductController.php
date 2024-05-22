@@ -177,7 +177,7 @@ class ProductController extends Controller
             'buying_price'     => 'required|max:80',
             'selling_price'    => 'required|max:80',
             'buying_date'      => 'required|max:80',
-            'expired_date'      => 'required|max:80',
+            // 'expired_date'      => 'required|max:80',
             'product_quantity' => 'required',
         ]);
 
