@@ -80,7 +80,7 @@
 
 									<div class="form-group">
 										<div class="form-row">
-											
+
 
 											<div class="col-md-6">
 												<label for="exampleFormControlSelect1">Select Product Type</label>
@@ -92,13 +92,13 @@
 
 											<div class="col-md-6" v-if="form.productType=='normal'">
                                                  <label for="">Product Quantity</label>
-												<input type="number" class="form-control" id="exampleInputNid" placeholder="Enter Product Quantity" v-model='form.product_quantity'>
+												<input type="tel" class="form-control" id="exampleInputNid" placeholder="Enter Product Quantity" v-model='form.product_quantity'>
 												<small class="text-danger" v-if="errors.product_quantity">{{ errors.product_quantity[0] }}</small>
 											</div>
 
 											<div class="col-md-6" v-else-if="form.productType=='custom'">
                                                  <label for="">Product Weight (কেজি)</label>
-												<input type="number" class="form-control" id="exampleInputNid" placeholder="Enter Product Weight (কেজি)" v-model='form.product_quantity'>
+												<input type="tel" class="form-control" id="exampleInputNid" placeholder="Enter Product Weight (কেজি)" v-model='form.product_quantity'>
 												<small class="text-danger" v-if="errors.product_quantity">{{ errors.product_quantity[0] }}</small>
 											</div>
 
