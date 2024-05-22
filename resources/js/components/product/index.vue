@@ -181,6 +181,14 @@ export default {
 			})
 		}
 	},
+    watch: {
+        '$route': {
+            handler(newValue, oldValue) {
+                this.allProduct();
+            },
+            deep: true
+        }
+    },
 	methods: {
 		addProductSubmit(){
             this.loading=true
@@ -226,7 +234,14 @@ export default {
            if (typeof page === 'undefined') {
 				page = 1;
 			}
-			axios.get('/api/product?page=' + page)
+
+            var product_type = 'normal'
+            if(this.$route.query.product_type){
+                product_type = this.$route.query.product_type;
+            }
+
+
+			axios.get('/api/product?page=' + page + '&product_type='+product_type)
 			.then(({data}) => {
 
                 this.products = data

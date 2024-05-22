@@ -117,6 +117,7 @@ span.money {
           <div class="bg-white py-2 collapse-inner rounded">
             <router-link class="collapse-item" to="/store-product">Add Product</router-link>
             <router-link class="collapse-item" to="/product">All Product</router-link>
+            <router-link class="collapse-item" to="/product?product_type=custom">Custom Product</router-link>
             <router-link class="collapse-item" to="/product/expired">Expired Product</router-link>
           </div>
         </div>
@@ -265,7 +266,7 @@ span.money {
     <i class="fas fa-angle-up"></i>
 </a>
 
-<script src="{{ asset('js/app.js?v=1.0.14') }}"></script>
+<script src="{{ asset('js/app.js?v=1.0.15') }}"></script>
 {{-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"> </script> --}}
 <script src="{{ asset('backend/vendors/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('backend/vendors/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
