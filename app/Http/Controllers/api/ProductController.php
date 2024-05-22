@@ -53,14 +53,25 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
+        $product_type='normal';
+        if($request->product_type){
+            $product_type = $request->product_type;
+        }
+
+
+
         $products = DB::table('products')
         ->join('categories', 'products.category_id', 'categories.id')
         // ->join('suppliers', 'products.supplier_id', 'suppliers.id')
         ->select('products.*', 'categories.category_name')
+        ->where('product_type',$product_type)
         ->orderBy('products.id', 'desc')
         ->paginate(25);
 
         return response()->json($products);
+
+
+
     }
 
     /**
@@ -149,12 +160,12 @@ class ProductController extends Controller
     {
         // return response()->json($product_code);
 
-         $count = Product::where('product_code',$product_code)->count();
+         $count = Product::where(['product_code'=>$product_code,'product_type'=>'normal'])->count();
          if($count<=0){
 
              return response()->json(0);
          }
-         $product = Product::where('product_code',$product_code)->get();
+         $product = Product::where(['product_code'=>$product_code,'product_type'=>'normal'])->get();
         return response()->json($product);
     }
 

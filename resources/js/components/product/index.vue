@@ -72,7 +72,7 @@
 										<td>{{ product.root }}</td>
 										<td>{{ product.buying_price }}</td>
 										<td>{{ product.selling_price }}</td>
-										<td>{{ product.product_quantity }} <button class='btn btn-info' @click="addMoreProduct(product)">+</button> </td>
+										<td>{{ product.product_quantity }} <span v-if="product.product_type=='custom'">কেজি</span><span v-else>টি</span> <button class='btn btn-info' @click="addMoreProduct(product)">+</button> </td>
 										<td>{{ product.buying_date }}</td>
 
 										<!-- <td style="background: green;color: white;text-align: center;" v-if="product.expired_date>todaydate"> {{ product.expired_date }}</td>

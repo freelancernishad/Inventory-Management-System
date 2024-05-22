@@ -446,9 +446,9 @@ if (this.pay > this.discountedamount) this.pay=this.discountedamount;
 
             var s_url = '';
             if(this.searchTerm==''){
-                s_url = "/api/product?page=" + page;
+                s_url = "/api/product?product_type=normal&page=" + page;
             }else{
-                s_url = '/api/products/search?filter[product_name]=' + this.searchTerm;
+                s_url = '/api/products/search?filter[product_type]=normal&filter[product_name]=' + this.searchTerm;
             }
 
             axios

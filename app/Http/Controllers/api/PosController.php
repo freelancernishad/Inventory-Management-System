@@ -226,7 +226,8 @@ $todayIncome =  $product_price-$buying_price;
 
     public function totalStock(Request $request)
     {
-        $products = DB::table('products')->sum('product_quantity');
+        $product_type = $request->product_type;
+        $products = DB::table('products')->where('product_type',$product_type)->sum('product_quantity');
         return response()->json($products);
     }
 
@@ -234,8 +235,8 @@ $todayIncome =  $product_price-$buying_price;
     public function totalStockAmount(Request $request)
     {
 
-
-        $products = DB::table('products')->get();
+        $product_type = $request->product_type;
+        $products = DB::table('products')->where('product_type',$product_type)->get();
 $total = 0;
 foreach ($products as $key => $value) {
     $total += $value->buying_price*$value->product_quantity;
