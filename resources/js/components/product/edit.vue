@@ -76,7 +76,7 @@
 
 											<div class="col-md-4">
                                                  <label for="">Product Quantity</label>
-												<input type="number" class="form-control" id="exampleInputNid" placeholder="Enter Product Quantity" v-model='form.product_quantity'>
+												<input type="tel" class="form-control" id="exampleInputNid" placeholder="Enter Product Quantity" v-model='form.product_quantity'>
 												<small class="text-danger" v-if="errors.product_quantity">{{ errors.product_quantity[0] }}</small>
 											</div>
 										</div>
