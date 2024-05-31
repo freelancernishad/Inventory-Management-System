@@ -50,11 +50,11 @@
 										<div class="form-row">
 
 											<div class="col-md-6">
-												<input type="number" class="form-control" id="exampleInputSalary" placeholder="Enter Buying Price" v-model='form.buying_price'>
+												<input type="tel" class="form-control" id="exampleInputSalary" placeholder="Enter Buying Price" v-model='form.buying_price'>
 												<small class="text-danger" v-if="errors.buying_price">{{ errors.buying_price[0] }}</small>
 											</div>
 											<div class="col-md-6">
-												<input type="number" class="form-control" id="exampleInputSalary" placeholder="Enter Selling Price" v-model='form.selling_price'>
+												<input type="tel" class="form-control" id="exampleInputSalary" placeholder="Enter Selling Price" v-model='form.selling_price'>
 												<small class="text-danger" v-if="errors.selling_price">{{ errors.selling_price[0] }}</small>
 											</div>
 										</div>

@@ -34,7 +34,7 @@
                                     Today Sell Amount
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <span class="money">৳</span> {{ todaySells }}
+                                    <span class="money">৳</span> {{ todaySells.toFixed(2) }}
                                 </div>
                                 <div class="mt-2 mb-0 text-muted text-xs">
                                     <!-- <span class="text-success mr-2"><i class="fa fa-arrow-up"></i>
@@ -57,10 +57,10 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-uppercase mb-1">
-                                    Today Income
+                                    Today
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <span class="money">৳</span> {{ income }}
+                                    <span class="money">৳</span> {{ income.toFixed(2) }}
                                 </div>
                                 <div class="mt-2 mb-0 text-muted text-xs">
                                     <!-- <span class="text-success mr-2"><i class="fas fa-arrow-up"></i>
@@ -85,7 +85,7 @@
                                     Today Due
                                 </div>
                                 <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                    <span class="money">৳</span> {{ due }}
+                                    <span class="money">৳</span> {{ due.toFixed(2) }}
                                 </div>
                                 <div class="mt-2 mb-0 text-muted text-xs">
                                     <!-- <span class="text-success mr-2"><i class="fas fa-arrow-up"></i>
@@ -111,7 +111,7 @@
                                     Expense Amount
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <span class="money">৳</span> {{ expense }}
+                                    <span class="money">৳</span> {{ expense.toFixed(2) }}
                                 </div>
                                 <div class="mt-2 mb-0 text-muted text-xs">
                                     <!-- <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i>
@@ -140,7 +140,7 @@
                                     Total Stock
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                     {{ totalStock }}
+                                     {{ totalStock.toFixed(2) }}
                                 </div>
                                 <div class="mt-2 mb-0 text-muted text-xs">
                                     <!-- <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i>
@@ -157,9 +157,6 @@
             </div>
 
 
-
-
-
             <!-- Pending Requests Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card h-100">
@@ -167,10 +164,10 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-uppercase mb-1">
-                                    Total Stock Custom Amount
+                                    Total Stock Amount
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <span class="money">৳</span> {{ totalStockAmountCustom }}
+                                    <span class="money">৳</span> {{ totalStockAmount.toFixed(2) }}
                                 </div>
                                 <div class="mt-2 mb-0 text-muted text-xs">
                                     <!-- <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i>
@@ -202,7 +199,7 @@
                                     Total Custom Stock
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                     {{ totalStockCustom }}
+                                     {{ totalStockCustom.toFixed(2) }}
                                 </div>
                                 <div class="mt-2 mb-0 text-muted text-xs">
                                     <!-- <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i>
@@ -229,10 +226,10 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-uppercase mb-1">
-                                    Total Stock Amount
+                                    Total Stock Custom Amount
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <span class="money">৳</span> {{ totalStockAmount }}
+                                    <span class="money">৳</span> {{ totalStockAmountCustom.toFixed(2) }}
                                 </div>
                                 <div class="mt-2 mb-0 text-muted text-xs">
                                     <!-- <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i>
@@ -247,6 +244,9 @@
                     </div>
                 </div>
             </div>
+
+
+
 
 
 
