@@ -138,7 +138,7 @@ export default {
            if (typeof page === 'undefined') {
 				page = 1;
 			}
-            var searchQ= `&date=${User.dateformat()[0]}`;
+            var searchQ= '';
            if (this.searchTerm) {
             searchQ = `&date=${this.searchTerm}`
 			}
@@ -161,7 +161,7 @@ export default {
 
 	},
 	mounted(){
-        this.searchTerm = User.dateformat()[0];
+        // this.searchTerm = User.dateformat()[0];
 		this.allProduct();
 	}
 }
