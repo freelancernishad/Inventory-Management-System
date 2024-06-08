@@ -18,6 +18,20 @@ class ProductController extends Controller
 {
 
 
+    function add_product_quantities_list(Request $request)
+    {
+        if ($request->has('date')) {
+            $date = $request->input('date');
+            $add_product_quantities = AddProductQuantity::with('product')
+                ->whereDate('date', $date)
+                ->orderBy('id','desc')
+                ->paginate(20);
+        } else {
+            $add_product_quantities = AddProductQuantity::with('product')->orderBy('id','desc')->paginate(20);
+        }
+
+        return $add_product_quantities;
+    }
 
     public function export()
     {

@@ -93,6 +93,10 @@ Route::apiResources([
 ]);
 
 
+Route::get('/add/product/quantities/list',[ProductController::class,'add_product_quantities_list']);
+
+
+
 Route::get('/custom/products',[ProductController::class,'customProducts']);
 
 
