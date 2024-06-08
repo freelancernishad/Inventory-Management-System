@@ -53,6 +53,7 @@
                   <tr>
                       <th>Order Id</th>
                     <th>Name</th>
+                    <th>Phone</th>
                     <th>Total Amount</th>
                     <th>Pay</th>
                     <th>Due</th>
@@ -66,6 +67,7 @@
                   <tr v-for="order in filtersearch" :key="order.id">
                     <td>{{ order.orderId }}</td>
                     <td>{{ order.name }}</td>
+                    <td>{{ order.phone }}</td>
                     <td>{{ order.sub_total }}</td>
                     <td>{{ order.pay }}</td>
                     <td>{{ order.due }}</td>
@@ -144,7 +146,8 @@ export default {
 
             filterProductsByName: function(products) {
                 return products.filter((order) => {
-                    return order.name.match(this.searchTerm);
+
+                    return order.phone.match(this.searchTerm);
                 });
             },
 

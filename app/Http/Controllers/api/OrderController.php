@@ -18,7 +18,7 @@ class OrderController extends Controller
         $orders = DB::table('orders')
             ->join('customers', 'orders.customer_id', 'customers.id')
 
-            ->select('customers.name', 'orders.*')
+            ->select('customers.name','customers.phone', 'orders.*')
             ->orderBy('orders.id', 'desc')
             ->get();
         return response()->json($orders);
@@ -40,7 +40,7 @@ class OrderController extends Controller
         $orders = DB::table('orders')
             ->join('customers', 'orders.customer_id', 'customers.id')
             ->where('orders.customer_id', $id)
-            ->where('orders.due', '>', 0)
+            // ->where('orders.due', '>', 0)
             ->select('customers.name', 'orders.*')
             ->orderBy('orders.id', 'desc')
             ->get();
@@ -220,7 +220,7 @@ class OrderController extends Controller
             $totalDue += $value->due;
          }
 
-      
+
 
       $allDuePayments = DB::table('duepayments')
          ->where('customer_id', $customer_id)
@@ -241,7 +241,7 @@ class OrderController extends Controller
 
          }
 
-     
+
          $nowCustomerDue = $totalDue;
 
 

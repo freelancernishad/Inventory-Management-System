@@ -44,11 +44,13 @@
                     <td>{{ order.due }}</td>
                     <td>{{ order.payBy }}</td>
                     <td>
-                      <router-link
+
+                      <router-link v-if="order.due > 0"
                         :to="{ name: 'orderPay', params: { id: order.id } }"
                         class="btn btn-sm btn-info"
                         >Pay</router-link
                       >
+
                       <router-link
                         :to="{ name: 'orderDetails', params: { id: order.id } }"
                         class="btn btn-sm btn-primary"
@@ -106,7 +108,7 @@ let id = this.$route.params.id
             }else{
                 this.orders = data
                 this.customer = data[0].name
-                }
+            }
 
 
             // console.log(data.length)
@@ -120,7 +122,7 @@ let id = this.$route.params.id
 			.then(({data}) => {
 // console.log(data);
             if(data==0){
-                this.$router.push({name: 'customer'})
+                // this.$router.push({name: 'customer'})
             }
 
             })

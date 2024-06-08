@@ -48,7 +48,11 @@
 										<td>{{ customer.phone }}</td>
 										<!-- <td>{{ customer.email }}</td> -->
 										<td>{{ customer.address }}</td>
-										<td> <span  :id="'due'+customer.id"></span> {{ totaldue(customer.id) }} <router-link :id="'button'+customer.id" :to="{name: 'customerdue', params: {id: customer.id}}" class="btn btn-sm btn-info">Pay Now</router-link></td>
+										<td> <span  :id="'due'+customer.id"></span> {{ totaldue(customer.id) }}
+
+                                            <router-link :id="'button'+customer.id" :to="{name: 'customerdue', params: {id: customer.id}}" class="btn btn-sm btn-info">Pay Now</router-link>
+
+                                        </td>
 										<td>
 											<router-link :to="{name: 'editCustomer', params: {id: customer.id}}" class="btn btn-sm btn-primary">Edit</router-link>
 											<!-- <a @click="deleteCustomer(customer.id)" class="btn btn-sm btn-danger" style="color: white">Delete</a> -->
@@ -128,7 +132,7 @@ document.getElementById('due'+id).innerHTML=data
 
 if(data==0){
 
-    document.getElementById('button'+id).style.display='none'
+    document.getElementById('button'+id).innerText='View Due List'
 }
 
             })
