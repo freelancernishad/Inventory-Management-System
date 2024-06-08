@@ -1,6 +1,6 @@
 <?php
-use Intervention\Image\Facades\Image;
-use Illuminate\Support\Facades\File;
+use App\Models\Product;
+use App\Models\AddProductQuantity;
 
 
 
@@ -154,6 +154,8 @@ function sent_error($message ,$messages=[],$code=404){
 
 
 
+use Illuminate\Support\Facades\File;
+use Intervention\Image\Facades\Image;
 use Stichoza\GoogleTranslate\GoogleTranslate;
 
 function transition($text)
@@ -659,3 +661,35 @@ try {
 
 
 
+function add_more_quentity($id,$product_quantity,$type='old'){
+
+
+    if($type=='new'){
+
+        $product = Product::find($id);
+        $addProductQuantity = new AddProductQuantity([
+            'product_id' => $id,
+            'date' => date('Y-m-d H:i:s'),
+            'quantity' => $product_quantity,
+            'pre_quantity' => 0,
+            'current_quantity' => $product_quantity,
+        ]);
+        $addProductQuantity->save();
+        return $product;
+    }
+
+
+    $product = Product::find($id);
+    $product_quantity_update = $product->product_quantity+$product_quantity;
+
+           $addProductQuantity = new AddProductQuantity([
+               'product_id' => $id,
+               'date' => date('Y-m-d H:i:s'),
+               'quantity' => $product_quantity,
+               'pre_quantity' => $product->product_quantity,
+               'current_quantity' => $product_quantity_update,
+           ]);
+           $addProductQuantity->save();
+           $product->update(['product_quantity'=>$product_quantity_update]);
+           return $product;
+}

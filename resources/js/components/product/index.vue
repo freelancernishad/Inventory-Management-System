@@ -203,7 +203,7 @@ export default {
         addMoreProduct(product){
             this.product = product;
             this.form.id = product.id;
-            console.log(product);
+            // console.log(product);
             this.modalShow = true;
 			setTimeout(() => {
 				const input = this.$refs.product_quantity;
