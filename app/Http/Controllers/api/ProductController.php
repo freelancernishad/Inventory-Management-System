@@ -152,7 +152,7 @@ class ProductController extends Controller
             $product->save();
         }
 
-        return $product = add_more_quentity($product->id,$product->product_quantity,'new')
+        return $product = add_more_quentity($product->id,$product->product_quantity,'new');
 
 
     }
@@ -244,6 +244,7 @@ class ProductController extends Controller
         } else {
             $product->save();
         }
+        return $product;
     }
 
     /**

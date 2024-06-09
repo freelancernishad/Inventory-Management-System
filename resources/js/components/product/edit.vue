@@ -176,8 +176,17 @@ export default {
 		updateProduct(){
 			let id = this.$route.params.id
 			axios.patch('/api/product/' + id, this.form)
-			.then(() => {
-				this.$router.push({name: 'product'})
+			.then((res) => {
+
+                // console.log(res)
+                if(res.data.product_type=='custom'){
+                    this.$router.push({name: 'product',query:{'product_type':'custom'}})
+                }else{
+                    this.$router.push({name: 'product'})
+                }
+
+
+
 				Notification.success()
 			})
 			.catch(error => this.errors = error.response.data.errors)
