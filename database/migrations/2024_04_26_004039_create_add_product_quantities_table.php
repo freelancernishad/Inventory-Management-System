@@ -18,9 +18,9 @@ class CreateAddProductQuantitiesTable extends Migration
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->string('date');
-            $table->integer('quantity');
-            $table->integer('pre_quantity');
-            $table->integer('current_quantity');
+            $table->string('quantity');
+            $table->string('pre_quantity');
+            $table->string('current_quantity');
             $table->timestamps();
         });
     }

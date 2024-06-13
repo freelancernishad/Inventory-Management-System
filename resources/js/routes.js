@@ -39,6 +39,7 @@ let duecustomer = require('./components/customer/due.vue').default;
 let customer = require('./components/customer/index.vue').default;
 let editCustomer = require('./components/customer/edit.vue').default;
 let customerdue = require('./components/customer/customerdue.vue').default;
+let dues = require('./components/customer/dues.vue').default;
 
 // Expense Components
 let salary = require('./components/salary/all_employee.vue').default;
@@ -120,6 +121,7 @@ export const routes = [
   { path: '/duecustomer', component: duecustomer, name:'duecustomer' },
   { path: '/edit-customer/:id', component: editCustomer, name:'editCustomer' },
   { path: '/customer/due/:id', component: customerdue, name:'customerdue' },
+  { path: '/all/dues', component: dues, name:'dues' },
 
   // Expense Routes
   { path: '/given-salary', component: salary, name:'given-salary' },

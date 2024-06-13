@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api;
 
+use App\Models\Due;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -203,6 +204,20 @@ if($type==''){
 
 
 
+    public function getDues(Request $request)
+    {
+        $query = Due::query()
+            ->with(['order', 'customer']);
+
+        if ($request->has('date')) {
+            $date = $request->input('date');
+            $query->whereDate('due_date', $date);
+        }
+
+        $dues = $query->paginate(20);
+
+        return response()->json($dues);
+    }
 
 
 

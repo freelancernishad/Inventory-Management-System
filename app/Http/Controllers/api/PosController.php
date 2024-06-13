@@ -146,6 +146,9 @@ class PosController extends Controller
 
 // return $responsemessege;
 
+        dueCreate($order_id,$request->customer_id,$request->due);
+
+
         return response()->json($order_id);
     }
     public function todaySell(Request $request)

@@ -47,7 +47,7 @@ function PdfMakerwithHeader($pageSize='A4',$html,$header,$footer,$filename,$Wate
 
     $mpdf->SetHTMLHeader($header);
     $mpdf->SetHTMLFooter($footer);
-    
+
 
     // $mpdf->SetHTMLHeader('Document Title|Center Text|{PAGENO}');
     $mpdf->defaultheaderfontsize = 10;
@@ -157,6 +157,7 @@ function sent_error($message ,$messages=[],$code=404){
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 use Stichoza\GoogleTranslate\GoogleTranslate;
+use App\Models\Due;
 
 function transition($text)
 {
@@ -693,3 +694,15 @@ function add_more_quentity($id,$product_quantity,$type='old'){
            $product->update(['product_quantity'=>$product_quantity_update]);
            return $product;
 }
+
+    function dueCreate($order_id,$customer_id,$due_amount=0){
+
+        $due = Due::create([
+            'order_id' => $order_id,
+            'customer_id' => $customer_id,
+            'due_amount' => $due_amount,
+            'status' => 'active',
+            'due_date' => now(),
+        ]);
+        return $due;
+    }

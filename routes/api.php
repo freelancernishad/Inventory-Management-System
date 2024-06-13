@@ -93,6 +93,10 @@ Route::apiResources([
 ]);
 
 
+Route::get('/customer/due/list',[CustomerController::class,'getDues']);
+
+
+
 Route::get('/add/product/quantities/list',[ProductController::class,'add_product_quantities_list']);
 
 

@@ -150,6 +150,7 @@ span.money {
         <router-link class="collapse-item" to="/store-customer">Add Customer</router-link>
         <router-link class="collapse-item" to="/customer">All Customer</router-link>
         <router-link class="collapse-item" :to="{name:'duecustomer'}">Due Customer</router-link>
+        <router-link class="collapse-item" :to="{name:'dues'}">Dues</router-link>
       </div>
     </div>
   </li>
