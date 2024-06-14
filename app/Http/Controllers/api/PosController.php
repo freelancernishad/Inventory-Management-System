@@ -250,6 +250,76 @@ foreach ($products as $key => $value) {
     }
 
 
+
+    public function getAllData(Request $request)
+    {
+        $date = $request->date ? date('d/m/Y', strtotime($request->date)) : date("d/m/Y");
+        $productType = $request->product_type ? $request->product_type : 'normal';
+    
+        // Today Sell
+        $todaySell = DB::table('orders')->where('order_date', $date)->sum('sub_total');
+    
+        // Today Income
+        $orders = DB::table('orders')->where('order_date', $date)->get();
+        $buyingPrice = 0;
+        $productPrice = 0;
+        foreach ($orders as $value) {
+            $buy = DB::table('order_details')->where('order_id', $value->id)->get();
+            foreach ($buy as $buyingPrices) {
+                $buyingPrice += $buyingPrices->buying_price * $buyingPrices->product_quantity;
+                $productPrice += $buyingPrices->product_price * $buyingPrices->product_quantity;
+            }
+        }
+        $todayIncome = $productPrice - $buyingPrice;
+    
+        // Today Due
+        $todayDue = DB::table('orders')->where('order_date', $date)->sum('due');
+    
+        // Total Dues
+        $totalDues = DB::table('orders')->sum('due');
+    
+        // Expenses
+        $expenseDate = $request->date ? date('Y-m-d', strtotime($request->date)) : date("Y-m-d");
+        $expenses = DB::table('expenses')->where('expense_date', $expenseDate)->sum('amount');
+    
+        // Total Stock
+        $totalStock = DB::table('products')->where('product_type', $productType)->sum('product_quantity');
+    
+        // Total Stock Amount
+        $products = DB::table('products')->where('product_type', $productType)->get();
+        $totalStockAmount = 0;
+        foreach ($products as $value) {
+            $totalStockAmount += $value->buying_price * $value->product_quantity;
+        }
+    
+        // Custom Total Stock
+        $customTotalStock = DB::table('products')->where('product_type', 'custom')->sum('product_quantity');
+    
+        // Custom Total Stock Amount
+        $customProducts = DB::table('products')->where('product_type', 'custom')->get();
+        $customTotalStockAmount = 0;
+        foreach ($customProducts as $value) {
+            $customTotalStockAmount += $value->buying_price * $value->product_quantity;
+        }
+    
+        return response()->json([
+            'todaySell' => $todaySell,
+            'todayIncome' => $todayIncome,
+            'todayDue' => $todayDue,
+            'totalDues' => $totalDues,
+            'expenses' => $expenses,
+            'totalStock' => $totalStock,
+            'totalStockAmount' => $totalStockAmount,
+            'customTotalStock' => $customTotalStock,
+            'customTotalStockAmount' => $customTotalStockAmount,
+        ]);
+    }
+
+
+
+
+
+
     public function stockOut(Request $request)
     {
         $stockOut = DB::table('products')->where('product_quantity', '<', 1)->get();

@@ -162,6 +162,9 @@ Route::post('/due-order/{id}',  [OrderController::class,'DueOrderupdate']);
         Route::get('/order/duepay/{id}', [OrderController::class,'orderduepay']);
 
         // Dashboard Routes
+
+        Route::get('/all-data', [PosController::class, 'getAllData']);
+
         Route::get('/today/sell', [PosController::class,'todaySell']);
         Route::get('/today/income', [PosController::class,'todayIncome']);
         Route::get('/today/due', [PosController::class,'todayDue']);

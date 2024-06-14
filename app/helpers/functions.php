@@ -706,3 +706,20 @@ function add_more_quentity($id,$product_quantity,$type='old'){
         ]);
         return $due;
     }
+
+    function month_name_en_to_bn_text($name)
+    {
+        $en = array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec');
+        $bn = array('জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই', 'অগাস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর');
+        return str_replace($en, $bn, $name);
+    }
+    function month_number_en_to_bn_text($number)
+    {
+        $en = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+        $bn = array('জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই', 'অগাস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর');
+
+        // Adjust the number to be within 1-12 range
+        $number = max(1, min(12, $number));
+
+        return str_replace($en, $bn, $number);
+    }

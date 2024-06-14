@@ -32,25 +32,23 @@
 										<th width="15%">Due</th>
 									</tr>
 								</thead>
+
 								<tbody>
-
-                    <tr v-for="product in products.data" :key="product.id">
-
-
+                                    <tr v-for="product in products.data" :key="product.id">
 										<td>{{ product.customer.name }}</td>
-										<td>{{ product.due_date }}</td>
-										<td>{{ product.due_amount }}</td>
-
-
-
-
-
-
+										<td>{{ product.date }}</td>
+										<td>{{ product.due_amount }} টাকা</td>
 									</tr>
-
-
-
 								</tbody>
+
+								<tfoot>
+                                    <tr>
+
+										<td colspan="2" style="text-align: right;">মোট</td>
+										<td>{{ totaldue }} টাকা</td>
+									</tr>
+								</tfoot>
+
 							</table>
 
 
@@ -103,6 +101,7 @@ export default {
              todaydate: null,
              loading:false,
              page:1,
+             totaldue:0,
 
 		}
 	},
@@ -142,7 +141,8 @@ export default {
 			axios.get('/api/customer/due/list?page=' + page+searchQ)
 			.then(({data}) => {
 
-                this.products = data
+                this.products = data.dues
+                this.totaldue = data.total_due
                 this.allitems = data
                 //   console.log(data)
                 this.loading=false

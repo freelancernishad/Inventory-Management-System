@@ -34,7 +34,7 @@
                                     Today Sell Amount
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <span class="money">৳</span> {{ Number(todaySells).toFixed(2) }}
+                                    <span class="money">৳</span> {{ Number(dashboard.todaySell).toFixed(2) }}
                                 </div>
                                 <div class="mt-2 mb-0 text-muted text-xs">
                                     <!-- <span class="text-success mr-2"><i class="fa fa-arrow-up"></i>
@@ -60,7 +60,7 @@
                                     Today
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <span class="money">৳</span> {{ Number(income).toFixed(2) }}
+                                    <span class="money">৳</span> {{ Number(dashboard.todayIncome).toFixed(2) }}
                                 </div>
                                 <div class="mt-2 mb-0 text-muted text-xs">
                                     <!-- <span class="text-success mr-2"><i class="fas fa-arrow-up"></i>
@@ -85,7 +85,7 @@
                                     Today Due
                                 </div>
                                 <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                    <span class="money">৳</span> {{ Number(due).toFixed(2) }}
+                                    <span class="money">৳</span> {{ Number(dashboard.todayDue).toFixed(2) }}
                                 </div>
                                 <div class="mt-2 mb-0 text-muted text-xs">
                                     <!-- <span class="text-success mr-2"><i class="fas fa-arrow-up"></i>
@@ -111,7 +111,7 @@
                                     Expense Amount
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <span class="money">৳</span> {{ Number(expense).toFixed(2) }}
+                                    <span class="money">৳</span> {{ Number(dashboard.expenses).toFixed(2) }}
                                 </div>
                                 <div class="mt-2 mb-0 text-muted text-xs">
                                     <!-- <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i>
@@ -140,7 +140,7 @@
                                     Total Stock
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                     {{ Number(totalStock).toFixed(2) }}
+                                     {{ Number(dashboard.totalStock).toFixed(2) }} টি
                                 </div>
                                 <div class="mt-2 mb-0 text-muted text-xs">
                                     <!-- <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i>
@@ -167,7 +167,7 @@
                                     Total Stock Amount
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <span class="money">৳</span> {{ Number(totalStockAmount).toFixed(2) }}
+                                    <span class="money">৳</span> {{ Number(dashboard.totalStockAmount).toFixed(2) }}
                                 </div>
                                 <div class="mt-2 mb-0 text-muted text-xs">
                                     <!-- <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i>
@@ -199,7 +199,7 @@
                                     Total Custom Stock
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                     {{ Number(totalStockCustom).toFixed(2) }}
+                                     {{ Number(dashboard.customTotalStock).toFixed(2) }} কেজি
                                 </div>
                                 <div class="mt-2 mb-0 text-muted text-xs">
                                     <!-- <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i>
@@ -229,7 +229,34 @@
                                     Total Stock Custom Amount
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <span class="money">৳</span> {{ Number(totalStockAmountCustom).toFixed(2) }}
+                                    <span class="money">৳</span> {{ Number(dashboard.customTotalStockAmount).toFixed(2) }}
+                                </div>
+                                <div class="mt-2 mb-0 text-muted text-xs">
+                                    <!-- <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i>
+                                        1.10%</span>
+                                    <span>Since yesterday</span> -->
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-shopping-cart fa-2x text-success"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Pending Requests Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-uppercase mb-1">
+                                    Total Dues Amount
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <span class="money">৳</span> {{ Number(dashboard.totalDues).toFixed(2) }}
                                 </div>
                                 <div class="mt-2 mb-0 text-muted text-xs">
                                     <!-- <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i>
@@ -282,92 +309,7 @@
                     :width="width2" :height="height2" />
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-6 mb-4">
-                <!-- Simple Tables -->
-                <div class="card">
-                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h2 class="m-0 font-weight-bold text-primary">
-                            Stock Out Products
-                        </h2>
-                        <router-link to="/store-product" class="btn btn-primary float-right"
-                            style="margin-top: 6px; margin-right: 6px">Add Product</router-link>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table align-items-center table-flush">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>Product Name</th>
-                                    <th>Product Code</th>
 
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="product in stockOutProducts" :key="product.id">
-                                    <td>{{ product.product_name }}</td>
-                                    <td>{{ product.product_code }}</td>
-
-                                    <td v-if="product.product_quantity >= 1">
-                                        <span class="badge badge-success">Available</span>
-                                    </td>
-                                    <td v-else="">
-                                        <span class="badge badge-danger">Stock Out</span>
-                                    </td>
-                                    <td>
-                                        <router-link :to="{
-                                            name: 'editStock',
-                                            params: { id: product.id },
-                                        }" class="btn btn-sm btn-primary">Edit Stock</router-link>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="card-footer"></div>
-                </div>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <!-- Simple Tables -->
-                <div class="card">
-                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h2 class="m-0 font-weight-bold text-primary">
-                            Date Expaired Products
-                        </h2>
-                        <router-link to="/store-product" class="btn btn-primary float-right"
-                            style="margin-top: 6px; margin-right: 6px">Add Product</router-link>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table align-items-center table-flush">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>Product Name</th>
-                                    <th>Product Code</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="product in expiredProducts" :key="product.id">
-                                    <td>{{ product.product_name }}</td>
-                                    <td>{{ product.product_code }}</td>
-
-
-                                    <td>
-                                        <span class="badge badge-danger">Expired</span>
-                                    </td>
-                                    <td>
-                                       <router-link :to="{name: 'editProduct', params: {id: product.id}}" class="btn btn-sm btn-primary">Edit</router-link>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="card-footer"></div>
-                </div>
-            </div>
-        </div>
     </div>
 </template>
 <script>
@@ -438,16 +380,10 @@ export default {
     },
     data() {
         return {
-            todaySells: 0,
-            income: 0,
-            due: 0,
-            expense: 0,
-            totalStock: 0,
-            totalStockAmount: 0,
-            totalStockCustom: 0,
-            totalStockAmountCustom: 0,
-            stockOutProducts: {},
-            expiredProducts: {},
+            dashboard: {},
+
+
+
             newdata: new Date(),
             year: "",
             month: "",
@@ -510,18 +446,11 @@ export default {
               this.date = User.dateformat()[0];
         this.monthname = this.newdata.getMonth();
 this.countmonth();
-        this.todaySell();
-        this.todayIncome();
-        this.todayDue();
-        this.expenses();
-        this.totalStocks();
-        this.totalStockAmounts();
-        this.totalStocksCustom();
-        this.totalStockAmountsCustom();
-        this.stockOutProduct();
+this.getAllData();
 
 
-        this.expiredProduct();
+
+
         this.monthlybar();
         this.dailybar();
         this.yearslist();
@@ -552,69 +481,21 @@ this.countmonth();
 
         },
 
-        todaySell() {
-            axios
-                .get(`/api/today/sell?date=${this.date}`)
-                .then(({ data }) => (this.todaySells = data))
-                .catch();
-        },
-        todayIncome() {
-            axios
-                .get(`/api/today/income?date=${this.date}`)
-                .then(({ data }) => (this.income = data))
-                .catch();
-        },
-        todayDue() {
-            axios
-                .get(`/api/today/due?date=${this.date}`)
-                .then(({ data }) => (this.due = data))
-                .catch();
-        },
-        expenses() {
-            axios
-                .get(`/api/total/expense?date=${this.date}`)
-                .then(({ data }) => (this.expense = data))
-                .catch();
-        },
+        getAllData() {
+    axios
+        .get(`/api/all-data`, { params: { date: this.date, product_type: 'normal' } })
+        .then(({ data }) => {
+            this.dashboard = data
+        })
+        .catch(error => {
+            console.error(error);
+        });
+},
 
-        totalStocks() {
-            axios
-                .get("/api/total/totalStock?product_type=normal")
-                .then(({ data }) => (this.totalStock = data))
-                .catch();
-        },
 
-        totalStockAmounts() {
-            axios
-                .get("/api/total/totalStockAmount?product_type=normal")
-                .then(({ data }) => (this.totalStockAmount = data))
-                .catch();
-        },
-        totalStocksCustom() {
-            axios
-                .get("/api/total/totalStock?product_type=custom")
-                .then(({ data }) => (this.totalStockCustom = data))
-                .catch();
-        },
 
-        totalStockAmountsCustom() {
-            axios
-                .get("/api/total/totalStockAmount?product_type=custom")
-                .then(({ data }) => (this.totalStockAmountCustom = data))
-                .catch();
-        },
-        stockOutProduct() {
-            axios
-                .get("/api/stockout/product")
-                .then(({ data }) => (this.stockOutProducts = data))
-                .catch();
-        },
-        expiredProduct() {
-            axios
-                .get("/api/products/expired")
-                .then(({ data }) => (this.expiredProducts = data.data))
-                .catch();
-        },
+
+
         monthlybar() {
             // console.log(this.year=)
             // this.start = this.newdata.getFullYear()+'-'+this.newdata.getMonth()+'-'+this.newdata.getDate();

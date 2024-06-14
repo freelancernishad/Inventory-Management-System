@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Models\Due;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use App\Services\DateService;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
@@ -203,7 +204,6 @@ if($type==''){
     }
 
 
-
     public function getDues(Request $request)
     {
         $query = Due::query()
@@ -214,11 +214,18 @@ if($type==''){
             $query->whereDate('due_date', $date);
         }
 
+        // Paginate the results
         $dues = $query->paginate(20);
 
-        return response()->json($dues);
-    }
+        // Use DateService to format due_date
+         $formattedDues = DateService::formatDueDates($dues->items());
 
+        // Replace the items in the paginated result with formatted ones
+        $dues->setCollection(collect($formattedDues));
+        $totalDue = $dues->getCollection()->sum('due_amount');
+
+        return response()->json(['dues'=>$dues,'total_due'=>$totalDue]);
+    }
 
 
 
