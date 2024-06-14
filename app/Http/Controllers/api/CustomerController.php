@@ -217,7 +217,7 @@ if($type==''){
         }
 
         // Paginate the results
-        $dues = $query->paginate(20);
+        $dues = $query->orderBy('id','desc')->paginate(20);
 
         // Use DateService to format due_date
          $formattedDues = DateService::formatDueDates($dues->items());
@@ -241,7 +241,7 @@ if($type==''){
         }
 
         // Paginate the results
-        $paid = $query->paginate(20);
+        $paid = $query->orderBy('id','desc')->paginate(20);
 
         // Calculate total paid amount
         $totalPaid = $paid->sum('payment_amount');
