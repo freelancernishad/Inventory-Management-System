@@ -20,4 +20,20 @@ class Duepayment extends Model
 
     ];
 
+        /**
+     * Get the order that owns the due.
+     */
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
+
+    /**
+     * Get the customer that owns the due.
+     */
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
 }

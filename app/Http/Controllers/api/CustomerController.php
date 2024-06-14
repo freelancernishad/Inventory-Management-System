@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\api;
 
+use Carbon\Carbon;
 use App\Models\Due;
 use App\Models\Customer;
+use App\Models\Duepayment;
 use Illuminate\Http\Request;
 use App\Services\DateService;
 use Illuminate\Support\Facades\DB;
@@ -225,6 +227,27 @@ if($type==''){
         $totalDue = $dues->getCollection()->sum('due_amount');
 
         return response()->json(['dues'=>$dues,'total_due'=>$totalDue]);
+    }
+
+    public function getPaidList(Request $request)
+    {
+        $query = Duepayment::query()
+            ->with(['order', 'customer']);
+
+        if ($request->has('date')) {
+
+            $date = date('d/m/Y',strtotime($request->input('date')));
+            $query->where('pay_date', $date);
+        }
+
+        // Paginate the results
+        $paid = $query->paginate(20);
+
+        // Calculate total paid amount
+        $totalPaid = $paid->sum('payment_amount');
+
+        // Return response with paginated results and total paid amount
+        return response()->json(['paid' => $paid, 'total_Paid' => $totalPaid]);
     }
 
 

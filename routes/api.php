@@ -94,6 +94,7 @@ Route::apiResources([
 
 
 Route::get('/customer/due/list',[CustomerController::class,'getDues']);
+Route::get('/customer/paid/list',[CustomerController::class,'getPaidList']);
 
 
 

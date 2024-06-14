@@ -347,7 +347,23 @@ export default {
         }
     },
     mounted() {
-        this.allProduct();
+
+        if(this.$route.query.page){
+
+            if(this.$route.query.id){
+                this.allProduct(this.$route.query.page,this.$route.query.id);
+            }else{
+                this.allProduct(this.$route.query.page);
+
+            }
+
+
+        }else{
+            this.allProduct();
+        }
+
+
+        this.customProduct();
         this.allCategory();
         this.allCustomers();
         this.cartProducts();
@@ -429,6 +445,7 @@ export default {
         },
 
     },
+
     methods: {
 
         duecount(){
@@ -439,18 +456,33 @@ if (this.pay > this.discountedamount) this.pay=this.discountedamount;
         },
 
 
-        allProduct(page) {
+        allProduct(page,id=0) {
+
             if (typeof page === "undefined") {
                 page = 1;
+            }else{
+                this.$router.push({ query: { ...this.$route.query, page } });
             }
+
+
+
 
             var s_url = '';
-            if(this.searchTerm==''){
-                s_url = "/api/product?product_type=normal&page=" + page;
+
+
+            if(id==0){
+                var idQuery = ''
+
             }else{
-                s_url = '/api/products/search?filter[product_type]=normal&filter[product_name]=' + this.searchTerm;
+                this.$router.push({ query: { ...this.$route.query, id } });
+                var idQuery = `&catid=${id}`
             }
 
+            if(this.searchTerm==''){
+                s_url = "/api/product?product_type=normal&page=" + page+idQuery;
+            }else{
+                s_url = `/api/products/search?filter[product_type]=normal&filter[product_name]=${encodeURIComponent(this.searchTerm)}&page=${page}${idQuery}`;
+            }
             axios
                 .get(s_url)
                 .then(({ data }) => {
@@ -461,6 +493,9 @@ if (this.pay > this.discountedamount) this.pay=this.discountedamount;
                 })
                 .catch();
 
+        },
+
+        customProduct(){
             axios
                 .get('/api/custom/products')
                 .then(({ data }) => {
@@ -468,7 +503,6 @@ if (this.pay > this.discountedamount) this.pay=this.discountedamount;
                 })
                 .catch();
         },
-
 
 
         addCustomProduct(event,index) {
@@ -526,13 +560,30 @@ if (this.pay > this.discountedamount) this.pay=this.discountedamount;
                 })
                 .catch();
         },
-        categoryProduct(id) {
+        categoryProduct(id,page=1) {
+            if (typeof page === "undefined") {
+                page = 1;
+            }else{
+                page =  this.$route.query.page
+            }
+
+            this.allProduct(page,id);
+            return ;
+
+
+            if (typeof page === "undefined") {
+                page = 1;
+            }else{
+                this.$router.push({ query: { ...this.$route.query, page } });
+
+            }
+
             this.cat_id = id
 
             if(this.searchTerm==''){
 
             axios
-                .get("/api/category/product/" + id)
+                .get("/api/category/product/" + id + '?page='+page)
                 .then(({ data }) => {
                     //  this.categoryProducts = data
                     this.products = data;
