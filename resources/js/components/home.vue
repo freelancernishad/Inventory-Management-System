@@ -474,10 +474,11 @@ this.getAllData();
 
         datechange(){
 
-            this.todaySell();
-            this.todayIncome();
-            this.todayDue();
-            this.expenses();
+            this.getAllData();
+            // this.todaySell();
+            // this.todayIncome();
+            // this.todayDue();
+            // this.expenses();
 
         },
 
