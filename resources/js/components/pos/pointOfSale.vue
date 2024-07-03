@@ -276,7 +276,7 @@
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
-                                    aria-controls="home" aria-selected="true"  @click="allProduct()" >Home</a>
+                                    aria-controls="home" aria-selected="true"  @click="allProduct(1,'home')" >Home</a>
                             </li>
                             <li class="nav-item" role="presentation" v-for="category in categories" :key="category.id">
                                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
@@ -470,13 +470,21 @@ if (this.pay > this.discountedamount) this.pay=this.discountedamount;
             var s_url = '';
 
 
-            if(id==0){
+            if(id=='home'){
                 var idQuery = ''
-
             }else{
-                this.$router.push({ query: { ...this.$route.query, id } });
-                var idQuery = `&catid=${id}`
+                if(this.$route.query.id){
+                        var idQuery = `&catid=${this.$route.query.id}`
+                }else{
+                    if(id==0){
+                        var idQuery = ''
+                    }else{
+                        this.$router.push({ query: { ...this.$route.query, id } });
+                        var idQuery = `&catid=${id}`
+                    }
+                }
             }
+
 
             if(this.searchTerm==''){
                 s_url = "/api/product?product_type=normal&page=" + page+idQuery;

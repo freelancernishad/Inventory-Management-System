@@ -209,7 +209,8 @@ if($type==''){
     public function getDues(Request $request)
     {
         $query = Due::query()
-            ->with(['order', 'customer']);
+            ->with(['order', 'customer'])
+            ->where('due_amount', '>', 0);  // Exclude dues with due_amount of 0
 
         if ($request->has('date')) {
             $date = $request->input('date');
@@ -217,16 +218,16 @@ if($type==''){
         }
 
         // Paginate the results
-        $dues = $query->orderBy('id','desc')->paginate(20);
+        $dues = $query->orderBy('id', 'desc')->paginate(20);
 
         // Use DateService to format due_date
-         $formattedDues = DateService::formatDueDates($dues->items());
+        $formattedDues = DateService::formatDueDates($dues->items());
 
         // Replace the items in the paginated result with formatted ones
         $dues->setCollection(collect($formattedDues));
         $totalDue = $dues->getCollection()->sum('due_amount');
 
-        return response()->json(['dues'=>$dues,'total_due'=>$totalDue]);
+        return response()->json(['dues' => $dues, 'total_due' => $totalDue]);
     }
 
     public function getPaidList(Request $request)

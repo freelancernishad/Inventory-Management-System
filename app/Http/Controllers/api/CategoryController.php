@@ -16,7 +16,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::whereHas('products', function($query) {
+            $query->where('product_type', 'normal');
+        })->get();
+
         return response()->json($categories);
     }
 

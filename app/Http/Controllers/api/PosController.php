@@ -84,6 +84,7 @@ class PosController extends Controller
             $customdata['product_name'] = $value['name'];
             $customdata['product_quantity'] = $weight_quantity;
             $customdata['product_quantity_type'] = $value['weight_type'];
+            $customdata['buying_price'] = $value['buyprice'];
             $customdata['product_price'] = $value['price'];
             $customdata['sub_total'] = $value['weight_quantity']*$value['price'];
 
@@ -255,12 +256,13 @@ foreach ($products as $key => $value) {
     {
         $date = $request->date ? date('d/m/Y', strtotime($request->date)) : date("d/m/Y");
         $productType = $request->product_type ? $request->product_type : 'normal';
-    
+
         // Today Sell
         $todaySell = DB::table('orders')->where('order_date', $date)->sum('sub_total');
-    
+
         // Today Income
         $orders = DB::table('orders')->where('order_date', $date)->get();
+
         $buyingPrice = 0;
         $productPrice = 0;
         foreach ($orders as $value) {
@@ -270,38 +272,55 @@ foreach ($products as $key => $value) {
                 $productPrice += $buyingPrices->product_price * $buyingPrices->product_quantity;
             }
         }
+
+        foreach ($orders as $value) {
+            $buy2 = DB::table('custom_order_details')->where('order_id', $value->id)->get();
+            foreach ($buy2 as $buyingPrices) {
+                $buyingPrice += $buyingPrices->buying_price * $buyingPrices->product_quantity;
+                $productPrice += $buyingPrices->product_price * $buyingPrices->product_quantity;
+            }
+        }
+
+
         $todayIncome = $productPrice - $buyingPrice;
-    
+
+
+
+
+
+
+
+
         // Today Due
         $todayDue = DB::table('orders')->where('order_date', $date)->sum('due');
-    
+
         // Total Dues
         $totalDues = DB::table('orders')->sum('due');
-    
+
         // Expenses
         $expenseDate = $request->date ? date('Y-m-d', strtotime($request->date)) : date("Y-m-d");
         $expenses = DB::table('expenses')->where('expense_date', $expenseDate)->sum('amount');
-    
+
         // Total Stock
         $totalStock = DB::table('products')->where('product_type', $productType)->sum('product_quantity');
-    
+
         // Total Stock Amount
         $products = DB::table('products')->where('product_type', $productType)->get();
         $totalStockAmount = 0;
         foreach ($products as $value) {
             $totalStockAmount += $value->buying_price * $value->product_quantity;
         }
-    
+
         // Custom Total Stock
         $customTotalStock = DB::table('products')->where('product_type', 'custom')->sum('product_quantity');
-    
+
         // Custom Total Stock Amount
         $customProducts = DB::table('products')->where('product_type', 'custom')->get();
         $customTotalStockAmount = 0;
         foreach ($customProducts as $value) {
             $customTotalStockAmount += $value->buying_price * $value->product_quantity;
         }
-    
+
         return response()->json([
             'todaySell' => $todaySell,
             'todayIncome' => $todayIncome,
