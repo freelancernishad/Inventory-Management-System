@@ -61,7 +61,7 @@ export default {
 	},
 	methods: {
 		allCategory(){
-			axios.get('/api/category')
+			axios.get('/api/category?type=all')
 			.then(({data}) => (this.categories = data))
 			.catch()
 		},

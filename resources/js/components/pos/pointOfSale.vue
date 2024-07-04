@@ -404,6 +404,7 @@ export default {
             customtotalObj:{},
             customtotal:0,
             discount:0,
+            categoryid:0,
         };
     },
     computed: {
@@ -456,52 +457,62 @@ if (this.pay > this.discountedamount) this.pay=this.discountedamount;
         },
 
 
-        allProduct(page,id=0) {
+        allProduct(page = 1, id = null) {
+    // Retrieve the current id from the route query if not provided
+    if (id === null) {
+        id = this.$route.query.id || 0;
+    }
 
-            if (typeof page === "undefined") {
-                page = 1;
-            }else{
-                this.$router.push({ query: { ...this.$route.query, page } });
+    // Check if the id has changed
+    const currentId = this.$route.query.id || 0;
+    if (id !== currentId) {
+        page = 1; // Reset page to 1 if id changes
+    }
+
+    // Update the router query with the page number if defined
+    if (page !== this.$route.query.page) {
+        this.$router.push({ query: { ...this.$route.query, page } });
+    }
+
+    // Construct the base URL for the API request
+    let s_url = '';
+    let queryParams = { ...this.$route.query, page };
+
+    // Determine the category id query parameter
+    if (id === 'home') {
+        delete queryParams.id;
+    } else {
+        queryParams.id = id;
+    }
+
+    // Update the router query with the new id if it's not 'home'
+    this.$router.push({ query: queryParams });
+
+    // Append the category id query parameter if not 'home'
+    const idQuery = (id !== 0 && id !== 'home') ? `&catid=${id}` : '';
+
+    // Determine the API endpoint based on the search term
+    if (this.searchTerm === '') {
+        s_url = `/api/product?product_type=normal&page=${page}${idQuery}`;
+    } else {
+        s_url = `/api/products/search?filter[product_type]=normal&filter[product_name]=${encodeURIComponent(this.searchTerm)}&page=${page}${idQuery}`;
+    }
+
+    // Make the API request
+    axios
+        .get(s_url)
+        .then(({ data }) => {
+            this.products = data;
+            this.allitems = data;
+            if (data.data.length > 0) {
+                this.qt = data.data[0].product_quantity;
             }
-
-
-
-
-            var s_url = '';
-
-
-            if(id=='home'){
-                var idQuery = ''
-            }else{
-                if(this.$route.query.id){
-                        var idQuery = `&catid=${this.$route.query.id}`
-                }else{
-                    if(id==0){
-                        var idQuery = ''
-                    }else{
-                        this.$router.push({ query: { ...this.$route.query, id } });
-                        var idQuery = `&catid=${id}`
-                    }
-                }
-            }
-
-
-            if(this.searchTerm==''){
-                s_url = "/api/product?product_type=normal&page=" + page+idQuery;
-            }else{
-                s_url = `/api/products/search?filter[product_type]=normal&filter[product_name]=${encodeURIComponent(this.searchTerm)}&page=${page}${idQuery}`;
-            }
-            axios
-                .get(s_url)
-                .then(({ data }) => {
-                    this.products = data;
-                    this.allitems = data;
-                    this.qt = data.data[0].product_quantity;
-                    // console.log(data);
-                })
-                .catch();
-
-        },
+            // console.log(data);
+        })
+        .catch(error => {
+            console.error("There was an error fetching the products:", error);
+        });
+},
 
         customProduct(){
             axios

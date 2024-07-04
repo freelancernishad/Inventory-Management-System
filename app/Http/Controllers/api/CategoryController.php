@@ -14,11 +14,17 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::whereHas('products', function($query) {
-            $query->where('product_type', 'normal');
-        })->get();
+        if($request->type=='all'){
+
+            $categories = Category::orderBy('id','desc')->get();
+        }else{
+
+            $categories = Category::whereHas('products', function($query) {
+                $query->where('product_type', 'normal');
+            })->get();
+        }
 
         return response()->json($categories);
     }
