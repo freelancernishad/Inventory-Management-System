@@ -151,7 +151,7 @@ export default {
 			 .catch(console.log('error'))
 
 		// Category Collected
-		axios.get('/api/category/')
+		axios.get('/api/category?type=all')
 			 .then(({data}) => (this.categories = data))
 
 		// Supplier Collected

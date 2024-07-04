@@ -191,7 +191,7 @@ export default {
 		}
 	},
 	mounted(){
-		axios.get('/api/category')
+		axios.get('/api/category?type=all')
 			 .then(({data}) => (this.categories = data))
 
 		axios.get('/api/supplier')
